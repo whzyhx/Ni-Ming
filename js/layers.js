@@ -15,33 +15,61 @@ addLayer("data",{
             jinbi: zero,
             dengji: zero,jingyan: zero,xuqiu: ten,
             qingtongzhuangbei: zero,baiyingzhuangbei: zero,
+
+
             haskilled11: zero,haskilled12: zero,haskilled13: zero,haskilled14: zero,
-            haskilled21: zero,haskilled22: zero,
+            haskilled21: zero,haskilled22: zero,haskilled23: zero,
             haskilled31: zero,haskilled32: zero,haskilled33: zero,haskilled34: zero,
+            haskilled41: zero,haskilled42: zero,haskilled43: zero,haskilled44: zero,
             lastjipin10:zero,
             last2: zero,last4: zero,last6: zero,last8: zero,last10:zero,
+
+
             qingtong1nw: zero,qingtong1mx: zero,qingtong1shuzhi: zero,
             qingtong2nw: zero,qingtong2mx: zero,qingtong2shuzhi: zero,
             qingtong3nw: zero,qingtong3mx: zero,qingtong3shuzhi: zero,
             qingtong4nw: zero,qingtong4mx: zero,qingtong4shuzhi: zero,
             haveqingtongtaozhuang1: zero,haveqingtongtaozhuang2: zero,haveqingtongtaozhuang3: zero,haveqingtongtaozhuang4: zero,haveqingtongtaozhuang5: zero,
+            
+            
             baiying1nw: zero,baiying1mx: zero,baiying1shuzhi: zero,
             baiying2nw: zero,baiying2mx: zero,baiying2shuzhi: zero,
             baiying3nw: zero,baiying3mx: zero,baiying3shuzhi: zero,
             baiying4nw: zero,baiying4mx: zero,baiying4shuzhi: zero,
             havebaiyingtaozhuang1: zero,havebaiyingtaozhuang2: zero,havebaiyingtaozhuang3: zero,havebaiyingtaozhuang4: zero,havebaiyingtaozhuang5: zero,
+            
+            
             chongwudan: zero,chongwudengji: zero,chongwudanxuqiu: two,
+            
+            
             jiesuotujian1: zero,jiesuotujian2: zero,jiesuotujian33333: zero,
             jiesuotujian4:zero,jiesuotujian5:zero,jiesuotujian6:zero,
             jiesuotujian7:zero,jiesuotujian8:zero,jiesuotujian9:zero,
             moxue: zero,moxuexuqiu:n(100),moxuejiejing:zero,moxuejiejingxuqiu:one,cuitidengji:zero,
             moqiruti:zero,moqirutijianshao:new ExpantaNum(0.1),debuff1:one,
-            zidongguajichacao:one,zongxuqiu:zero,
+
+
             killall:zero,hunqidengji:zero,hunqinw:zero,hunqimx:zero,uu:zero,
+
+            
+            zidongguajichacao:one,zongxuqiu:zero,
             guajibeishu:one,
-            caijue:zero,jihuocaijue:zero,
+
+
             player_pos1_x:one,player_pos1_y:one,guaiwu1_x:[],guaiwu1_y:[],
+
+            
+            caijue:zero,jihuocaijue:zero,
             shidufen:zero,caijuecuidudengji:zero,
+
+
+            baoshicanpian:zero,
+            qingtong1baoshi:zero,qingtong2baoshi:zero,qingtong3baoshi:zero,qingtong4baoshi:zero,
+            baiying1baoshi:zero,baiying2baoshi:zero,baiying3baoshi:zero,baiying4baoshi:zero,
+            onejixuejingshi:zero,twojixuejingshi:zero,threejixuejingshi:zero,
+            onejihongjingshi:zero,twojihongjingshi:zero,threejihongjingshi:zero,
+            onejilanjingshi:zero,twojilanjingshi:zero,threejilanjingshi:zero,
+            onejilvjingshi:zero,twojilvjingshi:zero,threejilvjingshi:zero,
         }
     },
     color: "red",
@@ -109,7 +137,18 @@ addLayer("m",{
         if(d().dengji.gte(2000))d().xuqiu=n(300000)
         if(d().dengji.gte(2500))d().xuqiu=n(500000)
         if(d().dengji.gte(3000))d().xuqiu=n(1000000)
-        d().moqiruti=d().moqiruti.sub(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1)))
+        if(d().dengji.gte(3500))d().xuqiu=n(2000000)
+        if(d().dengji.gte(4000))d().xuqiu=n(5000000)
+        if(d().dengji.gte(5000))d().xuqiu=n(10000000)
+        if(d().dengji.gte(6000))d().xuqiu=n(20000000)
+        if(d().dengji.gte(6500))d().xuqiu=n(25000000)
+        if(d().dengji.gte(7000))d().xuqiu=n(30000000)
+        if(d().dengji.gte(8000))d().xuqiu=n(50000000)
+        if(d().dengji.gte(10000))d().xuqiu=n(100000000)
+        if(d().moqiruti.gte(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1))))
+        {
+            d().moqiruti=d().moqiruti.sub(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1)))
+        }
         d().moqiruti=d().moqiruti.max(0)
         x=new ExpantaNum(0.99)
         d().debuff1=x.pow(d().moqiruti)
@@ -124,6 +163,10 @@ addLayer("m",{
             style(){return {"height":"125px"}},
             canClick(){return d().jingyan.gte(d().xuqiu)},
             onClick(){
+                if(d().jingyan.lte(d().xuqiu))
+                {
+                    return ""
+                }
                 d().jingyan=d().jingyan.sub(d().xuqiu)
                 d().dengji=d().dengji.add(1)
                 var x=two
@@ -162,6 +205,10 @@ addLayer("m",{
             unlocked(){return true},
             canClick(){return d().moxue.gte(d().moxuexuqiu) && d().moxuejiejing.gte(d().moxuejiejingxuqiu)},
             onClick(){
+                if(d().moxue.lte(d().moxuexuqiu) || d().moxuejiejing.lte(d().moxuejiejingxuqiu.sub(0.01)))
+                {
+                    return ""
+                }
                 d().moxue=d().moxue.sub(d().moxuexuqiu)
                 d().moxuejiejing=d().moxuejiejing.sub(d().moxuejiejingxuqiu)
                 d().cuitidengji=d().cuitidengji.add(1)
@@ -182,6 +229,7 @@ addLayer("m",{
                 x=x.mul(d().shengmingbeishu)
                 d().shengmingmx=d().shengmingmx.add(x)
                 d().moxuexuqiu=d().moxuexuqiu.mul(1.01)
+                d().moxuejiejingxuqiu=d().cuitidengji.add(1).div(25).ceil()
             }
         },
         31: {
@@ -192,6 +240,10 @@ addLayer("m",{
             unlocked(){return true},
             canClick(){return d().killall.gte(d().hunqidengji.add(1).mul(5))},
             onClick(){
+                if(d().killall.lte(d().hunqidengji.add(1).mul(5)))
+                {
+                    return ""
+                }
                 var x=zero
                 x=x.add(Math.random())
                 x=x.mul(100).add(1).floor().min(100)
@@ -236,7 +288,7 @@ addLayer("m",{
             done() {return d().dengji.gte(200)},
         },
         5: {
-            requirementDescription: "Lv.750",
+            requirementDescription: "Lv.500",
             effectDescription: `解锁神兵`,
             unlocked(){return hasMilestone("m",4)},
             done() {return d().dengji.gte(500)},
@@ -248,6 +300,12 @@ addLayer("m",{
             done() {return d().dengji.gte(750)},
         },
         7: {
+            requirementDescription: "Lv.900",
+            effectDescription: `解锁宝石`,
+            unlocked(){return hasMilestone("m",6)},
+            done() {return d().dengji.gte(900)},
+        },
+        8: {
             requirementDescription: "千人斩",
             effectDescription: `解锁淬魂`,
             unlocked(){return true},
@@ -574,6 +632,10 @@ addLayer("z",{
             style(){return {"height":"125px"}},
             canClick(){return d().shengmingnw.gte(layers.z.need(5,1,1))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(5,1,1)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(5,1,1))
                 d().jingyan=d().jingyan.add(1)
                 d().jinbi=d().jinbi.add(1)
@@ -589,6 +651,10 @@ addLayer("z",{
             unlocked(){return d().haskilled11.gte(1)},
             canClick(){return d().shengmingnw.gte(layers.z.need(20,5,2))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(20,5,2)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(20,5,2))
                 d().jingyan=d().jingyan.add(3)
                 d().jinbi=d().jinbi.add(2)
@@ -611,6 +677,10 @@ addLayer("z",{
             style(){return {"height":"125px","width":"125px"}},
             canClick(){return d().shengmingnw.gte(layers.z.need(100,30,5))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(100,30,5)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(100,30,5))
                 d().jingyan=d().jingyan.add(5)
                 d().jinbi=d().jinbi.add(10)
@@ -627,6 +697,10 @@ addLayer("z",{
             unlocked(){return d().haskilled13.gte(1)},
             canClick(){return d().shengmingnw.gte(layers.z.need(500,100,20))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(500,100,20)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(500,100,20))
                 d().jingyan=d().jingyan.add(50)
                 d().jinbi=d().jinbi.add(100)
@@ -649,6 +723,10 @@ addLayer("z",{
             style(){return {"height":"125px"}},
             canClick(){return d().shengmingnw.gte(layers.z.need(10000,100,1))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(10000,100,1)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(10000,100,1))
                 d().jingyan=d().jingyan.add(500)
                 d().haskilled21=d().haskilled21.add(1)
@@ -663,9 +741,31 @@ addLayer("z",{
             unlocked(){return d().haskilled21.gte(1)},
             canClick(){return d().shengmingnw.gte(layers.z.need(100000,1000,1))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(100000,1000,1)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(100000,1000,1))
                 d().jingyan=d().jingyan.add(3000)
                 d().haskilled22=d().haskilled22.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
+        23: {
+            display() {
+                return '经验猪魔<br>100W血 10000攻 1防<br>掉落:50000经验<br>当前扣血:'+format(layers.z.need(1000000,10000,1))+'点<br>已击杀:'+format(d().haskilled23)+'次'
+            },
+            style(){return {"height":"125px","width":"150px"}},
+            unlocked(){return d().haskilled22.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.need(1000000,10000,1))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(1000000,10000,1)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(1000000,10000,1))
+                d().jingyan=d().jingyan.add(50000)
+                d().haskilled23=d().haskilled23.add(1)
                 d().killall=d().killall.add(1)
             }
         },
@@ -677,6 +777,10 @@ addLayer("z",{
             style(){return {"height":"125px","width":"145px"}},
             canClick(){return d().shengmingnw.gte(layers.z.need(1000,300,50))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(1000,300,50)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(1000,300,50))
                 d().jingyan=d().jingyan.add(75)
                 d().jinbi=d().jinbi.add(150)
@@ -692,6 +796,10 @@ addLayer("z",{
             unlocked(){return d().haskilled31.gte(1)},
             canClick(){return d().shengmingnw.gte(layers.z.need(1500,500,70))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(1500,500,70)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(1500,500,70))
                 d().jingyan=d().jingyan.add(100)
                 d().jinbi=d().jinbi.add(200)
@@ -714,6 +822,10 @@ addLayer("z",{
             unlocked(){return d().haskilled32.gte(1)},
             canClick(){return d().shengmingnw.gte(layers.z.need(3000,1000,150))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(3000,1000,150)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(3000,1000,150))
                 d().jingyan=d().jingyan.add(200)
                 d().jinbi=d().jinbi.add(400)
@@ -741,6 +853,10 @@ addLayer("z",{
             unlocked(){return d().haskilled33.gte(1)},
             canClick(){return d().shengmingnw.gte(layers.z.need(10000,3000,300))},
             onClick(){
+                if(d().shengmingnw.lte(layers.z.need(10000,3000,300)))
+                {
+                    return ""
+                }
                 d().shengmingnw=d().shengmingnw.sub(layers.z.need(10000,3000,300))
                 d().jingyan=d().jingyan.add(500)
                 d().jinbi=d().jinbi.add(1000)
@@ -778,6 +894,45 @@ addLayer("z",{
                 d().killall=d().killall.add(1)
             }
         },
+        41: {
+            display() {
+                return '岩石巨人<br>5W血 1W攻 1500防<br>掉落:1000经验 1500金币<br>当前扣血:'+format(layers.z.need(50000,10000,1500))+'点<br>已击杀:'+format(d().haskilled41)+'次'
+            },
+            unlocked(){return d().haskilled34.gte(1)},
+            style(){return {"height":"125px","width":"160px"}},
+            canClick(){return d().shengmingnw.gte(layers.z.need(50000,10000,1500))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(50000,10000,1500)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(50000,10000,1500))
+                d().jingyan=d().jingyan.add(1000)
+                d().jinbi=d().jinbi.add(1500)
+                d().haskilled41=d().haskilled41.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
+        42: {
+            display() {
+                return '宝石巨人<br>10W血 2W攻 3000防<br>掉落:2000经验 3000金币<br><text style="color:pink">1宝石残片</text><br>当前扣血:'+format(layers.z.need(100000,20000,3000))+'点<br>已击杀:'+format(d().haskilled42)+'次'
+            },
+            unlocked(){return d().haskilled41.gte(1)},
+            style(){return {"height":"125px","width":"160px"}},
+            canClick(){return d().shengmingnw.gte(layers.z.need(100000,20000,3000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(100000,20000,3000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(100000,20000,3000))
+                d().baoshicanpian=d().baoshicanpian.add(1)
+                d().jingyan=d().jingyan.add(2000)
+                d().jinbi=d().jinbi.add(3000)
+                d().haskilled42=d().haskilled42.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
     },
 	microtabs:{
         "一阶地图":{
@@ -792,6 +947,12 @@ addLayer("z",{
 				content:[
                     ["row", [ ["clickable", 31],["clickable", 32],["clickable", 33],]],
                     ["row", [ ["clickable", 34],]],
+				]
+			},
+			"巢穴":{
+                unlocked(){return d().haskilled34.gte(1)},
+				content:[
+                    ["row", [ ["clickable", 41],["clickable", 42],]],
 				]
 			},
 		},
@@ -831,7 +992,7 @@ addLayer("z",{
                     { "color": "purple", "font-size": "28px",}
                 ],
                 "blank",
-                ["row", [ ["clickable", 21],["clickable", 22],]],
+                ["row", [ ["clickable", 21],["clickable", 22],["clickable", 23],]],
             ],
         },
     },
@@ -1382,12 +1543,642 @@ addLayer("b",{
         },
     },
     row: 2,
-    branches:["s"],
+    branches:["s","bs"],
     layerShown(){return d().dengji.gte(5)},
+})
+addLayer("bs",{ 
+    symbol: "宝石", 
+    position: 0,
+    startData() { return {
+        unlocked: true, 
+		points: new ExpantaNum(0),
+    }},
+    color: "pink",
+    resource: "装备",
+    type: "normal",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"想法",
+    gainMult() { 
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() { 
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    update(diff){
+    },
+    tooltip(){return ""},
+    clickables: {
+        11: {
+            display() {
+                return `合成1级红晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().qingtong1mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejihongjingshi=d().onejihongjingshi.add(1)
+                if(d().qingtong1baoshi.lte(n(0.1)))
+                {
+                    d().qingtong1baoshi=n(1)
+                    d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                    d().gongji=d().gongji.mul(1.05)
+                }
+            }
+        },
+        12: {
+            display() {
+                return `合成2级红晶石<br>消耗10一级红晶石`
+            },
+            unlocked(){return d().qingtong1mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejihongjingshi.gte(10)},
+            onClick(){
+                d().onejihongjingshi=d().onejihongjingshi.sub(10)
+                d().twojihongjingshi=d().twojihongjingshi.add(1)
+                if(d().qingtong1baoshi.lte(n(1.1)))
+                {
+                    d().qingtong1baoshi=n(2)
+                    d().gongjibeishu=d().gongjibeishu.div(1.05)
+                    d().gongjibeishu=d().gongjibeishu.mul(1.1)
+                    d().gongji=d().gongji.div(1.05)
+                    d().gongji=d().gongji.mul(1.1)
+                }
+            }
+        },
+        13: {
+            display() {
+                return `合成3级红晶石<br>消耗10二级红晶石`
+            },
+            unlocked(){return d().qingtong1mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojihongjingshi.gte(10)},
+            onClick(){
+                d().twojihongjingshi=d().twojihongjingshi.sub(10)
+                d().threejihongjingshi=d().threejihongjingshi.add(1)
+                if(d().qingtong1baoshi.lte(n(2.1)))
+                {
+                    d().qingtong1baoshi=n(3)
+                    d().gongjibeishu=d().gongjibeishu.div(1.1)
+                    d().gongjibeishu=d().gongjibeishu.mul(1.2)
+                    d().gongji=d().gongji.div(1.1)
+                    d().gongji=d().gongji.mul(1.2)
+                }
+            }
+        },
+        21: {
+            display() {
+                return `合成1级蓝晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().qingtong2mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejilanjingshi=d().onejilanjingshi.add(1)
+                if(d().qingtong2baoshi.lte(n(0.1)))
+                {
+                    d().qingtong2baoshi=n(1)
+                    d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                    d().fangyu=d().fangyu.mul(1.05)
+                }
+            }
+        },
+        22: {
+            display() {
+                return `合成2级蓝晶石<br>消耗10一级蓝晶石`
+            },
+            unlocked(){return d().qingtong2mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejilanjingshi.gte(10)},
+            onClick(){
+                d().onejilanjingshi=d().onejilanjingshi.sub(10)
+                d().twojilanjingshi=d().twojilanjingshi.add(1)
+                if(d().qingtong2baoshi.lte(n(1.1)))
+                {
+                    d().qingtong2baoshi=n(2)
+                    d().fangyubeishu=d().fangyubeishu.div(1.05)
+                    d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                    d().fangyu=d().fangyu.div(1.05)
+                    d().fangyu=d().fangyu.mul(1.1)
+                }
+            }
+        },
+        23: {
+            display() {
+                return `合成3级蓝晶石<br>消耗10二级蓝晶石`
+            },
+            unlocked(){return d().qingtong2mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojilanjingshi.gte(10)},
+            onClick(){
+                d().twojilanjingshi=d().twojilanjingshi.sub(10)
+                d().threejilanjingshi=d().threejilanjingshi.add(1)
+                if(d().qingtong2baoshi.lte(n(2.1)))
+                {
+                    d().qingtong2baoshi=n(3)
+                    d().fangyubeishu=d().fangyubeishu.div(1.1)
+                    d().fangyubeishu=d().fangyubeishu.mul(1.2)
+                    d().fangyu=d().fangyu.div(1.1)
+                    d().fangyu=d().fangyu.mul(1.2)
+                }
+            }
+        },
+        31: {
+            display() {
+                return `合成1级绿晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().qingtong3mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejilvjingshi=d().onejilvjingshi.add(1)
+                if(d().qingtong3baoshi.lte(n(0.1)))
+                {
+                    d().qingtong3baoshi=n(1)
+                    d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                    d().shengmingmx=d().shengmingmx.mul(1.05)
+                }
+            }
+        },
+        32: {
+            display() {
+                return `合成2级绿晶石<br>消耗10一级绿晶石`
+            },
+            unlocked(){return d().qingtong3mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejilvjingshi.gte(10)},
+            onClick(){
+                d().onejilvjingshi=d().onejilvjingshi.sub(10)
+                d().twojilvjingshi=d().twojilvjingshi.add(1)
+                if(d().qingtong3baoshi.lte(n(1.1)))
+                {
+                    d().qingtong3baoshi=n(2)
+                    d().shengmingbeishu=d().shengmingbeishu.div(1.05)
+                    d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
+                    d().shengmingmx=d().shengmingmx.div(1.05)
+                    d().shengmingmx=d().shengmingmx.mul(1.1)
+                }
+            }
+        },
+        33: {
+            display() {
+                return `合成3级绿晶石<br>消耗10二级绿晶石`
+            },
+            unlocked(){return d().qingtong3mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojilvjingshi.gte(10)},
+            onClick(){
+                d().twojilvjingshi=d().twojilvjingshi.sub(10)
+                d().threejilvjingshi=d().threejilvjingshi.add(1)
+                if(d().qingtong3baoshi.lte(n(2.1)))
+                {
+                    d().qingtong3baoshi=n(3)
+                    d().shengmingbeishu=d().shengmingbeishu.div(1.1)
+                    d().shengmingbeishu=d().shengmingbeishu.mul(1.2)
+                    d().shengmingmx=d().shengmingmx.div(1.1)
+                    d().shengmingmx=d().shengmingmx.mul(1.2)
+                }
+            }
+        },
+        41: {
+            display() {
+                return `合成1级血晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().qingtong4mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejixuejingshi=d().onejixuejingshi.add(1)
+                if(d().qingtong4baoshi.lte(n(0.1)))
+                {
+                    d().qingtong4baoshi=n(1)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                    d().shengminghuifu=d().shengminghuifu.mul(1.05)
+                }
+            }
+        },
+        42: {
+            display() {
+                return `合成2级血晶石<br>消耗10一级血晶石`
+            },
+            unlocked(){return d().qingtong4mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejixuejingshi.gte(10)},
+            onClick(){
+                d().onejixuejingshi=d().onejixuejingshi.sub(10)
+                d().twojixuejingshi=d().twojixuejingshi.add(1)
+                if(d().qingtong4baoshi.lte(n(1.1)))
+                {
+                    d().qingtong4baoshi=n(2)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.div(1.05)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
+                    d().shengminghuifu=d().shengminghuifu.div(1.05)
+                    d().shengminghuifu=d().shengminghuifu.mul(1.1)
+                }
+            }
+        },
+        43: {
+            display() {
+                return `合成3级血晶石<br>消耗10二级血晶石`
+            },
+            unlocked(){return d().qingtong4mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojixuejingshi.gte(10)},
+            onClick(){
+                d().twojixuejingshi=d().twojixuejingshi.sub(10)
+                d().threejixuejingshi=d().threejixuejingshi.add(1)
+                if(d().qingtong4baoshi.lte(n(2.1)))
+                {
+                    d().qingtong4baoshi=n(3)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.div(1.1)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.2)
+                    d().shengminghuifu=d().shengminghuifu.div(1.1)
+                    d().shengminghuifu=d().shengminghuifu.mul(1.2)
+                }
+            }
+        },
+        211: {
+            display() {
+                return `合成1级红晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().baiying1mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejihongjingshi=d().onejihongjingshi.add(1)
+                if(d().baiying1baoshi.lte(n(0.1)))
+                {
+                    d().baiying1baoshi=n(1)
+                    d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                    d().gongji=d().gongji.mul(1.05)
+                }
+            }
+        },
+        212: {
+            display() {
+                return `合成2级红晶石<br>消耗10一级红晶石`
+            },
+            unlocked(){return d().baiying1mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejihongjingshi.gte(10)},
+            onClick(){
+                d().onejihongjingshi=d().onejihongjingshi.sub(10)
+                d().twojihongjingshi=d().twojihongjingshi.add(1)
+                if(d().baiying1baoshi.lte(n(1.1)))
+                {
+                    d().baiying1baoshi=n(2)
+                    d().gongjibeishu=d().gongjibeishu.div(1.05)
+                    d().gongjibeishu=d().gongjibeishu.mul(1.1)
+                    d().gongji=d().gongji.div(1.05)
+                    d().gongji=d().gongji.mul(1.1)
+                }
+            }
+        },
+        213: {
+            display() {
+                return `合成3级红晶石<br>消耗10二级红晶石`
+            },
+            unlocked(){return d().baiying1mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojihongjingshi.gte(10)},
+            onClick(){
+                d().twojihongjingshi=d().twojihongjingshi.sub(10)
+                d().threejihongjingshi=d().threejihongjingshi.add(1)
+                if(d().baiying1baoshi.lte(n(2.1)))
+                {
+                    d().baiying1baoshi=n(3)
+                    d().gongjibeishu=d().gongjibeishu.div(1.1)
+                    d().gongjibeishu=d().gongjibeishu.mul(1.2)
+                    d().gongji=d().gongji.div(1.1)
+                    d().gongji=d().gongji.mul(1.2)
+                }
+            }
+        },
+        221: {
+            display() {
+                return `合成1级蓝晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().baiying2mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejilanjingshi=d().onejilanjingshi.add(1)
+                if(d().baiying2baoshi.lte(n(0.1)))
+                {
+                    d().baiying2baoshi=n(1)
+                    d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                    d().fangyu=d().fangyu.mul(1.05)
+                }
+            }
+        },
+        222: {
+            display() {
+                return `合成2级蓝晶石<br>消耗10一级蓝晶石`
+            },
+            unlocked(){return d().baiying2mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejilanjingshi.gte(10)},
+            onClick(){
+                d().onejilanjingshi=d().onejilanjingshi.sub(10)
+                d().twojilanjingshi=d().twojilanjingshi.add(1)
+                if(d().baiying2baoshi.lte(n(1.1)))
+                {
+                    d().baiying2baoshi=n(2)
+                    d().fangyubeishu=d().fangyubeishu.div(1.05)
+                    d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                    d().fangyu=d().fangyu.div(1.05)
+                    d().fangyu=d().fangyu.mul(1.1)
+                }
+            }
+        },
+        223: {
+            display() {
+                return `合成3级蓝晶石<br>消耗10二级蓝晶石`
+            },
+            unlocked(){return d().baiying2mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojilanjingshi.gte(10)},
+            onClick(){
+                d().twojilanjingshi=d().twojilanjingshi.sub(10)
+                d().threejilanjingshi=d().threejilanjingshi.add(1)
+                if(d().baiying2baoshi.lte(n(2.1)))
+                {
+                    d().baiying2baoshi=n(3)
+                    d().fangyubeishu=d().fangyubeishu.div(1.1)
+                    d().fangyubeishu=d().fangyubeishu.mul(1.2)
+                    d().fangyu=d().fangyu.div(1.1)
+                    d().fangyu=d().fangyu.mul(1.2)
+                }
+            }
+        },
+        231: {
+            display() {
+                return `合成1级绿晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().baiying3mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejilvjingshi=d().onejilvjingshi.add(1)
+                if(d().baiying3baoshi.lte(n(0.1)))
+                {
+                    d().baiying3baoshi=n(1)
+                    d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                    d().shengmingmx=d().shengmingmx.mul(1.05)
+                }
+            }
+        },
+        232: {
+            display() {
+                return `合成2级绿晶石<br>消耗10一级绿晶石`
+            },
+            unlocked(){return d().baiying3mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejilvjingshi.gte(10)},
+            onClick(){
+                d().onejilvjingshi=d().onejilvjingshi.sub(10)
+                d().twojilvjingshi=d().twojilvjingshi.add(1)
+                if(d().baiying3baoshi.lte(n(1.1)))
+                {
+                    d().baiying3baoshi=n(2)
+                    d().shengmingbeishu=d().shengmingbeishu.div(1.05)
+                    d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
+                    d().shengmingmx=d().shengmingmx.div(1.05)
+                    d().shengmingmx=d().shengmingmx.mul(1.1)
+                }
+            }
+        },
+        233: {
+            display() {
+                return `合成3级绿晶石<br>消耗10二级绿晶石`
+            },
+            unlocked(){return d().baiying3mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojilvjingshi.gte(10)},
+            onClick(){
+                d().twojilvjingshi=d().twojilvjingshi.sub(10)
+                d().threejilvjingshi=d().threejilvjingshi.add(1)
+                if(d().baiying3baoshi.lte(n(2.1)))
+                {
+                    d().baiying3baoshi=n(3)
+                    d().shengmingbeishu=d().shengmingbeishu.div(1.1)
+                    d().shengmingbeishu=d().shengmingbeishu.mul(1.2)
+                    d().shengmingmx=d().shengmingmx.div(1.1)
+                    d().shengmingmx=d().shengmingmx.mul(1.2)
+                }
+            }
+        },
+        241: {
+            display() {
+                return `合成1级血晶石<br>消耗5宝石残片`
+            },
+            unlocked(){return d().baiying4mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().baoshicanpian.gte(5)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(5)
+                d().onejixuejingshi=d().onejixuejingshi.add(1)
+                if(d().baiying4baoshi.lte(n(0.1)))
+                {
+                    d().baiying4baoshi=n(1)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                    d().shengminghuifu=d().shengminghuifu.mul(1.05)
+                }
+            }
+        },
+        242: {
+            display() {
+                return `合成2级血晶石<br>消耗10一级血晶石`
+            },
+            unlocked(){return d().baiying4mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().onejixuejingshi.gte(10)},
+            onClick(){
+                d().onejixuejingshi=d().onejixuejingshi.sub(10)
+                d().twojixuejingshi=d().twojixuejingshi.add(1)
+                if(d().baiying4baoshi.lte(n(1.1)))
+                {
+                    d().baiying4baoshi=n(2)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.div(1.05)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
+                    d().shengminghuifu=d().shengminghuifu.div(1.05)
+                    d().shengminghuifu=d().shengminghuifu.mul(1.1)
+                }
+            }
+        },
+        243: {
+            display() {
+                return `合成3级血晶石<br>消耗10二级血晶石`
+            },
+            unlocked(){return d().baiying4mx.gte(100)},
+            style(){return {"height":"100px","width":"100px"}},
+            canClick(){return d().twojixuejingshi.gte(10)},
+            onClick(){
+                d().twojixuejingshi=d().twojixuejingshi.sub(10)
+                d().threejixuejingshi=d().threejixuejingshi.add(1)
+                if(d().baiying4baoshi.lte(n(2.1)))
+                {
+                    d().baiying4baoshi=n(3)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.div(1.1)
+                    d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.2)
+                    d().shengminghuifu=d().shengminghuifu.div(1.1)
+                    d().shengminghuifu=d().shengminghuifu.mul(1.2)
+                }
+            }
+        },
+    },
+    tabFormat: {
+        青铜: {
+            content:["blank",
+                    ["display-text",
+                        function() { return '装备评分达到100,可以解锁对应宝石槽位'},
+                        { "color": "white", "font-size": "28px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
+                        { "color": "pink", "font-size": "28px",}
+                    ],
+                    "blank",
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
+                        { "color": "red", "font-size": "20px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
+                        { "color": "blue", "font-size": "20px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
+                        { "color": "green", "font-size": "20px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
+                        { "color": "green", "font-size": "20px",}
+                    ],
+                    "blank",
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["row",
+                    [
+                        ["display-text",function() { return '青铜剑 : '+(d().qingtong1baoshi.gte(3)?'攻击+20%':d().qingtong1baoshi.gte(2)?'攻击+10%':d().qingtong1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        ["clickable",11],["clickable",12],["clickable",13],
+                    ]],
+                    ["row",
+                    [
+                        ["display-text",function() { return '青铜护手 : '+(d().qingtong2baoshi.gte(3)?'防御+20%':d().qingtong2baoshi.gte(2)?'防御+10%':d().qingtong2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
+                        "blank",
+                        ["clickable",21],["clickable",22],["clickable",23],
+                    ]],
+                    ["row",
+                    [
+                        ["display-text",function() { return '青铜甲 : '+(d().qingtong3baoshi.gte(3)?'生命+20%':d().qingtong3baoshi.gte(2)?'生命+10%':d().qingtong3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        ["clickable",31],["clickable",32],["clickable",33],
+                    ]],
+                    ["row",
+                    [
+                        ["display-text",function() { return '青铜靴 : '+(d().qingtong4baoshi.gte(3)?'生命恢复+20%':d().qingtong4baoshi.gte(2)?'生命恢复+10%':d().qingtong4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
+                        "blank",
+                        ["clickable",41],["clickable",42],["clickable",43],
+                    ]],
+                    ]
+        },
+        白银: {
+            content:["blank",
+                    ["display-text",
+                        function() { return '装备评分达到100,可以解锁对应宝石槽位'},
+                        { "color": "white", "font-size": "28px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
+                        { "color": "pink", "font-size": "28px",}
+                    ],
+                    "blank",
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
+                        { "color": "red", "font-size": "20px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
+                        { "color": "blue", "font-size": "20px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
+                        { "color": "green", "font-size": "20px",}
+                    ],
+                    ["display-text",
+                        function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
+                        { "color": "green", "font-size": "20px",}
+                    ],
+                    "blank",
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["row",
+                    [
+                        ["display-text",function() { return '白银剑 : '+(d().baiying1baoshi.gte(3)?'攻击+20%':d().baiying1baoshi.gte(2)?'攻击+10%':d().baiying1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        ["clickable",211],["clickable",212],["clickable",213],
+                    ]],
+                    ["row",
+                    [
+                        ["display-text",function() { return '白银护手 : '+(d().baiying2baoshi.gte(3)?'防御+20%':d().baiying2baoshi.gte(2)?'防御+10%':d().baiying2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
+                        "blank",
+                        ["clickable",221],["clickable",222],["clickable",223],
+                    ]],
+                    ["row",
+                    [
+                        ["display-text",function() { return '白银甲 : '+(d().baiying3baoshi.gte(3)?'生命+20%':d().baiying3baoshi.gte(2)?'生命+10%':d().baiying3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        ["clickable",231],["clickable",232],["clickable",233],
+                    ]],
+                    ["row",
+                    [
+                        ["display-text",function() { return '白银靴 : '+(d().baiying4baoshi.gte(3)?'生命恢复+20%':d().baiying4baoshi.gte(2)?'生命恢复+10%':d().baiying4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
+                        "blank",
+                        ["clickable",241],["clickable",242],["clickable",243],
+                    ]],
+                    ]
+        },
+    },
+    row: 3,
+    layerShown(){return d().dengji.gte(900)},
 })
 addLayer("s",{ 
     symbol: "神兵", 
-    position: 0,
+    position: 1,
     startData() { return {
         unlocked: true, 
 		points: new ExpantaNum(0),
@@ -1565,7 +2356,7 @@ addLayer("c",{
 })
 addLayer("t",{ 
     symbol: "图鉴", 
-    position: 1,
+    position: 2,
     startData() { return {
         unlocked: true, 
 		points: new ExpantaNum(0),
@@ -1749,10 +2540,34 @@ addLayer("t",{
             unlocked(){return true},
             canClick(){return d().shidufen.gte(50) && d().jiesuotujian7.lte(0)},
             onClick(){
-                d().shidufen=d().shidufen.sub(1)
+                d().shidufen=d().shidufen.sub(50)
                 d().gongjibeishu=d().gongjibeishu.mul(1.1)
                 d().gongji=d().gongji.mul(1.1)
                 d().jiesuotujian7=n(1)
+            }
+        },
+        32: {
+            display() {
+                if(d().jiesuotujian8.gte(1))
+                {
+                    return `解锁图鉴八<br>需求:200宝石残片<br>效果:防御倍数x1.1<br>已解锁`
+                }
+                return `解锁图鉴八<br>需求:200宝石残片<br>效果:防御倍数x1.1<br>未解锁`
+            },
+            style() {
+                if(d().jiesuotujian8.lte(0))
+                {
+                    return {'height':'150px','width':'150px'}
+                }
+                return {'height':'150px','width':'150px','background-color':'green'}
+            },
+            unlocked(){return true},
+            canClick(){return d().baoshicanpian.gte(200) && d().jiesuotujian8.lte(0)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(200)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+                d().jiesuotujian8=n(1)
             }
         },
     },
@@ -1806,8 +2621,13 @@ addLayer("vip",{
         if(hasUpgrade("vip",214)){x=x.add(layers.z.need(500,100,20))}
         if(hasUpgrade("vip",221)){x=x.add(layers.z.need(10000,100,1))}
         if(hasUpgrade("vip",222)){x=x.add(layers.z.need(100000,1000,1))}
+        if(hasUpgrade("vip",223)){x=x.add(layers.z.need(1000000,10000,1))}
         if(hasUpgrade("vip",231)){x=x.add(layers.z.need(1000,300,50))}
         if(hasUpgrade("vip",232)){x=x.add(layers.z.need(1500,500,70))}
+        if(hasUpgrade("vip",234)){x=x.add(layers.z.need(10000,3000,300))}
+        if(hasUpgrade("vip",251)){x=x.add(layers.z.need(50000,10000,1500))}
+        if(hasUpgrade("vip",252)){x=x.add(layers.z.need(100000,20000,3000))}
+        if(hasUpgrade("vip",15)){x=x.div(2)}
         d().zongxuqiu=x
         d().guajibeishu=d().shengminghuifu.div(d().zongxuqiu)
         if(d().guajibeishu.gte(1))
@@ -1866,6 +2686,13 @@ addLayer("vip",{
             if(hasUpgrade("vip",13))d().haskilled22=d().haskilled22.add(n(1).mul(diff).mul(d().guajibeishu))
             if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
         }
+        if(hasUpgrade("vip",223))
+        {
+            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(50000).mul(diff).mul(d().guajibeishu))
+            // if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().haskilled23=d().haskilled23.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
+        }
         if(hasUpgrade("vip",231))
         {
             if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(75).mul(diff).mul(d().guajibeishu))
@@ -1875,10 +2702,33 @@ addLayer("vip",{
         }
         if(hasUpgrade("vip",232))
         {
-            d().baiyingzhuangbei=d().baiyingzhuangbei.add(n(0.2).mul(diff))
+            d().baiyingzhuangbei=d().baiyingzhuangbei.add(n(0.2).mul(diff).mul(d().guajibeishu))
             if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(100).mul(diff).mul(d().guajibeishu))
             if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(200).mul(diff).mul(d().guajibeishu))
             if(hasUpgrade("vip",13))d().haskilled32=d().haskilled32.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
+        }
+        if(hasUpgrade("vip",234))
+        {
+            d().caijue=d().caijue.add(n(0.001).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(500).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().haskilled34=d().haskilled34.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
+        }
+        if(hasUpgrade("vip",251))
+        {
+            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(1000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1500).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().haskilled41=d().haskilled41.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
+        }
+        if(hasUpgrade("vip",252))
+        {
+            d().baoshicanpian=d().baoshicanpian.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(2000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(3000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().haskilled42=d().haskilled42.add(n(1).mul(diff).mul(d().guajibeishu))
             if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
         }
         if(hasUpgrade("vip",241))
@@ -1965,6 +2815,20 @@ addLayer("vip",{
             style(){return {"height":"125px"}},
             unlocked(){return hasUpgrade("vip",13)},
         },
+        15:{
+            fullDisplay(){
+                return "VIP5<br>效果1:额外增加一枚挂机插槽<br>赠送:技能-神圣护盾<br>效果:挂机所扣血/2<br>需要:888.8888W金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(8888888)
+                d().zidongguajichacao=d().zidongguajichacao.add(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(8888888)
+            },
+            style(){return {"height":"140px","width":"140px"}},
+            unlocked(){return hasUpgrade("vip",14)},
+        },
         211:{
             fullDisplay(){
                 return "自动挂机<br>新手地图-鸡<br><br>需要:100金币"
@@ -2049,6 +2913,20 @@ addLayer("vip",{
             style(){return {"height":"125px"}},
             unlocked(){return true},
         },
+        223:{
+            fullDisplay(){
+                return "自动挂机<br>经验地图-经验猪魔<br><br>需要:10W金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(100000)
+                d().zidongguajichacao=d().zidongguajichacao.sub(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(100000) && d().zidongguajichacao.gte(1)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+        },
         231:{
             fullDisplay(){
                 return "自动挂机<br>矿洞-蝙蝠<br><br>需要:3000金币"
@@ -2073,6 +2951,48 @@ addLayer("vip",{
             },
             canAfford(){
                 return d().jinbi.gte(5000) && d().zidongguajichacao.gte(1)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+        },
+        234:{
+            fullDisplay(){
+                return "自动挂机<br>矿洞-红野猪<br><br>需要:30000金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(30000)
+                d().zidongguajichacao=d().zidongguajichacao.sub(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(30000) && d().zidongguajichacao.gte(1)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+        },
+        251:{
+            fullDisplay(){
+                return "自动挂机<br>巢穴-岩石巨人<br><br>需要:100W金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(1000000)
+                d().zidongguajichacao=d().zidongguajichacao.sub(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(1000000) && d().zidongguajichacao.gte(1)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+        },
+        252:{
+            fullDisplay(){
+                return "自动挂机<br>巢穴-宝石巨人<br><br>需要:200W金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(2000000)
+                d().zidongguajichacao=d().zidongguajichacao.sub(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(2000000) && d().zidongguajichacao.gte(1)
             },
             style(){return {"height":"125px"}},
             unlocked(){return true},
@@ -2145,13 +3065,17 @@ addLayer("vip",{
                     "blank",
                     "blank",
                     "blank",
-                    ["row", [ ["upgrade", 11],["upgrade", 12],["upgrade", 13],["upgrade", 14],]],
+                    ["row", [ ["upgrade", 11],["upgrade", 12],["upgrade", 13],["upgrade", 14],["upgrade", 15],]],
                 ],
         },
         自动化: {
             content:[            
                     ["row", [ ["infobox", "lore"]]],
                     "blank",
+                    ["display-text",
+                        function() { return '温馨提示:鉴于挂机系统的特殊性,自动化并不支持重洗<br>因此,选择之前请谨慎考虑' },
+                        { "color": "red", "font-size": "32px",}
+                    ],
                     ["display-text",
                         function() { return '你当前还剩余'+format(d().zidongguajichacao)+'个自动挂机插槽' },
                         { "color": "gold", "font-size": "24px",}
@@ -2167,10 +3091,11 @@ addLayer("vip",{
                     "blank",
                     "blank",
                     "blank",
-                    ["row", [ ["upgrade", 211],["upgrade", 212],["upgrade", 213],["upgrade", 214],]],
-                    ["row", [ ["upgrade", 221],["upgrade", 222],]],
-                    ["row", [ ["upgrade", 231],["upgrade", 232],]],
                     ["row", [ ["upgrade", 243],["upgrade", 241],["upgrade", 242],]],
+                    ["row", [ ["upgrade", 211],["upgrade", 212],["upgrade", 213],["upgrade", 214],]],
+                    ["row", [ ["upgrade", 221],["upgrade", 222],["upgrade", 223],]],
+                    ["row", [ ["upgrade", 231],["upgrade", 232],["upgrade", 234],]],
+                    ["row", [ ["upgrade", 251],["upgrade", 252],]],
                 ],
         },
     },
@@ -2644,4 +3569,29 @@ addLayer("j",{
     },
     row: 2,
     layerShown(){return d().dengji.gte(750)},
+})
+addLayer("ghost1",{ 
+    symbol: "ghost", 
+    position: 3,
+    startData() { return {
+        unlocked: true, 
+		points: new ExpantaNum(0),
+    }},
+    color: "black",
+    resource: "ghost",
+    type: "ghost",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"想法",
+    gainMult() { 
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() { 
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    row: 3,
+    layerShown(){return "ghost"},
 })

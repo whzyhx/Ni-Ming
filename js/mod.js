@@ -12,7 +12,7 @@
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.4",
+	num: "0.1.5",
 	name: "",
 }
 
@@ -21,15 +21,31 @@ let changelog = `<h1>计算公式:</h1><br><h3>
 			战力=(攻击x防御x生命x生命恢复)开四次方<br>
 			每次升级增加2点攻击,10点生命上限,0.2防御,0.1生命蕙复<br>
 			切割伤害不受防御影响<br>
-			每次淬体相当于10次升级所带来的增益<br></h3>
+			每次淬体相当于10次升级所带来的增益<br>
+			淬体所需魔血每级x1.01,所需魔血结晶每25级+1<br>
+			淬魂所需击杀次数每级+5,初始为5次<br></h3>
 			<br>
 			<h1>效果</h1><br>
 			每层<text style="color:red">魔气入体</text>会让你的防御x0.99
 			<br>
 			<br>
 			<h1>更新日志<br></h1>
+			<br><h3>v0.1.5<br></h3>
+			- 增加宝石系统<br>
+			- 增加<text style="color:pink">宝石残片</text><br>
+			- 增加对应图鉴<br>
+			- 增加这个游戏的第十二只怪物—————巢穴-岩石巨人!!!<br>
+			- 增加这个游戏的第十三只怪物—————巢穴-宝石巨人!!!<br>
+			- 增加这个游戏的第十四只怪物—————经验地图-经验猪魔!!!<br>
+			- 增加自动挂机-矿洞-红野猪<br>
+			- 增加自动挂机-巢穴-岩石巨人<br>
+			- 增加自动挂机-巢穴-宝石巨人<br>
+			- 增加自动挂机-经验地图-经验猪魔<br>
 			<br><h3>v0.1.4<br></h3>
 			<text style="color:green">- 新增 - 秘境系统!!!</text><br>
+			- 增加淬毒<br>
+			- 增加尸毒粉<br>
+			- 增加对应图鉴<br>
 			<br><h3>v0.1.3<br></h3>
 			- 将魂器洗炼公式从10调整至5x(魂器等级+1)<br>
 			- 增加神兵系统<br>
@@ -109,7 +125,8 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
-	`如果游玩过程中遇到困惑,请查看更新日志,谢谢`
+	`如果游玩过程中遇到困惑,请查看更新日志,谢谢<br>
+	如果你觉得这个游戏不好玩,可以玩一玩辉影神秘精心制作的混乱时空<br>`
 ]
 
 // Determines when the game "ends"
