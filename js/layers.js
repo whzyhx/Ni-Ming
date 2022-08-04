@@ -6,6 +6,13 @@ addLayer("data",{
             unlocked: true,
 		    points: new ExpantaNum(0),
             xiuxi: new ExpantaNum(0),
+
+            yuanbao:zero,chongxicishu:zero,
+
+
+            pifu_xingqisi:zero,choujiangcishu:zero,
+
+
             gongji: two,gongjibeishu: one,
             shengmingnw: ten,shengmingmx: ten,shengmingbeishu: one,
             shengminghuifu: one,shengminghuifubeishu: one,
@@ -45,6 +52,7 @@ addLayer("data",{
             jiesuotujian1: zero,jiesuotujian2: zero,jiesuotujian33333: zero,
             jiesuotujian4:zero,jiesuotujian5:zero,jiesuotujian6:zero,
             jiesuotujian7:zero,jiesuotujian8:zero,jiesuotujian9:zero,
+            jiesuotujian10:zero,jiesuotujian11:zero,jiesuotujian12:zero,
             moxue: zero,moxuexuqiu:n(100),moxuejiejing:zero,moxuejiejingxuqiu:one,cuitidengji:zero,
             moqiruti:zero,moqirutijianshao:new ExpantaNum(0.1),debuff1:one,
 
@@ -70,6 +78,13 @@ addLayer("data",{
             onejihongjingshi:zero,twojihongjingshi:zero,threejihongjingshi:zero,
             onejilanjingshi:zero,twojilanjingshi:zero,threejilanjingshi:zero,
             onejilvjingshi:zero,twojilvjingshi:zero,threejilvjingshi:zero,
+
+            yumao:zero,chibangdengji:zero,yumaoxuqiu:n(20),
+            chibangshuxing:[
+                1.00,1.01,1.02,1.03,1.04,1.05,1.06,1.07,1.08,1.09,
+                1.10,1.12,1.14,1.16,1.18,1.20,1.22,1.24,1.26,1.28,
+                1.30,1.33,1.36,1.39,1.42,1.45,1.48,1.51,1.54,1.57,
+            ],
         }
     },
     color: "red",
@@ -145,10 +160,7 @@ addLayer("m",{
         if(d().dengji.gte(7000))d().xuqiu=n(30000000)
         if(d().dengji.gte(8000))d().xuqiu=n(50000000)
         if(d().dengji.gte(10000))d().xuqiu=n(100000000)
-        if(d().moqiruti.gte(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1))))
-        {
-            d().moqiruti=d().moqiruti.sub(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1)))
-        }
+        d().moqiruti=d().moqiruti.sub(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1)))
         d().moqiruti=d().moqiruti.max(0)
         x=new ExpantaNum(0.99)
         d().debuff1=x.pow(d().moqiruti)
@@ -277,7 +289,7 @@ addLayer("m",{
         },
         3: {
             requirementDescription: "Lv.100",
-            effectDescription: `解锁VIP`,
+            effectDescription: `解锁VIP和SVIP`,
             unlocked(){return hasMilestone("m",2)},
             done() {return d().dengji.gte(100)},
         },
@@ -306,6 +318,12 @@ addLayer("m",{
             done() {return d().dengji.gte(900)},
         },
         8: {
+            requirementDescription: "Lv.1200",
+            effectDescription: `解锁翅膀`,
+            unlocked(){return hasMilestone("m",7)},
+            done() {return d().dengji.gte(1200)},
+        },
+        9: {
             requirementDescription: "千人斩",
             effectDescription: `解锁淬魂`,
             unlocked(){return true},
@@ -933,6 +951,27 @@ addLayer("z",{
                 d().killall=d().killall.add(1)
             }
         },
+        43: {
+            display() {
+                return '秃鹫<br>15W血 5W攻 5000防<br>掉落:3000经验 5000金币<br><text style="color:grey">半根鸟毛</text><br>当前扣血:'+format(layers.z.need(150000,50000,5000))+'点<br>已击杀:'+format(d().haskilled43)+'次'
+            },
+            unlocked(){return d().haskilled42.gte(1)},
+            style(){return {"height":"125px","width":"160px"}},
+            canClick(){return d().shengmingnw.gte(layers.z.need(150000,50000,5000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(150000,50000,5000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(150000,50000,5000))
+                d().baoshicanpian=d().baoshicanpian.add(1)
+                d().jingyan=d().jingyan.add(2000)
+                d().jinbi=d().jinbi.add(3000)
+                d().yumao=d().yumao.add(0.5)
+                d().haskilled43=d().haskilled43.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
     },
 	microtabs:{
         "一阶地图":{
@@ -952,7 +991,7 @@ addLayer("z",{
 			"巢穴":{
                 unlocked(){return d().haskilled34.gte(1)},
 				content:[
-                    ["row", [ ["clickable", 41],["clickable", 42],]],
+                    ["row", [ ["clickable", 41],["clickable", 42],["clickable", 43],]],
 				]
 			},
 		},
@@ -2570,6 +2609,30 @@ addLayer("t",{
                 d().jiesuotujian8=n(1)
             }
         },
+        33: {
+            display() {
+                if(d().jiesuotujian9.gte(1))
+                {
+                    return `解锁图鉴九<br>需求:200羽毛<br>效果:生命倍数x1.1<br>已解锁`
+                }
+                return `解锁图鉴九<br>需求:200羽毛<br>效果:生命倍数x1.1<br>未解锁`
+            },
+            style() {
+                if(d().jiesuotujian9.lte(0))
+                {
+                    return {'height':'150px','width':'150px'}
+                }
+                return {'height':'150px','width':'150px','background-color':'green'}
+            },
+            unlocked(){return true},
+            canClick(){return d().yumao.gte(200) && d().jiesuotujian9.lte(0)},
+            onClick(){
+                d().baoshicanpian=d().baoshicanpian.sub(200)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
+                d().shengmingmx=d().shengmingmx.mul(1.1)
+                d().jiesuotujian9=n(1)
+            }
+        },
     },
     tabFormat: {
         图鉴: {
@@ -3059,8 +3122,8 @@ addLayer("vip",{
         VIP: {
             content:["blank",
                     ["display-text",
-                        function() { return '还在等什么,少年,想要变强,那就氪金吧!!!' },
-                        { "color": "white", "font-size": "28px",}
+                        function() { return '还在等什么,少年,想要变强,那就氪金币吧!!!' },
+                        { "color": "gold", "font-size": "28px",}
                     ],
                     "blank",
                     "blank",
@@ -3072,10 +3135,6 @@ addLayer("vip",{
             content:[            
                     ["row", [ ["infobox", "lore"]]],
                     "blank",
-                    ["display-text",
-                        function() { return '温馨提示:鉴于挂机系统的特殊性,自动化并不支持重洗<br>因此,选择之前请谨慎考虑' },
-                        { "color": "red", "font-size": "32px",}
-                    ],
                     ["display-text",
                         function() { return '你当前还剩余'+format(d().zidongguajichacao)+'个自动挂机插槽' },
                         { "color": "gold", "font-size": "24px",}
@@ -3096,6 +3155,137 @@ addLayer("vip",{
                     ["row", [ ["upgrade", 221],["upgrade", 222],["upgrade", 223],]],
                     ["row", [ ["upgrade", 231],["upgrade", 232],["upgrade", 234],]],
                     ["row", [ ["upgrade", 251],["upgrade", 252],]],
+                ],
+        },
+    },
+    row: "side",
+    layerShown(){return d().dengji.gte(100)},
+})
+addLayer("svip",{ 
+    symbol: "SVIP", 
+    position: 1,
+    startData() { return {
+        unlocked: true, 
+		points: new ExpantaNum(0),
+    }},
+    color: "orange",
+    resource: "SVIP",
+    type: "normal",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"想法",
+    gainMult() { 
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() { 
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    infoboxes: {
+        lore: {
+            title: "重洗说明",
+            body() { return "<h3>重洗会让你的VIP重置<br>但并不会返还金币,请慎重考虑" },
+        },
+    },
+    tooltip(){return ""},
+    upgrades:{
+        11:{
+            fullDisplay(){
+                return "SVIP1<br>给你一次重洗的机会<br>需要:8.88元宝"
+            },
+            onPurchase(){
+                d().yuanbao=d().yuanbao.sub(8.88)
+                d().chongxicishu=d().chongxicishu.add(1)
+            },
+            canAfford(){
+                return d().yuanbao.gte(8.88)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+        },
+    },
+    clickables:{
+        11: {
+            display() {
+                return `一键回收青铜装备<br>单价:0.01元宝`
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return true},
+            onClick(){
+                d().yuanbao=d().yuanbao.add(d().qingtongzhuangbei.div(100))
+                d().qingtongzhuangbei=n(0)
+            }
+        },
+        12: {
+            display() {
+                return `一键回收白银装备<br>单价:0.02元宝`
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return true},
+            onClick(){
+                d().yuanbao=d().yuanbao.add(d().baiyingzhuangbei.div(50))
+                d().baiyingzhuangbei=n(0)
+            }
+        },
+        13: {
+            display() {
+                return `一键回收裁决<br>单价:5元宝`
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return true},
+            onClick(){
+                d().yuanbao=d().yuanbao.add(d().caijue.mul(5))
+                d().caijue=n(0)
+            }
+        },
+        66666: {
+            display() {
+                return `<text style="color:red">重洗</text>`
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return d().chongxicishu.gte(1)},
+            onClick(){
+                d().chongxicishu=d().chongxicishu.sub(1)
+                layerDataReset('vip',[])
+            }
+        },
+    },
+    tabFormat: {
+        SVIP: {
+            content:["blank",
+                    ["display-text",
+                        function() { return '还在等什么,少年,想要变强,那就氪元宝吧!!!' },
+                        { "color": "orange", "font-size": "28px",}
+                    ],
+                    "blank",
+                    ["display-text",
+                        function() { return '你还可以重洗'+format(d().chongxicishu)+'次' },
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    "blank",
+                    ["row", [ ["clickable", 66666],]],
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["row", [ ["upgrade", 11],]],
+                ],
+        },
+        回收: {
+            content:["blank",
+                    ["display-text",
+                        function() { return '你有'+format(d().yuanbao)+'<text style="color:orange">元宝</text>' },
+                        {"font-size": "28px",}
+                    ],
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["row", [ ["clickable", 11],["clickable", 12],["clickable", 13],]],
                 ],
         },
     },
@@ -3570,16 +3760,16 @@ addLayer("j",{
     row: 2,
     layerShown(){return d().dengji.gte(750)},
 })
-addLayer("ghost1",{ 
-    symbol: "ghost", 
+addLayer("cb",{ 
+    symbol: "翅膀", 
     position: 3,
     startData() { return {
         unlocked: true, 
 		points: new ExpantaNum(0),
     }},
-    color: "black",
-    resource: "ghost",
-    type: "ghost",
+    color: "grey",
+    resource: "翅膀",
+    type: "normal",
     requires:new ExpantaNum(1e308),
     exponent:1,
     baseAmount(){return player.points},
@@ -3592,6 +3782,192 @@ addLayer("ghost1",{
         var exp = new ExpantaNum(1)
         return exp
     },
+    update(diff){
+        if(d().chibangdengji.gte(20))
+        {
+            d().yumaoxuqiu=n(60)
+        }
+        else if(d().chibangdengji.gte(10))
+        {
+            d().yumaoxuqiu=n(35)
+        }
+        
+    },
+    demo(leve)
+    {
+        let leveVal = ''
+        for(let i=0;i<=19;i++)
+        {
+            if (d().chibangdengji.lte(i))
+            {
+                const leve=(i + '').split('')
+                if(leve.length<=1)
+                {
+                    leveVal=`洁白之翼 0阶${leve[0]}星`
+                }
+                else
+                {
+                    leveVal=`<text style="color:gold">圣洁之羽</text> ${leve[0]}阶${leve[1]}星`
+                }
+            }
+            if(i==leve)
+            {
+                break
+            }
+        }
+        return leveVal
+    },
+    clickables:{
+        11: {
+            display() {
+                if(d().chibangdengji.gte(19))
+                {
+                    return `已达该版本最高上限`
+                }
+                return `升级翅膀`
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return d().yumao.gte(d().yumaoxuqiu) && d().chibangdengji.lte(n(18.5))},
+            onClick(){
+                if(d().yumao.lte(d().yumaoxuqiu.sub(0.1)))
+                {
+                    return ""
+                }
+                d().yumao=d().yumao.sub(d().yumaoxuqiu)
+                d().chibangdengji=d().chibangdengji.add(1)
+                var x=n(d().chibangshuxing[d().chibangdengji.sub(1)])
+                var y=n(d().chibangshuxing[d().chibangdengji])
+
+                d().gongjibeishu=d().gongjibeishu.div(x)
+                d().qiegebeishu=d().qiegebeishu.div(x)
+                d().fangyubeishu=d().fangyubeishu.div(x)
+                d().shengmingbeishu=d().shengmingbeishu.div(x)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.div(x)
+                d().gongji=d().gongji.div(x)
+                d().qiege=d().qiege.div(x)
+                d().fangyu=d().fangyu.div(x)
+                d().shengmingmx=d().shengmingmx.div(x)
+                d().shengminghuifu=d().shengminghuifu.div(x)
+
+                d().gongjibeishu=d().gongjibeishu.mul(y)
+                d().qiegebeishu=d().qiegebeishu.mul(y)
+                d().fangyubeishu=d().fangyubeishu.mul(y)
+                d().shengmingbeishu=d().shengmingbeishu.mul(y)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(y)
+                d().gongji=d().gongji.mul(y)
+                d().qiege=d().qiege.mul(y)
+                d().fangyu=d().fangyu.mul(y)
+                d().shengmingmx=d().shengmingmx.mul(y)
+                d().shengminghuifu=d().shengminghuifu.mul(y)
+            }
+        },
+        12: {
+            display() {
+                return '抽奖!<br>已经抽了'+format(d().choujiangcishu)+'次<br>抽一次要1W金币<br>中奖率:1%%'
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return d().jinbi.gte(10000) && d().pifu_xingqisi.lte(0)},
+            onClick(){
+                d().jinbi=d().jinbi.sub(10000)
+                var x=zero
+                x=x.add(Math.random())
+                if(x.gte(0.9999))
+                {
+                    d().pifu_xingqisi=n(2)
+                }
+                d().choujiangcishu=d().choujiangcishu.add(1)
+            }
+        },
+    },
+    tabFormat: {
+        翅膀: {
+            content:["blank",
+                    ["display-image",()=>{
+                        if(d().chibangdengji.lte(9))
+                        {
+                            return 'js/images/chibang1.png'
+                        }
+                        if(d().chibangdengji.lte(19))
+                        {
+                            return 'js/images/chibang2.png'
+                        }
+                        if(d().chibangdengji.lte(29))
+                        {
+                            return 'js/images/chibang3.png'
+                        }
+                        if(d().chibangdengji.lte(39))
+                        {
+                            return 'js/images/chibang4.png'
+                        }
+                        if(d().chibangdengji.lte(49))
+                        {
+                            return 'js/images/chibang5.png'
+                        }
+                    }, {maxWidth:'50%',maxHeight:'50%',position: 'relative'}],
+                    "blank",
+                    ["display-text",
+                        function() { return layers.cb.demo(d().chibangdengji)},
+                        { "font-size": "30px",}
+                    ],
+                    "blank",
+                    ["display-text",
+                        function() { return '你的翅膀给你所有属性提供'+format(n(d().chibangshuxing[d().chibangdengji]))+'x倍的加成'},
+                        { "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '下级将提供'+format(n(d().chibangshuxing[d().chibangdengji.add(1)]))+'x倍的加成'},
+                        { "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '你现在有 ' + format(d().yumao) + ' 羽毛' },
+                        { "color": "grey", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '下一次升级需要 ' + format(d().yumaoxuqiu) + ' 羽毛' },
+                        { "color": "grey", "font-size": "24px",}
+                    ],
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["row",[["clickable",11]]],
+                ],
+        },
+        皮肤: {
+            content:["blank",
+                    "blank",
+                    "blank",
+                    ["row",[["clickable",12]]],
+                    "blank",
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["row",
+                    [
+                    ["display-image",()=>{
+                        if(d().pifu_xingqisi.gte(1))
+                        {
+                            return 'js/images/chibangxingqisi.png'
+                        }
+                        return ''
+                    }, {maxWidth:'50%',maxHeight:'50%',position: 'relative'}],
+                    "blank",
+                    "blank",
+                    ["display-text",
+                        function() {
+                            if(d().pifu_xingqisi.gte(1))
+                            {
+                                return `<text style="color:gold">限定皮肤-疯狂星期四</text> 已激活`
+                            }
+                            return '???尚未激活'
+                        },
+                        {"font-size": "28px",}],
+                    ]
+                    ],
+                ],
+        },
+    },
     row: 3,
-    layerShown(){return "ghost"},
+    layerShown(){return d().dengji.gte(1200)},
 })

@@ -12,7 +12,7 @@
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.5",
+	num: "0.1.6",
 	name: "",
 }
 
@@ -30,6 +30,14 @@ let changelog = `<h1>计算公式:</h1><br><h3>
 			<br>
 			<br>
 			<h1>更新日志<br></h1>
+			<br><h3>v0.1.6<br></h3>
+			- 增加翅膀系统<br>
+			- 增加<text style="color:grey">羽毛</text><br>
+			- 增加对应图鉴<br>
+			- 增加这个游戏的第十五只怪物—————巢穴-秃鹫!!!<br>
+			- 增加SVIP1<br>
+			- 增加重洗<br>
+			- 增加回收<br>
 			<br><h3>v0.1.5<br></h3>
 			- 增加宝石系统<br>
 			- 增加<text style="color:pink">宝石残片</text><br>
