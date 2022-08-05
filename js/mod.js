@@ -12,7 +12,7 @@
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.6",
+	num: "0.1.7",
 	name: "",
 }
 
@@ -30,6 +30,14 @@ let changelog = `<h1>计算公式:</h1><br><h3>
 			<br>
 			<br>
 			<h1>更新日志<br></h1>
+			<br><h3>v0.1.7<br></h3>
+			- 增加副本<br>
+			- 增加通天塔<br>
+			- 开放四层通天塔<br>
+			- 增加圣器<br>
+			- 增加圣盾<br>
+			- 增加<text style="color:red">烈火之翼</text><br>
+			- 增加<text style="color:orange">稀有皮肤-氪金之翼</text><br>
 			<br><h3>v0.1.6<br></h3>
 			- 增加翅膀系统<br>
 			- 增加<text style="color:grey">羽毛</text><br>

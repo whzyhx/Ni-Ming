@@ -7,10 +7,15 @@ addLayer("data",{
 		    points: new ExpantaNum(0),
             xiuxi: new ExpantaNum(0),
 
+            tongtiantajisha1:zero,tongtiantajisha2:zero,tongtiantajisha3:zero,tongtiantajisha4:zero,
+            shengdun1:zero,shengdun2:zero,shengdun3:zero,shengdun4:zero,
+            jihuodun1:zero,jihuodun2:zero,jihuodun3:zero,jihuodun4:zero,jihuodun:zero,
+
             yuanbao:zero,chongxicishu:zero,
 
 
             pifu_xingqisi:zero,choujiangcishu:zero,
+            pifu_kejin:zero,choujiangcishu1:zero,
 
 
             gongji: two,gongjibeishu: one,
@@ -84,6 +89,7 @@ addLayer("data",{
                 1.00,1.01,1.02,1.03,1.04,1.05,1.06,1.07,1.08,1.09,
                 1.10,1.12,1.14,1.16,1.18,1.20,1.22,1.24,1.26,1.28,
                 1.30,1.33,1.36,1.39,1.42,1.45,1.48,1.51,1.54,1.57,
+                1.60,1.64,1.68,1.72,1.76,1.80,1.84,1.88,1.92,1.96,
             ],
         }
     },
@@ -323,6 +329,12 @@ addLayer("m",{
             unlocked(){return hasMilestone("m",7)},
             done() {return d().dengji.gte(1200)},
         },
+        8: {
+            requirementDescription: "Lv.1500",
+            effectDescription: `解锁副本-通天塔和圣器`,
+            unlocked(){return hasMilestone("m",8)},
+            done() {return d().dengji.gte(1500)},
+        },
         9: {
             requirementDescription: "千人斩",
             effectDescription: `解锁淬魂`,
@@ -534,7 +546,7 @@ addLayer("z",{
     exponent:1,
     baseAmount(){return player.points},
     baseResource:"点数",
-    branches:['j'],
+    branches:['j',"f"],
     gainMult() {
         mult = new ExpantaNum(1)
         return mult
@@ -1037,6 +1049,131 @@ addLayer("z",{
     },
     row: 1,
     layerShown(){return true},
+})
+addLayer("f",{
+    symbol: "副本",
+    position: 2,
+    startData(){return{
+            unlocked: true,
+		    points: new ExpantaNum(0),
+        }
+    },
+    tooltip(){return ""},
+    color: "cyan",
+    resource: "副本",
+    type: "none",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"点数",
+    gainMult() {
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() {
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    clickables: {
+        11: {
+            display() {
+                return '1层通天<br><text style="color:darkblue">1 圣盾碎片-1</text><br>200W血 10W攻 8000防<br>当前扣血:'+format(layers.z.need(2000000,100000,8000))+'点<br>已击杀:'+format(d().tongtiantajisha1)+'次'
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px","width":"800px"}},
+            canClick(){return d().shengmingnw.gte(layers.z.need(2000000,100000,8000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(2000000,100000,8000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(2000000,100000,8000))
+                d().shengdun1=d().shengdun1.add(1)
+                d().tongtiantajisha1=d().tongtiantajisha1.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
+        12: {
+            display() {
+                return '2层通天<br><text style="color:darkblue">1 圣盾碎片-2</text><br>250W血 12.5W攻 15000防<br>当前扣血:'+format(layers.z.need(2500000,125000,15000))+'点<br>已击杀:'+format(d().tongtiantajisha2)+'次'
+            },
+            unlocked(){return d().tongtiantajisha1.gte(1)},
+            style(){return {"height":"125px","width":"750px"}},
+            canClick(){return d().shengmingnw.gte(layers.z.need(2500000,125000,15000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(2500000,125000,15000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(2500000,100000,15000))
+                d().shengdun2=d().shengdun2.add(1)
+                d().tongtiantajisha2=d().tongtiantajisha2.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
+        13: {
+            display() {
+                return '3层通天<br><text style="color:darkblue">1 圣盾碎片-3</text><br>350W血 17.5W攻 25000防<br>当前扣血:'+format(layers.z.need(3500000,175000,25000))+'点<br>已击杀:'+format(d().tongtiantajisha3)+'次'
+            },
+            unlocked(){return d().tongtiantajisha2.gte(1)},
+            style(){return {"height":"125px","width":"700px"}},
+            canClick(){return d().shengmingnw.gte(layers.z.need(3500000,175000,25000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(3500000,175000,25000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(3500000,175000,25000))
+                d().shengdun3=d().shengdun3.add(1)
+                d().tongtiantajisha3=d().tongtiantajisha3.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
+        14: {
+            display() {
+                return '4层通天<br><text style="color:darkblue">1 圣盾碎片-4</text><br>500W血 25W攻 50000防<br>当前扣血:'+format(layers.z.need(5000000,250000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha4)+'次'
+            },
+            unlocked(){return d().tongtiantajisha3.gte(1)},
+            style(){return {"height":"125px","width":"650px"}},
+            canClick(){return d().shengmingnw.gte(layers.z.need(5000000,250000,50000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(5000000,250000,50000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(5000000,250000,50000))
+                d().shengdun4=d().shengdun4.add(1)
+                d().tongtiantajisha4=d().tongtiantajisha4.add(1)
+                d().killall=d().killall.add(1)
+            }
+        },
+    },
+    tabFormat: {
+        "通天塔": {
+            buttonStyle(){return {"color":"red","border-color":"red"}},
+            content:[
+                ["display-text",
+                    function() { return '你当前的生命为' + format(d().shengmingnw) + '点(+' + format(d().shengminghuifu) +'点/秒)'},
+                    { "color": "green", "font-size": "28px",}
+                ],
+                ["display-text",
+                    function() { return '你当前有' + format(d().moqiruti) + '层魔气入体(-'+format(d().moqirutijianshao.mul(d().hunqimx.div(100).add(1)))+'层/秒)'},
+                    { "color": "purple", "font-size": "28px",}
+                ],
+                ["display-text",
+                    function() { return '这让你的防御变为' + format(d().debuff1) + '倍'},
+                    { "color": "purple", "font-size": "28px",}
+                ],
+                "blank",
+                ["row", [ ["clickable", 14]]],
+                ["row", [ ["clickable", 13]]],
+                ["row", [ ["clickable", 12]]],
+                ["row", [ ["clickable", 11]]],
+            ],
+        },
+    },
+    row: 1,
+    layerShown(){return d().dengji.gte(1500)},
 })
 addLayer("b",{ 
     symbol: "装备", 
@@ -1582,8 +1719,163 @@ addLayer("b",{
         },
     },
     row: 2,
-    branches:["s","bs"],
+    branches:["s","bs",'sq'],
     layerShown(){return d().dengji.gte(5)},
+})
+addLayer("sq",{ 
+    symbol: "圣器", 
+    position: 0,
+    startData() { return {
+        unlocked: true, 
+		points: new ExpantaNum(0),
+    }},
+    color: "lime",
+    resource: "圣器",
+    type: "normal",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"想法",
+    gainMult() { 
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() { 
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    update(diff){
+        if(d().jihuodun1.gte(1) && d().jihuodun2.gte(1) && d().jihuodun3.gte(1) && d().jihuodun4.gte(1) && d().jihuodun.lte(0))
+        {
+            d().jihuodun=n(2)
+            d().fangyubeishu=d().fangyubeishu.mul(1.5)
+            d().fangyu=d().fangyu.mul(1.5)
+        }
+    },
+    tooltip(){return ""},
+    //┌┐┘└
+    clickables: {
+        11: {
+            display() {
+                if(d().jihuodun1.gte(1))
+                {
+                    return `┌`
+                }
+                return `激活 盾碎片-1<br>需要:<br>50 圣盾碎片-1<br>效果:<text style="color:blue">防御倍数x1.1`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuodun1.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengdun1.gte(50)},
+            onClick(){
+                d().shengdun1=d().shengdun1.sub(50)
+                d().jihuodun1=n(2)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+            }
+        },
+        12: {
+            display() {
+                if(d().jihuodun2.gte(1))
+                {
+                    return `┐`
+                }
+                return `激活 盾碎片-2<br>需要:<br>50 圣盾碎片-2<br>效果:<text style="color:blue">防御倍数x1.1`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuodun2.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengdun2.gte(50)},
+            onClick(){
+                d().shengdun2=d().shengdun2.sub(50)
+                d().jihuodun2=n(2)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+            }
+        },
+        13: {
+            display() {
+                if(d().jihuodun3.gte(1))
+                {
+                    return `└`
+                }
+                return `激活 盾碎片-3<br>需要:<br>50 圣盾碎片-3<br>效果:<text style="color:blue">防御倍数x1.1`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuodun3.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengdun3.gte(50)},
+            onClick(){
+                d().shengdun3=d().shengdun3.sub(50)
+                d().jihuodun3=n(2)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+            }
+        },
+        14: {
+            display() {
+                if(d().jihuodun4.gte(1))
+                {
+                    return `┘`
+                }
+                return `激活 盾碎片-4<br>需要:<br>50 圣盾碎片-4<br>效果:<text style="color:blue">防御倍数x1.1`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuodun4.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengdun4.gte(50)},
+            onClick(){
+                d().shengdun4=d().shengdun4.sub(50)
+                d().jihuodun4=n(2)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+            }
+        },
+    },
+    tabFormat: {
+        圣盾:{
+            content:[
+                ["row",[["clickable",11],["clickable",12],]],
+                ["row",[["clickable",13],["clickable",14],]],
+                "blank",
+                "blank",
+                "blank",
+                "blank",
+                ["display-text",
+                    function() { 
+                        if(d().jihuodun.gte(1))
+                        {
+                            return '<text style="color:blue">圣盾 效果:防御倍数x1.5(已激活)'
+                        }
+                        return '<text style="color:white">圣盾 效果:防御倍数x1.5(未激活)'
+                    },
+                    {"font-size": "28px",}
+                ],
+            ],
+        },
+    },
+    row: 4,
+    layerShown(){return d().dengji.gte(1500)},
 })
 addLayer("bs",{ 
     symbol: "宝石", 
@@ -2692,7 +2984,14 @@ addLayer("vip",{
         if(hasUpgrade("vip",252)){x=x.add(layers.z.need(100000,20000,3000))}
         if(hasUpgrade("vip",15)){x=x.div(2)}
         d().zongxuqiu=x
-        d().guajibeishu=d().shengminghuifu.div(d().zongxuqiu)
+        if(d().zongxuqiu.lte(n(0)))
+        {
+            d().guajibeishu=n(1)
+        }
+        else
+        {
+            d().guajibeishu=d().shengminghuifu.div(d().zongxuqiu)
+        }
         if(d().guajibeishu.gte(1))
         {
             d().guajibeishu=softcap(d().guajibeishu,n(3),0.1)
@@ -3783,6 +4082,10 @@ addLayer("cb",{
         return exp
     },
     update(diff){
+        if(d().chibangdengji.gte(30))
+        {
+            d().yumaoxuqiu=n(100)
+        }
         if(d().chibangdengji.gte(20))
         {
             d().yumaoxuqiu=n(60)
@@ -3796,7 +4099,7 @@ addLayer("cb",{
     demo(leve)
     {
         let leveVal = ''
-        for(let i=0;i<=19;i++)
+        for(let i=0;i<=29;i++)
         {
             if (d().chibangdengji.lte(i))
             {
@@ -3807,7 +4110,14 @@ addLayer("cb",{
                 }
                 else
                 {
-                    leveVal=`<text style="color:gold">圣洁之羽</text> ${leve[0]}阶${leve[1]}星`
+                    if(leve[0]==1)
+                    {
+                        leveVal=`<text style="color:gold">圣洁之翼</text> ${leve[0]}阶${leve[1]}星`
+                    }
+                    else
+                    {
+                        leveVal=`<text style="color:red">烈火之翼</text> ${leve[0]}阶${leve[1]}星`
+                    }
                 }
             }
             if(i==leve)
@@ -3820,7 +4130,7 @@ addLayer("cb",{
     clickables:{
         11: {
             display() {
-                if(d().chibangdengji.gte(19))
+                if(d().chibangdengji.gte(29))
                 {
                     return `已达该版本最高上限`
                 }
@@ -3828,7 +4138,7 @@ addLayer("cb",{
             },
             unlocked(){return true},
             style(){return {"height":"125px"}},
-            canClick(){return d().yumao.gte(d().yumaoxuqiu) && d().chibangdengji.lte(n(18.5))},
+            canClick(){return d().yumao.gte(d().yumaoxuqiu) && d().chibangdengji.lte(n(28.5))},
             onClick(){
                 if(d().yumao.lte(d().yumaoxuqiu.sub(0.1)))
                 {
@@ -3864,7 +4174,7 @@ addLayer("cb",{
         },
         12: {
             display() {
-                return '抽奖!<br>已经抽了'+format(d().choujiangcishu)+'次<br>抽一次要1W金币<br>中奖率:1%%'
+                return '金币抽奖!<br>已经抽了'+format(d().choujiangcishu)+'次<br>抽一次要1W金币<br>中奖率:1%%'
             },
             unlocked(){return true},
             style(){return {"height":"125px"}},
@@ -3878,6 +4188,24 @@ addLayer("cb",{
                     d().pifu_xingqisi=n(2)
                 }
                 d().choujiangcishu=d().choujiangcishu.add(1)
+            }
+        },
+        13: {
+            display() {
+                return '元宝抽奖!<br>已经抽了'+format(d().choujiangcishu1)+'次<br>抽一次要5元宝<br>中奖率:1%'
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return d().yuanbao.gte(5) && d().pifu_kejin.lte(0)},
+            onClick(){
+                d().yuanbao=d().yuanbao.sub(5)
+                var x=zero
+                x=x.add(Math.random())
+                if(x.gte(0.99))
+                {
+                    d().pifu_kejin=n(2)
+                }
+                d().choujiangcishu1=d().choujiangcishu1.add(1)
             }
         },
     },
@@ -3938,11 +4266,12 @@ addLayer("cb",{
             content:["blank",
                     "blank",
                     "blank",
-                    ["row",[["clickable",12]]],
+                    ["row",[["clickable",12],["clickable",13],]],
                     "blank",
                     "blank",
                     "blank",
                     "blank",
+                    ///////////////////////
                     ["row",
                     [
                     ["display-image",()=>{
@@ -3965,9 +4294,91 @@ addLayer("cb",{
                         {"font-size": "28px",}],
                     ]
                     ],
+                    /////////////////////
+                    "blank",
+                    ["row",
+                    [
+                    ["display-image",()=>{
+                        if(d().pifu_kejin.gte(1))
+                        {
+                            return 'js/images/chibangkejin.png'
+                        }
+                        return ''
+                    }, {maxWidth:'50%',maxHeight:'50%',position: 'relative'}],
+                    "blank",
+                    "blank",
+                    ["display-text",
+                        function() {
+                            if(d().pifu_kejin.gte(1))
+                            {
+                                return `<text style="color:orange">稀有皮肤-氪金之翼</text> 已激活`
+                            }
+                            return '???尚未激活'
+                        },
+                        {"font-size": "28px",}],
+                    ]
+                    ],
                 ],
         },
     },
     row: 3,
     layerShown(){return d().dengji.gte(1200)},
+})
+addLayer("ghost1",{ 
+    symbol: "翅膀", 
+    position: 1,
+    startData() { return {
+        unlocked: true, 
+		points: new ExpantaNum(0),
+    }},
+    color: "grey",
+    resource: "翅膀",
+    type: "normal",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"想法",
+    gainMult() { 
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() { 
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    clickables:{
+    },
+    tabFormat: {
+    },
+    row: 4,
+    layerShown(){return "ghost"},
+})
+addLayer("ghost2",{ 
+    symbol: "翅膀", 
+    position: 2,
+    startData() { return {
+        unlocked: true, 
+		points: new ExpantaNum(0),
+    }},
+    color: "grey",
+    resource: "翅膀",
+    type: "normal",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"想法",
+    gainMult() { 
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() { 
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    clickables:{
+    },
+    tabFormat: {
+    },
+    row: 4,
+    layerShown(){return "ghost"},
 })
