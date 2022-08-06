@@ -3808,7 +3808,7 @@ function walkto(x,y){
         d().guaiwu_x[tt].pop()
         d().guaiwu_y[tt].pop()
         d().shengmingnw=d().shengmingnw.sub(layers.z.need(d().guaiwuxue[tt],d().guaiwugong[tt],d().guaiwufang[tt]))
-        if(tt.lte(0))
+        if(tt.lte(n(0.5)))
         {
             var xxxxx=zero
             xxxxx=xxxxx.add(Math.random())
@@ -3817,7 +3817,7 @@ function walkto(x,y){
                 d().shidufen=d().shidufen.add(1)
             }
         }
-        if(tt.gte(1))
+        if(tt.gte(n(0.5)))
         {
             var xxxxx=zero
             xxxxx=xxxxx.add(Math.random())
