@@ -35,6 +35,7 @@ addLayer("data",{
             haskilled41: zero,haskilled42: zero,haskilled43: zero,haskilled44: zero,
             lastjipin10:zero,
             last2: zero,last4: zero,last6: zero,last8: zero,last10:zero,
+            last12: zero,last14: zero,last16: zero,last18: zero,last20:zero,
 
 
             qingtong1nw: zero,qingtong1mx: zero,qingtong1shuzhi: zero,
@@ -69,11 +70,24 @@ addLayer("data",{
             guajibeishu:one,
 
 
-            player_pos1_x:one,player_pos1_y:one,guaiwu1_x:[],guaiwu1_y:[],
+            player_pos_x:[n(1),n(1)],player_pos_y:[n(1),n(1)],guaiwu_x:[[],[]],guaiwu_y:[[],[]],
+            szx:[n(5),n(7)],szy:[n(5),n(7)],
+            cannot_x:[
+                [],
+                [n(2),n(2),n(2),n(2),n(2),n(2),n(3),n(4),n(4),n(4),n(4),n(5),n(5),n(6),n(6),n(6),n(6),n(6)],
+            ],
+            cannot_y:[
+                [],
+                [n(1),n(2),n(3),n(4),n(5),n(6),n(6),n(2),n(3),n(4),n(6),n(2),n(6),n(2),n(3),n(4),n(5),n(6)],
+            ],
+            nwt:zero,
+            guaiwuxue:[n(50000),n(2500000)],guaiwugong:[n(20000),n(200000)],guaiwufang:[n(2000),n(20000)],
 
             
             caijue:zero,jihuocaijue:zero,
+            longwenjia:zero,jihuolongwenjia:zero,
             shidufen:zero,caijuecuidudengji:zero,
+            fumoshu:zero,longwenjiafumodengji:zero,
 
 
             baoshicanpian:zero,
@@ -166,6 +180,8 @@ addLayer("m",{
         if(d().dengji.gte(7000))d().xuqiu=n(30000000)
         if(d().dengji.gte(8000))d().xuqiu=n(50000000)
         if(d().dengji.gte(10000))d().xuqiu=n(100000000)
+        if(d().dengji.gte(15000))d().xuqiu=n(300000000)
+        if(d().dengji.gte(20000))d().xuqiu=n(500000000)
         d().moqiruti=d().moqiruti.sub(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1)))
         d().moqiruti=d().moqiruti.max(0)
         x=new ExpantaNum(0.99)
@@ -440,6 +456,10 @@ addLayer("m",{
                 { "color": "white", "font-size": "28px",}
             ],
             ["display-text",
+                function() { return '你有 ' + format(d().yumao) + ' 羽毛' },
+                { "color": "white", "font-size": "28px",}
+            ],
+            ["display-text",
                 function() { return '你有 ' + format(d().moxue) + ' 魔血' },
                 { "color": "white", "font-size": "28px",}
             ],
@@ -450,6 +470,27 @@ addLayer("m",{
             "blank",
             ["display-text",
                 function() { return '你有 ' + format(d().caijue) + ' 裁决' },
+                { "color": "white", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().longwenjia) + ' 龙纹甲' },
+                { "color": "white", "font-size": "28px",}
+            ],
+            "blank",
+            ["display-text",
+                function() { return '你有 ' + format(d().shengdun1) + ' 圣盾碎片-1' },
+                { "color": "white", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().shengdun2) + ' 圣盾碎片-2' },
+                { "color": "white", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().shengdun3) + ' 圣盾碎片-3' },
+                { "color": "white", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().shengdun4) + ' 圣盾碎片-4' },
                 { "color": "white", "font-size": "28px",}
             ],
         ],
@@ -644,6 +685,23 @@ addLayer("z",{
     canget10string(){
         var x=zero
         x=x.add(d().last10)
+        if(x.gte(1))
+        {
+            return "是"
+        }
+        else
+        {
+            return "否"
+        }
+    },
+    canget12(){
+        var x=zero
+        x=x.add(Math.random())
+        return x.gte(0.999)
+    },
+    canget12string(){
+        var x=zero
+        x=x.add(d().last12)
         if(x.gte(1))
         {
             return "是"
@@ -984,6 +1042,32 @@ addLayer("z",{
                 d().killall=d().killall.add(1)
             }
         },
+        44: {
+            display() {
+                return '<text style="color":"gold">黄金巨人</text><br>30W血 5W攻 2W防<br>掉落:5000经验 10000金币<br>当前扣血:'+format(layers.z.need(300000,50000,20000))+'点<br><text style="color:gold">(0.1%)龙纹甲</text><br>上次是否获得物品:'+layers.z.canget12string()+'<br>已击杀:'+format(d().haskilled44)+'次'
+            },
+            style() {return {'height':'200px','width':'200px'}},
+            unlocked(){return d().haskilled43.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.need(300000,50000,20000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(300000,50000,20000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(300000,50000,20000))
+                d().jingyan=d().jingyan.add(5000)
+                d().jinbi=d().jinbi.add(10000)
+                d().haskilled44=d().haskilled44.add(1)
+                if(layers.z.canget12()){
+                    d().last12=n(1)
+                    d().longwenjia=d().longwenjia.add(1)
+                }
+                else{
+                    d().last12=n(0)
+                }
+                d().killall=d().killall.add(1)
+            }
+        },
     },
 	microtabs:{
         "一阶地图":{
@@ -1004,6 +1088,7 @@ addLayer("z",{
                 unlocked(){return d().haskilled34.gte(1)},
 				content:[
                     ["row", [ ["clickable", 41],["clickable", 42],["clickable", 43],]],
+                    ["row", [ ["clickable", 44],]]
 				]
 			},
 		},
@@ -1721,6 +1806,155 @@ addLayer("b",{
     row: 2,
     branches:["s","bs",'sq'],
     layerShown(){return d().dengji.gte(5)},
+})
+addLayer("s",{ 
+    symbol: "神兵", 
+    position: 1,
+    startData() { return {
+        unlocked: true, 
+		points: new ExpantaNum(0),
+    }},
+    color: "blue",
+    resource: "神兵",
+    type: "normal",
+    requires:new ExpantaNum(1e308),
+    exponent:1,
+    baseAmount(){return player.points},
+    baseResource:"想法",
+    gainMult() { 
+        mult = new ExpantaNum(1)
+        return mult
+    },
+    gainExp() { 
+        var exp = new ExpantaNum(1)
+        return exp
+    },
+    bars: {
+        1: {
+            direction: RIGHT,
+            width: 300,
+            height: 20,
+            fillStyle(){return {"background-color":"green"}},
+            unlocked(){return d().jihuocaijue.gte(1) && d().dengji.gte(750)},
+            display(){return `淬毒等级 `+format(d().caijuecuidudengji)+' / 100'},
+            progress() { return d().caijuecuidudengji.div(100) },
+        },
+        2: {
+            direction: RIGHT,
+            width: 300,
+            height: 20,
+            fillStyle(){return {"background-color":"purple"}},
+            unlocked(){return d().jihuolongwenjia.gte(1) && d().dengji.gte(750)},
+            display(){return `附魔等级 `+format(d().longwenjiafumodengji)+' / 100'},
+            progress() { return d().longwenjiafumodengji.div(100) },
+        },
+    },
+    tooltip(){return ""},
+    row: 3,
+    clickables: {
+        11: {
+            display() {
+                return `激活-<text style="color:gold">神兵·裁决</text><br>需要:10W金币<br><text style="color:red">攻击倍数x2</text><br>`+(d().jihuocaijue.gte(1)?"(已激活)":"未激活")
+            },
+            style(){
+                if(d().jihuocaijue.gte(1))
+                {
+                    return {"background-color":"green","border-color":"blue","border-width":"5px","height":"125px"}
+                }
+                return {"border-color":"blue","border-width":"5px","height":"125px"}
+            },
+            unlocked(){return true},
+            canClick(){return d().caijue.gte(1) && d().jinbi.gte(100000) && d().jihuocaijue.lte(0)},
+            onClick(){
+                d().caijue=d().caijue.sub(1)
+                d().jinbi=d().jinbi.sub(100000)
+                d().jihuocaijue=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(2)
+                d().gongji=d().gongji.mul(2)
+            }
+        },
+        12: {
+            display() {
+                return '淬毒<br>消耗:1尸毒粉<br>每次淬毒,独立提升1%的攻击'
+            },
+            style(){
+                return {"border-color":"green","border-width":"5px","background-color":"black","color":"green","width":"100px","height":"100px"}
+            },
+            unlocked(){return d().dengji.gte(750)},
+            canClick(){return d().shidufen.gte(1) && d().caijuecuidudengji.lte(n(99.1))},
+            onClick(){
+                d().shidufen=d().shidufen.sub(1)
+                d().caijuecuidudengji=d().caijuecuidudengji.add(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.01)
+                d().gongji=d().gongji.mul(1.01)
+            }
+        },
+        21: {
+            display() {
+                return `激活-<text style="color:orange">龙纹甲</text><br>需要:1000W金币<br><text style="color:green">生命倍数x2</text><br>`+(d().jihuolongwenjia.gte(1)?"(已激活)":"未激活")
+            },
+            style(){
+                if(d().jihuolongwenjia.gte(1))
+                {
+                    return {"background-color":"gold","border-color":"blue","border-width":"5px","height":"125px"}
+                }
+                return {"background-color":"red","border-color":"blue","border-width":"5px","height":"125px"}
+            },
+            unlocked(){return true},
+            canClick(){return d().longwenjia.gte(1) && d().jinbi.gte(10000000) && d().jihuolongwenjia.lte(0)},
+            onClick(){
+                d().longwenjia=d().longwenjia.sub(1)
+                d().jinbi=d().jinbi.sub(10000000)
+                d().jihuolongwenjia=n(1)
+                d().shengmingbeishu=d().shengmingbeishu.mul(2)
+                d().shengmingmx=d().shengmingmx.mul(2)
+            }
+        },
+        22: {
+            display() {
+                return '附魔<br>消耗:1附魔书<br>每次附魔,独立提升1%的生命恢复'
+            },
+            style(){
+                return {"border-color":"purple","border-width":"5px","background-color":"black","color":"purple","width":"100px","height":"100px"}
+            },
+            unlocked(){return d().dengji.gte(750)},
+            canClick(){return d().fumoshu.gte(1) && d().longwenjiafumodengji.lte(n(99.1))},
+            onClick(){
+                d().fumoshu=d().fumoshu.sub(1)
+                d().longwenjiafumodengji=d().longwenjiafumodengji.add(1)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.01)
+                d().shengminghuifu=d().shengminghuifu.mul(1.01)
+            }
+        },
+    },
+    tabFormat:{
+        主界面:{
+            content:[
+                ["display-text",
+                function() { return '你有'+format(d().caijue)+'把裁决'},
+                { "color": "gold", "font-size": "24px",}
+                ],
+                ["display-text",
+                function() { return '你有'+format(d().longwenjia)+'件龙纹甲'},
+                { "color": "gold", "font-size": "24px",}
+                ],
+                ["display-text",
+                function() { return '你有'+format(d().shidufen)+'尸毒粉'},
+                { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                function() { return '你有'+format(d().fumoshu)+'附魔书'},
+                { "color": "purple", "font-size": "24px",}
+                ],
+                "blank",
+                "blank",
+                "blank",
+                ["row",[["clickable",11],["bar",1],["clickable",12],]],
+                ["row",[["clickable",21],["bar",2],["clickable",22],]],
+            ]
+        }
+    },
+    layerShown(){return d().dengji.gte(500)},
 })
 addLayer("sq",{ 
     symbol: "圣器", 
@@ -2507,100 +2741,6 @@ addLayer("bs",{
     row: 3,
     layerShown(){return d().dengji.gte(900)},
 })
-addLayer("s",{ 
-    symbol: "神兵", 
-    position: 1,
-    startData() { return {
-        unlocked: true, 
-		points: new ExpantaNum(0),
-    }},
-    color: "blue",
-    resource: "神兵",
-    type: "normal",
-    requires:new ExpantaNum(1e308),
-    exponent:1,
-    baseAmount(){return player.points},
-    baseResource:"想法",
-    gainMult() { 
-        mult = new ExpantaNum(1)
-        return mult
-    },
-    gainExp() { 
-        var exp = new ExpantaNum(1)
-        return exp
-    },
-    bars: {
-        1: {
-            direction: RIGHT,
-            width: 300,
-            height: 20,
-            fillStyle(){return {"background-color":"green"}},
-            unlocked(){return d().jihuocaijue.gte(1) && d().dengji.gte(750)},
-            display(){return `淬毒等级 `+format(d().caijuecuidudengji)+' / 100'},
-            progress() { return d().caijuecuidudengji.div(100) },
-        },
-    },
-    tooltip(){return ""},
-    row: 3,
-    clickables: {
-        11: {
-            display() {
-                return `激活-<text style="color:gold">神兵·裁决</text><br>需要:10W金币<br><text style="color:red">攻击倍数x2</text><br>`+(d().jihuocaijue.gte(1)?"(已激活)":"未激活")
-            },
-            style(){
-                if(d().jihuocaijue.gte(1))
-                {
-                    return {"background-color":"green","border-color":"blue","border-width":"5px","height":"125px"}
-                }
-                return {"border-color":"blue","border-width":"5px","height":"125px"}
-            },
-            unlocked(){return true},
-            canClick(){return d().caijue.gte(1) && d().jinbi.gte(100000) && d().jihuocaijue.lte(0)},
-            onClick(){
-                d().caijue=d().caijue.sub(1)
-                d().jinbi=d().jinbi.sub(100000)
-                d().jihuocaijue=n(1)
-                d().gongjibeishu=d().gongjibeishu.mul(2)
-                d().gongji=d().gongji.mul(2)
-            }
-        },
-        12: {
-            display() {
-                return '淬毒<br>消耗:1尸毒粉<br>每次淬毒,独立提升1%的攻击'
-            },
-            style(){
-                return {"border-color":"green","border-width":"5px","background-color":"black","color":"green","width":"100px","height":"100px"}
-            },
-            unlocked(){return d().dengji.gte(750)},
-            canClick(){return d().shidufen.gte(1) && d().caijuecuidudengji.lte(n(99.1))},
-            onClick(){
-                d().shidufen=d().shidufen.sub(1)
-                d().caijuecuidudengji=d().caijuecuidudengji.add(1)
-                d().gongjibeishu=d().gongjibeishu.mul(1.01)
-                d().gongji=d().gongji.mul(1.01)
-            }
-        },
-    },
-    tabFormat:{
-        主界面:{
-            content:[
-                ["display-text",
-                function() { return '你有'+format(d().caijue)+'把裁决'},
-                { "color": "gold", "font-size": "24px",}
-                ],
-                ["display-text",
-                function() { return '你有'+format(d().shidufen)+'尸毒粉'},
-                { "color": "green", "font-size": "24px",}
-                ],
-                "blank",
-                "blank",
-                "blank",
-                ["row",[["clickable",11],["bar",1],["clickable",12],]],
-            ]
-        }
-    },
-    layerShown(){return d().dengji.gte(500)},
-})
 addLayer("c",{ 
     symbol: "宠物", 
     position: 1,
@@ -2925,6 +3065,54 @@ addLayer("t",{
                 d().jiesuotujian9=n(1)
             }
         },
+        41: {
+            display() {
+                if(d().jiesuotujian10.gte(1))
+                {
+                    return `解锁图鉴十<br>需求:1件龙纹甲<br>效果:生命倍数x1.1<br>已解锁`
+                }
+                return `解锁图鉴十<br>需求:1件龙纹甲<br>效果:生命倍数x1.1<br>未解锁`
+            },
+            style() {
+                if(d().jiesuotujian10.lte(0))
+                {
+                    return {'height':'150px','width':'150px'}
+                }
+                return {'height':'150px','width':'150px','background-color':'green'}
+            },
+            unlocked(){return true},
+            canClick(){return d().longwenjia.gte(1) && d().jiesuotujian10.lte(0)},
+            onClick(){
+                d().longwenjia=d().longwenjia.sub(1)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
+                d().shengmingmx=d().shengmingmx.mul(1.1)
+                d().jiesuotujian10=n(1)
+            }
+        },
+        42: {
+            display() {
+                if(d().jiesuotujian11.gte(1))
+                {
+                    return `解锁图鉴十一<br>需求:50附魔书<br>效果:生命恢复倍数x1.1<br>已解锁`
+                }
+                return `解锁图鉴十一<br>需求:50附魔书<br>效果:生命恢复倍数x1.1<br>未解锁`
+            },
+            style() {
+                if(d().jiesuotujian11.lte(0))
+                {
+                    return {'height':'150px','width':'150px'}
+                }
+                return {'height':'150px','width':'150px','background-color':'green'}
+            },
+            unlocked(){return true},
+            canClick(){return d().fumoshu.gte(50) && d().jiesuotujian11.lte(0)},
+            onClick(){
+                d().fumoshu=d().fumoshu.sub(50)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
+                d().shengminghuifu=d().shengminghuifu.mul(1.1)
+                d().jiesuotujian11=n(1)
+            }
+        },
     },
     tabFormat: {
         图鉴: {
@@ -2939,6 +3127,7 @@ addLayer("t",{
                     ["row", [ ["clickable", 11],["clickable", 12],["clickable", 13],]],
                     ["row", [ ["clickable", 21],["clickable", 22],["clickable", 23],]],
                     ["row", [ ["clickable", 31],["clickable", 32],["clickable", 33],]],
+                    ["row", [ ["clickable", 41],["clickable", 42],["clickable", 43],]],
                 ],
         },
     },
@@ -3592,15 +3781,16 @@ addLayer("svip",{
     layerShown(){return d().dengji.gte(100)},
 })
 function walkto(x,y){
+    var tt=d().nwt
     var xx=n(x)
     var yy=n(y)
-    d().player_pos1_x=n(xx)
-    d().player_pos1_y=n(yy)
+    d().player_pos_x[tt]=n(xx)
+    d().player_pos_y[tt]=n(yy)
     var isM=n(100)
     var xxx=zero
-    for(var i=0,len=d().guaiwu1_x.length;i<len;i++)
+    for(var i=0,len=d().guaiwu_x[tt].length;i<len;i++)
     {
-        xxx=xx.sub(d().guaiwu1_x[i]).abs().add(yy.sub(d().guaiwu1_y[i]).abs())
+        xxx=xx.sub(d().guaiwu_x[tt][i]).abs().add(yy.sub(d().guaiwu_y[tt][i]).abs())
         if(xxx.lte(n(0.001)))
         {
             isM=n(i)
@@ -3609,40 +3799,67 @@ function walkto(x,y){
     }
     if(isM.lte(99))
     {
-        var tmp=d().guaiwu1_x[d().guaiwu1_x.length-1]
-        d().guaiwu1_x[d().guaiwu1_x.length-1]=d().guaiwu1_x[isM]
-        d().guaiwu1_x[isM]=tmp
-        tmp=d().guaiwu1_y[d().guaiwu1_y.length-1]
-        d().guaiwu1_y[d().guaiwu1_y.length-1]=d().guaiwu1_y[isM]
-        d().guaiwu1_y[isM]=tmp
-        d().guaiwu1_x.pop()
-        d().guaiwu1_y.pop()
-        d().shengmingnw=d().shengmingnw.sub(layers.z.need(50000,20000,2000))
-        var xxxxx=zero
-        xxxxx=xxxxx.add(Math.random())
-        if(xxxxx.gte(0.5))
+        var tmp=d().guaiwu_x[tt][d().guaiwu_x[[tt]].length-1]
+        d().guaiwu_x[tt][d().guaiwu_x[tt].length-1]=d().guaiwu_x[tt][isM]
+        d().guaiwu_x[tt][isM]=tmp
+        tmp=d().guaiwu_y[tt][d().guaiwu_y[tt].length-1]
+        d().guaiwu_y[tt][d().guaiwu_y[tt].length-1]=d().guaiwu_y[tt][isM]
+        d().guaiwu_y[tt][isM]=tmp
+        d().guaiwu_x[tt].pop()
+        d().guaiwu_y[tt].pop()
+        d().shengmingnw=d().shengmingnw.sub(layers.z.need(d().guaiwuxue[tt],d().guaiwugong[tt],d().guaiwufang[tt]))
+        if(tt.lte(0))
         {
-            d().shidufen=d().shidufen.add(1)
+            var xxxxx=zero
+            xxxxx=xxxxx.add(Math.random())
+            if(xxxxx.gte(0.5))
+            {
+                d().shidufen=d().shidufen.add(1)
+            }
+        }
+        if(tt.gte(1))
+        {
+            var xxxxx=zero
+            xxxxx=xxxxx.add(Math.random())
+            if(xxxxx.gte(0.5))
+            {
+                d().fumoshu=d().fumoshu.add(1)
+            }
         }
     }
     return ""
 }
 function canwalk(x,y,ned){
+    var tt=d().nwt
     var xx=n(x)
     var yy=n(y)
     var nd=n(ned)
     var isM=zero
     var xxx=zero
-    for(var i=0,len=d().guaiwu1_x.length;i<len;i++)
+    for(var i=0,len=d().cannot_x[tt].length;i<len;i++)
     {
-        xxx=xx.sub(d().guaiwu1_x[i]).abs().add(yy.sub(d().guaiwu1_y[i]).abs())
+        xxx=xx.sub(d().cannot_x[tt][i]).abs().add(yy.sub(d().cannot_y[tt][i]).abs())
         if(xxx.lte(n(0.001)))
         {
-            isM=n(1)
+            isM=n(2)
             break
         }
     }
-    xxx=d().player_pos1_x.sub(xx).abs().add(d().player_pos1_y.sub(yy).abs())
+    if(isM.gte(1))
+    {
+        return false
+    }
+    isM=zero
+    for(var i=0,len=d().guaiwu_x[tt].length;i<len;i++)
+    {
+        xxx=xx.sub(d().guaiwu_x[tt][i]).abs().add(yy.sub(d().guaiwu_y[tt][i]).abs())
+        if(xxx.lte(n(0.001)))
+        {
+            isM=n(2)
+            break
+        }
+    }
+    xxx=d().player_pos_x[tt].sub(xx).abs().add(d().player_pos_y[tt].sub(yy).abs())
     if(isM.gte(1))
     {
         return d().shengmingnw.gte(nd) && xxx.lte(1)
@@ -3654,17 +3871,33 @@ function canwalk(x,y,ned){
 }
 function ggttstyle(x,y)
 {
+    var tt=d().nwt
     var xx=n(x)
     var yy=n(y)
-    var xxx=d().player_pos1_x.sub(xx).abs().add(d().player_pos1_y.sub(yy).abs())
+    var isM=zero
+    var xxx=zero
+    for(var i=0,len=d().cannot_x[tt].length;i<len;i++)
+    {
+        xxx=xx.sub(d().cannot_x[tt][i]).abs().add(yy.sub(d().cannot_y[tt][i]).abs())
+        if(xxx.lte(n(0.001)))
+        {
+            isM=n(1)
+            break
+        }
+    }
+    if(isM.gte(1))
+    {
+        return {"background-color":"black","height":"75px","width":"75px","transition-duration":"0s"}
+    }
+    var xxx=d().player_pos_x[tt].sub(xx).abs().add(d().player_pos_y[tt].sub(yy).abs())
     if(xxx.lte(n(0.001)))
     {
         return {"background-color":"red","height":"75px","width":"75px","transition-duration":"0s"}
     }
-    var isM=zero
-    for(var i=0,len=d().guaiwu1_x.length;i<len;i++)
+    isM=zero
+    for(var i=0,len=d().guaiwu_x[tt].length;i<len;i++)
     {
-        xxx=xx.sub(d().guaiwu1_x[i]).abs().add(yy.sub(d().guaiwu1_y[i]).abs())
+        xxx=xx.sub(d().guaiwu_x[tt][i]).abs().add(yy.sub(d().guaiwu_y[tt][i]).abs())
         if(xxx.lte(n(0.001)))
         {
             isM=n(1)
@@ -3675,7 +3908,7 @@ function ggttstyle(x,y)
     {
         return {"background-color":"orange","height":"75px","width":"75px","transition-duration":"0s"}
     }
-    var xxx=d().player_pos1_x.sub(xx).abs().add(d().player_pos1_y.sub(yy).abs())
+    var xxx=d().player_pos_x[tt].sub(xx).abs().add(d().player_pos_y[tt].sub(yy).abs())
     if(xxx.lte(1))
     {
         return {"background-color":"green","height":"75px","width":"75px","transition-duration":"0s"}
@@ -3683,32 +3916,36 @@ function ggttstyle(x,y)
     return {"background-color":"white","height":"75px","width":"75px","transition-duration":"0s"}
 }
 function walkup(){
-    if(d().player_pos1_x.lte(0))
+    var tt=d().nwt
+    if(d().player_pos_x[tt].lte(0))
     {
         return ""
     }
-    walkto(d().player_pos1_x.sub(1),d().player_pos1_y)
+    walkto(d().player_pos_x[tt].sub(1),d().player_pos_y[tt])
 }
 function walkdown(){
-    if(d().player_pos1_x.gte(5))
+    var tt=d().nwt
+    if(d().player_pos_x[tt].gte(d().szx[tt]))
     {
         return ""
     }
-    walkto(d().player_pos1_x.add(1),d().player_pos1_y)
+    walkto(d().player_pos_x[tt].add(1),d().player_pos_y[tt])
 }
 function walkleft(){
-    if(d().player_pos1_y.lte(0))
+    var tt=d().nwt
+    if(d().player_pos_y[tt].lte(0))
     {
         return ""
     }
-    walkto(d().player_pos1_x,d().player_pos1_y.sub(1))
+    walkto(d().player_pos_x[tt],d().player_pos_y[tt].sub(1))
 }
 function walkright(){
-    if(d().player_pos1_y.gte(5))
+    var tt=d().nwt
+    if(d().player_pos_y[tt].gte(d().szy[d().nwt]))
     {
         return ""
     }
-    walkto(d().player_pos1_x,d().player_pos1_y.add(1))
+    walkto(d().player_pos_x[tt],d().player_pos_y[tt].add(1))
 }
 addLayer("j",{ 
     symbol: "秘境", 
@@ -3749,6 +3986,23 @@ addLayer("j",{
             <text style="color:orange">橘色</text>:怪物的位置<br>
             掉落:每只僵尸有50%几率掉落1尸毒粉` },
         },
+        lore1: {
+            title: "秘境说明",
+            body() { return `
+            <h3>
+            w:向上<br>
+            s:向下<br>
+            a:向左<br>
+            d:向右<br>
+            x:生成怪物(需打完当前所有怪物)<br>
+            也可以点击以进行移动<br>
+            <text style="color:red">红色</text>:玩家当前位置<br>
+            <text style="color:green">绿色</text>:当前可以移动到的位置<br>
+            白色:当前不可移动到的位置<br>
+            黑色:障碍物<br>
+            <text style="color:orange">橘色</text>:怪物的位置<br>
+            掉落:每只骷髅有50%几率掉落1附魔书` },
+        },
     },
     tooltip(){return ""},
     hotkeys: [
@@ -3756,11 +4010,11 @@ addLayer("j",{
             key: "w", 
             description: "w:向上",
             onPress() {
-                if(d().player_pos1_x.lte(1))
+                if(d().player_pos_x[d().nwt].lte(1))
                 {
                     return ""
                 }
-                if(canwalk(d().player_pos1_x.sub(1),d().player_pos1_y,layers.z.need(50000,20000,2000)))
+                if(canwalk(d().player_pos_x[d().nwt].sub(1),d().player_pos_y[d().nwt],layers.z.need(d().guaiwuxue[d().nwt],d().guaiwugong[d().nwt],d().guaiwufang[d().nwt])))
                 {
                     walkup()
                 }
@@ -3771,11 +4025,11 @@ addLayer("j",{
             key: "s", 
             description: "s:向下",
             onPress() {
-                if(d().player_pos1_x.gte(5))
+                if(d().player_pos_x[d().nwt].gte(d().szx[d().nwt]))
                 {
                     return ""
                 }
-                if(canwalk(d().player_pos1_x.add(1),d().player_pos1_y,layers.z.need(50000,20000,2000)))
+                if(canwalk(d().player_pos_x[d().nwt].add(1),d().player_pos_y[d().nwt],layers.z.need(d().guaiwuxue[d().nwt],d().guaiwugong[d().nwt],d().guaiwufang[d().nwt])))
                 {
                     walkdown()
                 }
@@ -3786,11 +4040,11 @@ addLayer("j",{
             key: "a", 
             description: "a:向左",
             onPress() {
-                if(d().player_pos1_y.lte(1))
+                if(d().player_pos_y[d().nwt].lte(1))
                 {
                     return ""
                 }
-                if(canwalk(d().player_pos1_x,d().player_pos1_y.sub(1),layers.z.need(50000,20000,2000)))
+                if(canwalk(d().player_pos_x[d().nwt],d().player_pos_y[d().nwt].sub(1),layers.z.need(d().guaiwuxue[d().nwt],d().guaiwugong[d().nwt],d().guaiwufang[d().nwt])))
                 {
                     walkleft()
                 }
@@ -3801,11 +4055,11 @@ addLayer("j",{
             key: "d", 
             description: "d:向右",
             onPress() {
-                if(d().player_pos1_y.gte(5))
+                if(d().player_pos_y[d().nwt].gte(d().szy[d().nwt]))
                 {
                     return ""
                 }
-                if(canwalk(d().player_pos1_x,d().player_pos1_y.add(1),layers.z.need(50000,20000,2000)))
+                if(canwalk(d().player_pos_x[d().nwt],d().player_pos_y[d().nwt].add(1),layers.z.need(d().guaiwuxue[d().nwt],d().guaiwugong[d().nwt],d().guaiwufang[d().nwt])))
                 {
                     walkright()
                 }
@@ -3816,32 +4070,152 @@ addLayer("j",{
             key: "x", 
             description: "x:生成怪物(需打完当前所有怪物)",
             onPress() {
-                if(n(d().guaiwu1_x.length).gte(1))
+                var tt=d().nwt
+                if(n(d().guaiwu_x[tt].length).gte(1))
                 {
                     return ""
                 }
                 for(var i=0;i<5;i++)
                 {
-                    var xx=zero
+                    var xx=one
+                    xx=xx.div(d().szx[tt])
                     xx=xx.add(Math.random())
-                    xx=xx.add(0.2)
-                    xx=xx.mul(5)
+                    xx=xx.mul(d().szx[tt])
                     xx=xx.floor()
-                    xx=xx.min(5)
-                    var yy=zero
+                    xx=xx.min(d().szx[tt])
+                    var yy=one
+                    yy=yy.div(d().szy[tt])
                     yy=yy.add(Math.random())
-                    yy=yy.add(0.2)
-                    yy=yy.mul(5)
+                    yy=yy.mul(d().szy[tt])
                     yy=yy.floor()
-                    yy=yy.min(5)
-                    d().guaiwu1_x.push(xx)
-                    d().guaiwu1_y.push(yy)
+                    yy=yy.min(d().szy[tt])
+                    var isM=zero
+                    var xxx=zero
+                    for(var j=0,len=d().cannot_x[tt].length;j<len;j++)
+                    {
+                        xxx=xx.sub(d().cannot_x[tt][j]).abs().add(yy.sub(d().cannot_y[tt][j]).abs())
+                        if(xxx.lte(n(0.001)))
+                        {
+                            isM=n(2)
+                            break
+                        }
+                    }
+                    if(isM.gte(1))
+                    {
+                        continue
+                    }
+                    d().guaiwu_x[tt].push(xx)
+                    d().guaiwu_y[tt].push(yy)
                 }
             },
             unlocked() {return d().dengji.gte(750)}
         },
     ],
     clickables:{
+        11111: {
+            display() {return `切换至秘境0`},
+            style(){return {'height':"125px"}},
+            unlocked(){return true},
+            canClick(){return d().nwt.gte(n(0.5))},
+            onClick(){d().nwt=n(0)}
+        },
+        11112: {
+            display() {return `刷新怪物`},
+            style(){return {'height':"125px"}},
+            unlocked(){return true},
+            canClick(){return d().guaiwu_x[d().nwt].length<=0},
+            onClick(){
+                var tt=d().nwt
+                if(n(d().guaiwu_x[tt].length).gte(1))
+                {
+                    return ""
+                }
+                for(var i=0;i<5;i++)
+                {
+                    var xx=one
+                    xx=xx.div(d().szx[tt])
+                    xx=xx.add(Math.random())
+                    xx=xx.mul(d().szx[tt])
+                    xx=xx.floor()
+                    xx=xx.min(d().szx[tt])
+                    var yy=one
+                    yy=yy.div(d().szy[tt])
+                    yy=yy.add(Math.random())
+                    yy=yy.mul(d().szy[tt])
+                    yy=yy.floor()
+                    yy=yy.min(d().szy[tt])
+                    var isM=zero
+                    var xxx=zero
+                    for(var j=0,len=d().cannot_x[tt].length;j<len;j++)
+                    {
+                        xxx=xx.sub(d().cannot_x[tt][j]).abs().add(yy.sub(d().cannot_y[tt][j]).abs())
+                        if(xxx.lte(n(0.001)))
+                        {
+                            isM=n(2)
+                            break
+                        }
+                    }
+                    if(isM.gte(1))
+                    {
+                        continue
+                    }
+                    d().guaiwu_x[tt].push(xx)
+                    d().guaiwu_y[tt].push(yy)
+                }
+            }
+        },
+        21111: {
+            display() {return `切换至秘境1`},
+            style(){return {'height':"125px"}},
+            unlocked(){return true},
+            canClick(){return d().nwt.lte(n(0.5))},
+            onClick(){d().nwt=n(1)}
+        },
+        21112: {
+            display() {return `刷新怪物`},
+            style(){return {'height':"125px"}},
+            unlocked(){return true},
+            canClick(){return d().guaiwu_x[d().nwt].length<=0},
+            onClick(){
+                var tt=d().nwt
+                if(n(d().guaiwu_x[tt].length).gte(1))
+                {
+                    return ""
+                }
+                for(var i=0;i<5;i++)
+                {
+                    var xx=one
+                    xx=xx.div(d().szx[tt])
+                    xx=xx.add(Math.random())
+                    xx=xx.mul(d().szx[tt])
+                    xx=xx.floor()
+                    xx=xx.min(d().szx[tt])
+                    var yy=one
+                    yy=yy.div(d().szy[tt])
+                    yy=yy.add(Math.random())
+                    yy=yy.mul(d().szy[tt])
+                    yy=yy.floor()
+                    yy=yy.min(d().szy[tt])
+                    var isM=zero
+                    var xxx=zero
+                    for(var j=0,len=d().cannot_x[tt].length;j<len;j++)
+                    {
+                        xxx=xx.sub(d().cannot_x[tt][j]).abs().add(yy.sub(d().cannot_y[tt][j]).abs())
+                        if(xxx.lte(n(0.001)))
+                        {
+                            isM=n(2)
+                            break
+                        }
+                    }
+                    if(isM.gte(1))
+                    {
+                        continue
+                    }
+                    d().guaiwu_x[tt].push(xx)
+                    d().guaiwu_y[tt].push(yy)
+                }
+            }
+        },
         11: {
             display() {return ``},
             style(){return ggttstyle(n(1),n(1))},
@@ -4017,13 +4391,360 @@ addLayer("j",{
             canClick(){return canwalk(5,5,layers.z.need(50000,20000,2000))},
             onClick(){walkto(5,5)}
         },
+        211: {
+            display() {return ``},
+            style(){return ggttstyle(n(1),n(1))},
+            unlocked(){return true},
+            canClick(){return canwalk(1,1,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(1,1)}
+        },
+        212: {
+            display() {return ``},
+            style(){return ggttstyle(n(1),n(2))},
+            unlocked(){return true},
+            canClick(){return canwalk(1,2,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(1,2)}
+        },
+        213: {
+            display() {return ``},
+            style(){return ggttstyle(n(1),n(3))},
+            unlocked(){return true},
+            canClick(){return canwalk(1,3,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(1,3)}
+        },
+        214: {
+            display() {return ``},
+            style(){return ggttstyle(n(1),n(4))},
+            unlocked(){return true},
+            canClick(){return canwalk(1,4,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(1,4)}
+        },
+        215: {
+            display() {return ``},
+            style(){return ggttstyle(n(1),n(5))},
+            unlocked(){return true},
+            canClick(){return canwalk(1,5,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(1,5)}
+        },
+        216: {
+            display() {return ``},
+            style(){return ggttstyle(n(1),n(6))},
+            unlocked(){return true},
+            canClick(){return canwalk(1,6,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(1,6)}
+        },
+        217: {
+            display() {return ``},
+            style(){return ggttstyle(n(1),n(7))},
+            unlocked(){return true},
+            canClick(){return canwalk(1,7,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(1,7)}
+        },
+        221: {
+            display() {return ``},
+            style(){return ggttstyle(n(2),n(1))},
+            unlocked(){return true},
+            canClick(){return canwalk(2,1,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(2,1)}
+        },
+        222: {
+            display() {return ``},
+            style(){return ggttstyle(n(2),n(2))},
+            unlocked(){return true},
+            canClick(){return canwalk(2,2,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(2,2)}
+        },
+        223: {
+            display() {return ``},
+            style(){return ggttstyle(n(2),n(3))},
+            unlocked(){return true},
+            canClick(){return canwalk(2,3,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(2,3)}
+        },
+        224: {
+            display() {return ``},
+            style(){return ggttstyle(n(2),n(4))},
+            unlocked(){return true},
+            canClick(){return canwalk(2,4,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(2,4)}
+        },
+        225: {
+            display() {return ``},
+            style(){return ggttstyle(n(2),n(5))},
+            unlocked(){return true},
+            canClick(){return canwalk(2,5,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(2,5)}
+        },
+        226: {
+            display() {return ``},
+            style(){return ggttstyle(n(2),n(6))},
+            unlocked(){return true},
+            canClick(){return canwalk(2,6,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(2,6)}
+        },
+        227: {
+            display() {return ``},
+            style(){return ggttstyle(n(2),n(7))},
+            unlocked(){return true},
+            canClick(){return canwalk(2,7,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(2,7)}
+        },
+        231: {
+            display() {return ``},
+            style(){return ggttstyle(n(3),n(1))},
+            unlocked(){return true},
+            canClick(){return canwalk(3,1,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(3,1)}
+        },
+        232: {
+            display() {return ``},
+            style(){return ggttstyle(n(3),n(2))},
+            unlocked(){return true},
+            canClick(){return canwalk(3,2,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(3,2)}
+        },
+        233: {
+            display() {return ``},
+            style(){return ggttstyle(n(3),n(3))},
+            unlocked(){return true},
+            canClick(){return canwalk(3,3,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(3,3)}
+        },
+        234: {
+            display() {return ``},
+            style(){return ggttstyle(n(3),n(4))},
+            unlocked(){return true},
+            canClick(){return canwalk(3,4,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(3,4)}
+        },
+        235: {
+            display() {return ``},
+            style(){return ggttstyle(n(3),n(5))},
+            unlocked(){return true},
+            canClick(){return canwalk(3,5,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(3,5)}
+        },
+        236: {
+            display() {return ``},
+            style(){return ggttstyle(n(3),n(6))},
+            unlocked(){return true},
+            canClick(){return canwalk(3,6,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(3,6)}
+        },
+        237: {
+            display() {return ``},
+            style(){return ggttstyle(n(3),n(7))},
+            unlocked(){return true},
+            canClick(){return canwalk(3,7,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(3,7)}
+        },
+        241: {
+            display() {return ``},
+            style(){return ggttstyle(n(4),n(1))},
+            unlocked(){return true},
+            canClick(){return canwalk(4,1,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(4,1)}
+        },
+        242: {
+            display() {return ``},
+            style(){return ggttstyle(n(4),n(2))},
+            unlocked(){return true},
+            canClick(){return canwalk(4,2,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(4,2)}
+        },
+        243: {
+            display() {return ``},
+            style(){return ggttstyle(n(4),n(3))},
+            unlocked(){return true},
+            canClick(){return canwalk(4,3,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(4,3)}
+        },
+        244: {
+            display() {return ``},
+            style(){return ggttstyle(n(4),n(4))},
+            unlocked(){return true},
+            canClick(){return canwalk(4,4,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(4,4)}
+        },
+        245: {
+            display() {return ``},
+            style(){return ggttstyle(n(4),n(5))},
+            unlocked(){return true},
+            canClick(){return canwalk(4,5,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(4,5)}
+        },
+        246: {
+            display() {return ``},
+            style(){return ggttstyle(n(4),n(6))},
+            unlocked(){return true},
+            canClick(){return canwalk(4,6,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(4,6)}
+        },
+        247: {
+            display() {return ``},
+            style(){return ggttstyle(n(4),n(7))},
+            unlocked(){return true},
+            canClick(){return canwalk(4,7,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(4,7)}
+        },
+        251: {
+            display() {return ``},
+            style(){return ggttstyle(n(5),n(1))},
+            unlocked(){return true},
+            canClick(){return canwalk(5,1,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(5,1)}
+        },
+        252: {
+            display() {return ``},
+            style(){return ggttstyle(n(5),n(2))},
+            unlocked(){return true},
+            canClick(){return canwalk(5,2,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(5,2)}
+        },
+        253: {
+            display() {return ``},
+            style(){return ggttstyle(n(5),n(3))},
+            unlocked(){return true},
+            canClick(){return canwalk(5,3,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(5,3)}
+        },
+        254: {
+            display() {return ``},
+            style(){return ggttstyle(n(5),n(4))},
+            unlocked(){return true},
+            canClick(){return canwalk(5,4,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(5,4)}
+        },
+        255: {
+            display() {return ``},
+            style(){return ggttstyle(n(5),n(5))},
+            unlocked(){return true},
+            canClick(){return canwalk(5,5,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(5,5)}
+        },
+        256: {
+            display() {return ``},
+            style(){return ggttstyle(n(5),n(6))},
+            unlocked(){return true},
+            canClick(){return canwalk(5,6,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(5,6)}
+        },
+        257: {
+            display() {return ``},
+            style(){return ggttstyle(n(5),n(7))},
+            unlocked(){return true},
+            canClick(){return canwalk(5,7,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(5,7)}
+        },
+        261: {
+            display() {return ``},
+            style(){return ggttstyle(n(6),n(1))},
+            unlocked(){return true},
+            canClick(){return canwalk(6,1,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(6,1)}
+        },
+        262: {
+            display() {return ``},
+            style(){return ggttstyle(n(6),n(2))},
+            unlocked(){return true},
+            canClick(){return canwalk(6,2,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(6,2)}
+        },
+        263: {
+            display() {return ``},
+            style(){return ggttstyle(n(6),n(3))},
+            unlocked(){return true},
+            canClick(){return canwalk(6,3,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(6,3)}
+        },
+        264: {
+            display() {return ``},
+            style(){return ggttstyle(n(6),n(4))},
+            unlocked(){return true},
+            canClick(){return canwalk(6,4,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(6,4)}
+        },
+        265: {
+            display() {return ``},
+            style(){return ggttstyle(n(6),n(5))},
+            unlocked(){return true},
+            canClick(){return canwalk(6,5,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(6,5)}
+        },
+        266: {
+            display() {return ``},
+            style(){return ggttstyle(n(6),n(6))},
+            unlocked(){return true},
+            canClick(){return canwalk(6,6,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(6,6)}
+        },
+        267: {
+            display() {return ``},
+            style(){return ggttstyle(n(6),n(7))},
+            unlocked(){return true},
+            canClick(){return canwalk(6,7,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(6,7)}
+        },
+        271: {
+            display() {return ``},
+            style(){return ggttstyle(n(7),n(1))},
+            unlocked(){return true},
+            canClick(){return canwalk(7,1,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(7,1)}
+        },
+        272: {
+            display() {return ``},
+            style(){return ggttstyle(n(7),n(2))},
+            unlocked(){return true},
+            canClick(){return canwalk(7,2,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(7,2)}
+        },
+        273: {
+            display() {return ``},
+            style(){return ggttstyle(n(7),n(3))},
+            unlocked(){return true},
+            canClick(){return canwalk(7,3,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(7,3)}
+        },
+        274: {
+            display() {return ``},
+            style(){return ggttstyle(n(7),n(4))},
+            unlocked(){return true},
+            canClick(){return canwalk(7,4,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(7,4)}
+        },
+        275: {
+            display() {return ``},
+            style(){return ggttstyle(n(7),n(5))},
+            unlocked(){return true},
+            canClick(){return canwalk(7,5,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(7,5)}
+        },
+        276: {
+            display() {return ``},
+            style(){return ggttstyle(n(7),n(6))},
+            unlocked(){return true},
+            canClick(){return canwalk(7,6,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(7,6)}
+        },
+        277: {
+            display() {return ``},
+            style(){return ggttstyle(n(7),n(7))},
+            unlocked(){return true},
+            canClick(){return canwalk(7,7,layers.z.need(2500000,200000,20000))},
+            onClick(){walkto(7,7)}
+        },
     },
     tabFormat: {
         '秘境-僵尸洞':{
             content:[
                 ["row",[["infobox","lore"]]],
                 ["display-text",
-                    function() { return '你当前的坐标X:'+format(d().player_pos1_x)+',Y:'+format(d().player_pos1_y) },
+                    function() { return '你当前的坐标X:'+format(d().player_pos_x[0])+',Y:'+format(d().player_pos_y[0]) },
+                    { "color": "white", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '你当前在秘境'+format(d().nwt) },
                     { "color": "white", "font-size": "24px",}
                 ],
                 ["display-text",
@@ -4031,7 +4752,7 @@ addLayer("j",{
                     { "color": "green", "font-size": "24px",}
                 ],
                 ["display-text",
-                    function() { return '当前还剩'+format(d().guaiwu1_x.length)+'只僵尸'},
+                    function() { return '当前还剩'+format(d().guaiwu_x[0].length)+'只僵尸'},
                     { "color": "white", "font-size": "24px",}
                 ],
                 ["display-text",
@@ -4053,6 +4774,52 @@ addLayer("j",{
                 ["row",[["clickable",31],["clickable",32],["clickable",33],["clickable",34],["clickable",35],]],
                 ["row",[["clickable",41],["clickable",42],["clickable",43],["clickable",44],["clickable",45],]],
                 ["row",[["clickable",51],["clickable",52],["clickable",53],["clickable",54],["clickable",55],]],
+                "blank",
+                ["row",[["clickable",11111],["clickable",11112],]],
+            ],
+        },
+        '秘境-地穴':{
+            content:[
+                ["row",[["infobox","lore1"]]],
+                ["display-text",
+                    function() { return '你当前的坐标X:'+format(d().player_pos_x[1])+',Y:'+format(d().player_pos_y[1]) },
+                    { "color": "white", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '你当前在秘境'+format(d().nwt) },
+                    { "color": "white", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '当前拥有'+format(d().fumoshu)+'附魔书'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '当前还剩'+format(d().guaiwu_x[1].length)+'只骷髅'},
+                    { "color": "white", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '骷髅属性:250W血,20W攻,2W防'},
+                    { "color": "white", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '你当前的生命为' + format(d().shengmingnw) + '点(+' + format(d().shengminghuifu) +'点/秒)'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '当前扣血:'+format(layers.z.need(2500000,200000,20000))+'点'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                "blank",
+                "blank",
+                ["row",[["clickable",211],["clickable",212],["clickable",213],["clickable",214],["clickable",215],["clickable",216],["clickable",217],]],
+                ["row",[["clickable",221],["clickable",222],["clickable",223],["clickable",224],["clickable",225],["clickable",226],["clickable",227],]],
+                ["row",[["clickable",231],["clickable",232],["clickable",233],["clickable",234],["clickable",235],["clickable",236],["clickable",237],]],
+                ["row",[["clickable",241],["clickable",242],["clickable",243],["clickable",244],["clickable",245],["clickable",246],["clickable",247],]],
+                ["row",[["clickable",251],["clickable",252],["clickable",253],["clickable",254],["clickable",255],["clickable",256],["clickable",257],]],
+                ["row",[["clickable",261],["clickable",262],["clickable",263],["clickable",264],["clickable",265],["clickable",266],["clickable",267],]],
+                ["row",[["clickable",271],["clickable",272],["clickable",273],["clickable",274],["clickable",275],["clickable",276],["clickable",277],]],
+                "blank",
+                ["row",[["clickable",21111],["clickable",21112],]],
             ],
         }
     },

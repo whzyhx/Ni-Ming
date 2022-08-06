@@ -12,7 +12,7 @@
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.7",
+	num: "0.1.8",
 	name: "",
 }
 
@@ -30,6 +30,13 @@ let changelog = `<h1>计算公式:</h1><br><h3>
 			<br>
 			<br>
 			<h1>更新日志<br></h1>
+			<br><h3>v0.1.8<br></h3>
+			- 增加秘境-地穴<br>
+			- 增加龙纹甲<br>
+			- 增加对应图鉴<br>
+			- 增加附魔书<br>
+			- 增加对应图鉴<br>
+			- 增加这个游戏的第十六只怪物—————巢穴-<text style="color:gold">黄金巨人</text>!!!<br>
 			<br><h3>v0.1.7<br></h3>
 			- 增加副本<br>
 			- 增加通天塔<br>
