@@ -12,7 +12,7 @@
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1.8",
+	num: "0.1.9",
 	name: "",
 }
 
@@ -30,6 +30,17 @@ let changelog = `<h1>计算公式:</h1><br><h3>
 			<br>
 			<br>
 			<h1>更新日志<br></h1>
+			<br><h3>v0.1.9<br></h3>
+			- 翅膀上限开放至39级<br>
+			- 增加<text style="color:blue">玄冰之翼</text><br>
+			- 增加自动挂机-巢穴-秃鹫<br>
+			- 增加称号系统<br>
+			- 增加这个游戏的第十七只怪物—————祖玛神殿-祖玛守卫!!!<br>
+			- 增加黄金装备<br>
+			- 增加黄金装备宝石槽位<br>
+			- 增加9层通天塔<br>
+			- 增加圣器-圣剑<br>
+			- 增加SVIP2<br>
 			<br><h3>v0.1.8<br></h3>
 			- 增加秘境-地穴<br>
 			- 增加龙纹甲<br>
@@ -43,6 +54,7 @@ let changelog = `<h1>计算公式:</h1><br><h3>
 			- 开放四层通天塔<br>
 			- 增加圣器<br>
 			- 增加圣盾<br>
+			- 翅膀上限开放至29级<br>
 			- 增加<text style="color:red">烈火之翼</text><br>
 			- 增加<text style="color:orange">稀有皮肤-氪金之翼</text><br>
 			<br><h3>v0.1.6<br></h3>
@@ -149,7 +161,7 @@ function addedPlayerData() { return {
 // Display extra things at the top of the page
 var displayThings = [
 	`如果游玩过程中遇到困惑,请查看更新日志,谢谢<br>
-	如果你觉得这个游戏不好玩,可以玩一玩辉影神秘精心制作的混乱时空<br>`
+	如果你觉得这个游戏不好玩,可以玩一玩QwQe308精心制作的升级树<br>`
 ]
 
 // Determines when the game "ends"
