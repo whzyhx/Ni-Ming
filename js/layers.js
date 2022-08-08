@@ -6191,7 +6191,7 @@ addLayer("j",{
         }
     },
     row: 2,
-    layerShown(){return d().dengji.gte(750) && (d().caijuecuidudengji.lte(n(99.5)) || d().jiesuotujian7.lte(0.5)) && (d().longwenjiafumodengji.lte(n(99.5)) || d().jiesuotujian11.lte(0.5))},
+    layerShown(){return d().dengji.gte(750) && (d().caijuecuidudengji.lte(n(99.5)) || d().jiesuotujian7.lte(0.5) || d().longwenjiafumodengji.lte(n(99.5)) || d().jiesuotujian11.lte(0.5))},
 })
 addLayer("cb",{ 
     symbol: "翅膀", 
