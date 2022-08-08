@@ -2684,7 +2684,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengdun1.gte(50)},
+            canClick(){return d().shengdun1.gte(50) && d().jihuodun1.lte(1)},
             onClick(){
                 d().shengdun1=d().shengdun1.sub(50)
                 d().jihuodun1=n(2)
@@ -2708,7 +2708,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengdun2.gte(50)},
+            canClick(){return d().shengdun2.gte(50) && d().jihuodun2.lte(1)},
             onClick(){
                 d().shengdun2=d().shengdun2.sub(50)
                 d().jihuodun2=n(2)
@@ -2732,7 +2732,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengdun3.gte(50)},
+            canClick(){return d().shengdun3.gte(50) && d().jihuodun3.lte(1)},
             onClick(){
                 d().shengdun3=d().shengdun3.sub(50)
                 d().jihuodun3=n(2)
@@ -2756,7 +2756,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengdun4.gte(50)},
+            canClick(){return d().shengdun4.gte(50) && d().jihuodun4.lte(1)},
             onClick(){
                 d().shengdun4=d().shengdun4.sub(50)
                 d().jihuodun4=n(2)
@@ -2780,7 +2780,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian1.gte(50)},
+            canClick(){return d().shengjian1.gte(50) && d().jihuojian1.lte(1)},
             onClick(){
                 d().shengjian1=d().shengjian1.sub(50)
                 d().jihuojian1=n(2)
@@ -2804,7 +2804,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian2.gte(50)},
+            canClick(){return d().shengjian2.gte(50) && d().jihuojian2.lte(1)},
             onClick(){
                 d().shengjian2=d().shengjian2.sub(50)
                 d().jihuojian2=n(2)
@@ -2828,7 +2828,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian3.gte(50)},
+            canClick(){return d().shengjian3.gte(50) && d().jihuojian3.lte(1)},
             onClick(){
                 d().shengjian3=d().shengjian3.sub(50)
                 d().jihuojian3=n(2)
@@ -2852,7 +2852,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian4.gte(50)},
+            canClick(){return d().shengjian4.gte(50) && d().jihuojian4.lte(1)},
             onClick(){
                 d().shengjian4=d().shengjian4.sub(50)
                 d().jihuojian4=n(2)
@@ -2876,7 +2876,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian5.gte(50)},
+            canClick(){return d().shengjian5.gte(50) && d().jihuojian5.lte(1)},
             onClick(){
                 d().shengjian5=d().shengjian5.sub(50)
                 d().jihuojian5=n(2)
@@ -2900,7 +2900,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian6.gte(50)},
+            canClick(){return d().shengjian6.gte(50) && d().jihuojian6.lte(1)},
             onClick(){
                 d().shengjian6=d().shengjian6.sub(50)
                 d().jihuojian6=n(2)
@@ -2924,7 +2924,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian7.gte(50)},
+            canClick(){return d().shengjian7.gte(50) && d().jihuojian7.lte(1)},
             onClick(){
                 d().shengjian7=d().shengjian7.sub(50)
                 d().jihuojian7=n(2)
@@ -2948,7 +2948,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian8.gte(50)},
+            canClick(){return d().shengjian8.gte(50) && d().jihuojian8.lte(1)},
             onClick(){
                 d().shengjian8=d().shengjian8.sub(50)
                 d().jihuojian8=n(2)
@@ -2972,7 +2972,7 @@ addLayer("sq",{
                 }
                 return {"height":"125px","width":"125px"}
             },
-            canClick(){return d().shengjian9.gte(50)},
+            canClick(){return d().shengjian9.gte(50) && d().jihuojian9.lte(1)},
             onClick(){
                 d().shengjian9=d().shengjian9.sub(50)
                 d().jihuojian9=n(2)
