@@ -7,6 +7,85 @@ addLayer("data",{
 		    points: new ExpantaNum(0),
             xiuxi: new ExpantaNum(0),
 
+            cigeng:one,
+
+            lingqi:zero,lingqihuoqu:zero,jingjiedengji:zero,
+            touruqingtongzhuangbei:zero,
+            tourubaiyingzhuangbei:zero,
+            touruhuangjinzhuangbei:zero,
+            touruchongwudan:zero,
+            tourucaijue:zero,
+            tourulongwenjia:zero,
+            jindutiao_lingqi:zero,
+            jingjiemingcheng:[
+                '<text style="color:cyan">炼气期</text> 1阶',
+                '<text style="color:cyan">炼气期</text> 2阶',
+                '<text style="color:cyan">炼气期</text> 3阶',
+                '<text style="color:cyan">炼气期</text> 4阶',
+                '<text style="color:cyan">炼气期</text> 5阶',
+                '<text style="color:cyan">炼气期</text> 6阶',
+                '<text style="color:cyan">炼气期</text> 7阶',
+                '<text style="color:cyan">炼气期</text> 8阶',
+                '<text style="color:cyan">炼气期</text> 9阶',
+                '<text style="color:cyan">炼气期</text> 10阶',
+                '<text style="color:brown">筑基期</text> 1阶',
+                '<text style="color:brown">筑基期</text> 2阶',
+                '<text style="color:brown">筑基期</text> 3阶',
+                '<text style="color:brown">筑基期</text> 4阶',
+                '<text style="color:brown">筑基期</text> 5阶',
+                '<text style="color:brown">筑基期</text> 6阶',
+                '<text style="color:brown">筑基期</text> 7阶',
+                '<text style="color:brown">筑基期</text> 8阶',
+                '<text style="color:brown">筑基期</text> 9阶',
+                '<text style="color:brown">筑基期</text> 10阶',
+                '<text style="color:gold">金丹期</text> 1阶',
+                '<text style="color:gold">金丹期</text> 2阶',
+                '<text style="color:gold">金丹期</text> 3阶',
+                '<text style="color:gold">金丹期</text> 4阶',
+                '<text style="color:gold">金丹期</text> 5阶',
+                '<text style="color:gold">金丹期</text> 6阶',
+                '<text style="color:gold">金丹期</text> 7阶',
+                '<text style="color:gold">金丹期</text> 8阶',
+                '<text style="color:gold">金丹期</text> 9阶',
+                '<text style="color:gold">金丹期</text> 10阶',
+                '<text style="color:purple">元婴期</text> 1阶',
+                '<text style="color:purple">元婴期</text> 2阶',
+                '<text style="color:purple">元婴期</text> 3阶',
+                '<text style="color:purple">元婴期</text> 4阶',
+                '<text style="color:purple">元婴期</text> 5阶',
+                '<text style="color:purple">元婴期</text> 6阶',
+                '<text style="color:purple">元婴期</text> 7阶',
+                '<text style="color:purple">元婴期</text> 8阶',
+                '<text style="color:purple">元婴期</text> 9阶',
+                '<text style="color:purple">元婴期</text> 10阶',
+                '<text style="color:orange">分神期</text> 1阶',
+                '<text style="color:orange">分神期</text> 2阶',
+                '<text style="color:orange">分神期</text> 3阶',
+                '<text style="color:orange">分神期</text> 4阶',
+                '<text style="color:orange">分神期</text> 5阶',
+                '<text style="color:orange">分神期</text> 6阶',
+                '<text style="color:orange">分神期</text> 7阶',
+                '<text style="color:orange">分神期</text> 8阶',
+                '<text style="color:orange">分神期</text> 9阶',
+                '<text style="color:orange">分神期</text> 10阶',
+            ],
+            jingjiexuyao:[
+                10,20,30,40,50,60,70,80,90,100,
+                100,200,300,400,500,600,700,800,900,1000,
+                1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,
+                10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,
+                100000,200000,300000,400000,500000,600000,700000,800000,900000,1000000,
+                1000000,2000000,3000000,4000000,5000000,6000000,7000000,8000000,9000000,10000000,
+            ],
+            jingjieshuxing:[
+                1.00,1.03,1.06,1.09,1.12,1.15,1.18,1.21,1.24,1.27,
+                1.30,1.35,1.40,1.45,1.50,1.55,1.60,1.65,1.70,1.75,
+                1.80,1.88,1.96,2.04,2.12,2.20,2.28,2.36,2.44,2.52,
+                2.60,2.70,2.80,2.90,3.00,3.10,3.20,3.30,3.40,3.50,
+                3.60,3.75,3.90,4.05,4.20,4.35,4.50,4.65,4.80,4.95,
+                5.10,5.30,5.50,5.70,5.90,6.10,6.30,6.50,6.70,6.90,
+            ],
+
             tongtiantajisha1:zero,tongtiantajisha2:zero,tongtiantajisha3:zero,tongtiantajisha4:zero,
             tongtiantajisha5:zero,tongtiantajisha6:zero,tongtiantajisha7:zero,tongtiantajisha8:zero,
             tongtiantajisha9:zero,tongtiantajisha10:zero,tongtiantajisha11:zero,tongtiantajisha12:zero,
@@ -168,6 +247,10 @@ addLayer("m",{
         return exp
     },
     update(diff){
+        if(hasMilestone("t",5))
+        {
+            d().cigeng=n(2)
+        }
         if(d().killall.gte(1000))
         {
             d().uu=n(1)
@@ -181,49 +264,10 @@ addLayer("m",{
         d().zhanli=x
         d().shengmingnw=d().shengmingnw.add(d().shengminghuifu.mul(diff))
         d().shengmingnw=d().shengmingnw.min(d().shengmingmx)
-        if(d().dengji.gte(10))d().xuqiu=n(30)
-        if(d().dengji.gte(15))d().xuqiu=n(50)
-        if(d().dengji.gte(20))d().xuqiu=n(100)
-        if(d().dengji.gte(50))d().xuqiu=n(500)
-        if(d().dengji.gte(100))d().xuqiu=n(1000)
-        if(d().dengji.gte(200))d().xuqiu=n(3000)
-        if(d().dengji.gte(300))d().xuqiu=n(5000)
-        if(d().dengji.gte(500))d().xuqiu=n(10000)
-        if(d().dengji.gte(1000))d().xuqiu=n(100000)
-        if(d().dengji.gte(2000))d().xuqiu=n(300000)
-        if(d().dengji.gte(2500))d().xuqiu=n(500000)
-        if(d().dengji.gte(3000))d().xuqiu=n(1000000)
-        if(d().dengji.gte(3500))d().xuqiu=n(2000000)
-        if(d().dengji.gte(4000))d().xuqiu=n(5000000)
-        if(d().dengji.gte(5000))d().xuqiu=n(10000000)
-        if(d().dengji.gte(6000))d().xuqiu=n(20000000)
-        if(d().dengji.gte(6500))d().xuqiu=n(25000000)
-        if(d().dengji.gte(7000))d().xuqiu=n(30000000)
-        if(d().dengji.gte(8000))d().xuqiu=n(50000000)
-        if(d().dengji.gte(10000))d().xuqiu=n(100000000)
-        if(d().dengji.gte(15000))d().xuqiu=n(300000000)
-        if(d().dengji.gte(20000))d().xuqiu=n(500000000)
         d().moqiruti=d().moqiruti.sub(d().moqirutijianshao.mul(diff).mul(d().hunqimx.div(100).add(1)))
         d().moqiruti=d().moqiruti.max(0)
         x=new ExpantaNum(0.99)
         d().debuff1=x.pow(d().moqiruti)
-        d().moxuejiejingxuqiu=d().cuitidengji.add(1).div(25).ceil()
-        if(hasMilestone("t",1))
-        {
-            d().moxuejiejingxuqiu=d().moxuejiejingxuqiu.div(2)
-        }
-        if(hasMilestone("t",3))
-        {
-            d().moxuejiejingxuqiu=d().moxuejiejingxuqiu.div(2)
-        }
-        if(hasMilestone("t",4))
-        {
-            d().moxuejiejingxuqiu=d().moxuejiejingxuqiu.div(2)
-        }
-        if(hasMilestone("t",5))
-        {
-            d().moxuejiejingxuqiu=d().moxuejiejingxuqiu.div(2)
-        }
     },
     tooltip(){return ""},
     clickables: {
@@ -253,6 +297,28 @@ addLayer("m",{
                 x=new ExpantaNum(10)
                 x=x.mul(d().shengmingbeishu)
                 d().shengmingmx=d().shengmingmx.add(x)
+                if(d().dengji.gte(10))d().xuqiu=n(30)
+                if(d().dengji.gte(15))d().xuqiu=n(50)
+                if(d().dengji.gte(20))d().xuqiu=n(100)
+                if(d().dengji.gte(50))d().xuqiu=n(500)
+                if(d().dengji.gte(100))d().xuqiu=n(1000)
+                if(d().dengji.gte(200))d().xuqiu=n(3000)
+                if(d().dengji.gte(300))d().xuqiu=n(5000)
+                if(d().dengji.gte(500))d().xuqiu=n(10000)
+                if(d().dengji.gte(1000))d().xuqiu=n(100000)
+                if(d().dengji.gte(2000))d().xuqiu=n(300000)
+                if(d().dengji.gte(2500))d().xuqiu=n(500000)
+                if(d().dengji.gte(3000))d().xuqiu=n(1000000)
+                if(d().dengji.gte(3500))d().xuqiu=n(2000000)
+                if(d().dengji.gte(4000))d().xuqiu=n(5000000)
+                if(d().dengji.gte(5000))d().xuqiu=n(10000000)
+                if(d().dengji.gte(6000))d().xuqiu=n(20000000)
+                if(d().dengji.gte(6500))d().xuqiu=n(25000000)
+                if(d().dengji.gte(7000))d().xuqiu=n(30000000)
+                if(d().dengji.gte(8000))d().xuqiu=n(50000000)
+                if(d().dengji.gte(10000))d().xuqiu=n(100000000)
+                if(d().dengji.gte(15000))d().xuqiu=n(300000000)
+                if(d().dengji.gte(20000))d().xuqiu=n(500000000)
             }
         },
         21: {
@@ -275,13 +341,13 @@ addLayer("m",{
             },
             style(){return {"height":"130px","width":"130px","color":"orange","background-color":"purple","border-color":"orange","border-width":"5px"}},
             unlocked(){return true},
-            canClick(){return d().moxue.gte(d().moxuexuqiu) && d().moxuejiejing.gte(d().moxuejiejingxuqiu)},
+            canClick(){return d().moxue.gte(d().moxuexuqiu.root(d().cigeng)) && d().moxuejiejing.gte(d().moxuejiejingxuqiu)},
             onClick(){
-                if(d().moxue.lte(d().moxuexuqiu) || d().moxuejiejing.lte(d().moxuejiejingxuqiu.sub(0.01)))
+                if(d().moxue.lte(d().moxuexuqiu.root(d().cigeng)) || d().moxuejiejing.lte(d().moxuejiejingxuqiu.sub(0.01)))
                 {
                     return ""
                 }
-                d().moxue=d().moxue.sub(d().moxuexuqiu)
+                d().moxue=d().moxue.sub(d().moxuexuqiu.root(d().cigeng))
                 d().moxuejiejing=d().moxuejiejing.sub(d().moxuejiejingxuqiu)
                 d().cuitidengji=d().cuitidengji.add(1)
                 var x=two
@@ -301,6 +367,19 @@ addLayer("m",{
                 x=x.mul(d().shengmingbeishu)
                 d().shengmingmx=d().shengmingmx.add(x)
                 d().moxuexuqiu=d().moxuexuqiu.mul(1.01)
+                d().moxuejiejingxuqiu=d().cuitidengji.add(1).div(25).ceil()
+                if(hasMilestone("t",1))
+                {
+                    d().moxuejiejingxuqiu=d().moxuejiejingxuqiu.div(2)
+                }
+                if(hasMilestone("t",3))
+                {
+                    d().moxuejiejingxuqiu=d().moxuejiejingxuqiu.div(2)
+                }
+                if(hasMilestone("t",4))
+                {
+                    d().moxuejiejingxuqiu=d().moxuejiejingxuqiu.div(2)
+                }
             }
         },
         31: {
@@ -389,6 +468,12 @@ addLayer("m",{
             done() {return d().dengji.gte(1500)},
         },
         10: {
+            requirementDescription: "Lv.2000",
+            effectDescription: `解锁修为`,
+            unlocked(){return hasMilestone("m",9)},
+            done() {return d().dengji.gte(2000)},
+        },
+        11: {
             requirementDescription: "千人斩",
             effectDescription: `解锁淬魂`,
             unlocked(){return true},
@@ -582,7 +667,7 @@ addLayer("m",{
                     { "color": "red", "font-size": "24px",}
                 ],
                 ["display-text",
-                    function() { return '你有' + format(d().moxue)+'点魔血(+'+format((hasUpgrade("vip",241)?d().shengminghuifu.add(1).root(2):n(0)))+'点/秒)'},
+                    function() { return '你有' + format(d().moxue)+'点魔血(+'+format((hasUpgrade("vip",241)?d().shengminghuifu.add(1).div(10):n(0)))+'点/秒)'},
                     { "color": "purple", "font-size": "24px",}
                 ],
                 ["display-text",
@@ -601,7 +686,7 @@ addLayer("m",{
                     { "color": "white", "font-size": "24px",}
                 ],
                 ["display-text",
-                    function() { return '下一次淬体需要' + format(d().moxuexuqiu)+'点魔血'},
+                    function() { return '下一次淬体需要' + format(d().moxuexuqiu.root(d().cigeng))+'点魔血'},
                     { "color": "purple", "font-size": "24px",}
                 ],
                 ["display-text",
@@ -646,7 +731,7 @@ addLayer("m",{
         },
     },
     row: 1,
-    branches:['j'],
+    branches:['j','c'],
     layerShown(){return true},
 })
 addLayer("z",{
@@ -1582,200 +1667,210 @@ addLayer("b",{
         return exp
     },
     update(diff){
-        var x=n(1000)
-        x=x.min(d().qingtong1mx)
-        x=x.min(d().qingtong2mx)
-        x=x.min(d().qingtong3mx)
-        x=x.min(d().qingtong4mx)
-        if(x.gte(60) && d().haveqingtongtaozhuang1.lte(0))
+        var x=zero
+        if(d().haveqingtongtaozhuang5.lte(0.5))
         {
-            d().haveqingtongtaozhuang1=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            x=n(1000)
+            x=x.min(d().qingtong1mx)
+            x=x.min(d().qingtong2mx)
+            x=x.min(d().qingtong3mx)
+            x=x.min(d().qingtong4mx)
+            if(x.gte(60) && d().haveqingtongtaozhuang1.lte(0))
+            {
+                d().haveqingtongtaozhuang1=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(80) && d().haveqingtongtaozhuang2.lte(0))
+            {
+                d().haveqingtongtaozhuang2=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(90) && d().haveqingtongtaozhuang3.lte(0))
+            {
+                d().haveqingtongtaozhuang3=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(95) && d().haveqingtongtaozhuang4.lte(0))
+            {
+                d().haveqingtongtaozhuang4=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(100) && d().haveqingtongtaozhuang5.lte(0))
+            {
+                d().haveqingtongtaozhuang5=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.1)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
+                d().gongji=d().gongji.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+                d().shengmingmx=d().shengmingmx.mul(1.1)
+                d().shengminghuifu=d().shengminghuifu.mul(1.1)
+            }
         }
-        if(x.gte(80) && d().haveqingtongtaozhuang2.lte(0))
-        {
-            d().haveqingtongtaozhuang2=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
+        if(d().havebaiyingtaozhuang5.lte(0.5))
+        {   
+            x=n(1000)
+            x=x.min(d().baiying1mx)
+            x=x.min(d().baiying2mx)
+            x=x.min(d().baiying3mx)
+            x=x.min(d().baiying4mx)
+            if(x.gte(60) && d().havebaiyingtaozhuang1.lte(0))
+            {
+                d().havebaiyingtaozhuang1=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(80) && d().havebaiyingtaozhuang2.lte(0))
+            {
+                d().havebaiyingtaozhuang2=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(90) && d().havebaiyingtaozhuang3.lte(0))
+            {
+                d().havebaiyingtaozhuang3=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(95) && d().havebaiyingtaozhuang4.lte(0))
+            {
+                d().havebaiyingtaozhuang4=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(100) && d().havebaiyingtaozhuang5.lte(0))
+            {
+                d().havebaiyingtaozhuang5=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.1)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
+                d().gongji=d().gongji.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+                d().shengmingmx=d().shengmingmx.mul(1.1)
+                d().shengminghuifu=d().shengminghuifu.mul(1.1)
+            }
         }
-        if(x.gte(90) && d().haveqingtongtaozhuang3.lte(0))
+        if(d().havehuangjintaozhuang5.lte(0.5))
         {
-            d().haveqingtongtaozhuang3=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(95) && d().haveqingtongtaozhuang4.lte(0))
-        {
-            d().haveqingtongtaozhuang4=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(100) && d().haveqingtongtaozhuang5.lte(0))
-        {
-            d().haveqingtongtaozhuang5=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.1)
-            d().fangyubeishu=d().fangyubeishu.mul(1.1)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
-            d().gongji=d().gongji.mul(1.1)
-            d().fangyu=d().fangyu.mul(1.1)
-            d().shengmingmx=d().shengmingmx.mul(1.1)
-            d().shengminghuifu=d().shengminghuifu.mul(1.1)
-        }
-        x=n(1000)
-        x=x.min(d().baiying1mx)
-        x=x.min(d().baiying2mx)
-        x=x.min(d().baiying3mx)
-        x=x.min(d().baiying4mx)
-        if(x.gte(60) && d().havebaiyingtaozhuang1.lte(0))
-        {
-            d().havebaiyingtaozhuang1=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(80) && d().havebaiyingtaozhuang2.lte(0))
-        {
-            d().havebaiyingtaozhuang2=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(90) && d().havebaiyingtaozhuang3.lte(0))
-        {
-            d().havebaiyingtaozhuang3=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(95) && d().havebaiyingtaozhuang4.lte(0))
-        {
-            d().havebaiyingtaozhuang4=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(100) && d().havebaiyingtaozhuang5.lte(0))
-        {
-            d().havebaiyingtaozhuang5=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.1)
-            d().fangyubeishu=d().fangyubeishu.mul(1.1)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
-            d().gongji=d().gongji.mul(1.1)
-            d().fangyu=d().fangyu.mul(1.1)
-            d().shengmingmx=d().shengmingmx.mul(1.1)
-            d().shengminghuifu=d().shengminghuifu.mul(1.1)
-        }
-        x=n(1000)
-        x=x.min(d().huangjin1mx)
-        x=x.min(d().huangjin2mx)
-        x=x.min(d().huangjin3mx)
-        x=x.min(d().huangjin4mx)
-        if(x.gte(60) && d().havehuangjintaozhuang1.lte(0))
-        {
-            d().havehuangjintaozhuang1=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(80) && d().havehuangjintaozhuang2.lte(0))
-        {
-            d().havehuangjintaozhuang2=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(90) && d().havehuangjintaozhuang3.lte(0))
-        {
-            d().havehuangjintaozhuang3=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(95) && d().havehuangjintaozhuang4.lte(0))
-        {
-            d().havehuangjintaozhuang4=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.05)
-            d().fangyubeishu=d().fangyubeishu.mul(1.05)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
-            d().gongji=d().gongji.mul(1.05)
-            d().fangyu=d().fangyu.mul(1.05)
-            d().shengmingmx=d().shengmingmx.mul(1.05)
-            d().shengminghuifu=d().shengminghuifu.mul(1.05)
-        }
-        if(x.gte(100) && d().havehuangjintaozhuang5.lte(0))
-        {
-            d().havehuangjintaozhuang5=n(1)
-            d().gongjibeishu=d().gongjibeishu.mul(1.1)
-            d().fangyubeishu=d().fangyubeishu.mul(1.1)
-            d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
-            d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
-            d().gongji=d().gongji.mul(1.1)
-            d().fangyu=d().fangyu.mul(1.1)
-            d().shengmingmx=d().shengmingmx.mul(1.1)
-            d().shengminghuifu=d().shengminghuifu.mul(1.1)
+            x=n(1000)
+            x=x.min(d().huangjin1mx)
+            x=x.min(d().huangjin2mx)
+            x=x.min(d().huangjin3mx)
+            x=x.min(d().huangjin4mx)
+            if(x.gte(60) && d().havehuangjintaozhuang1.lte(0))
+            {
+                d().havehuangjintaozhuang1=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(80) && d().havehuangjintaozhuang2.lte(0))
+            {
+                d().havehuangjintaozhuang2=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(90) && d().havehuangjintaozhuang3.lte(0))
+            {
+                d().havehuangjintaozhuang3=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(95) && d().havehuangjintaozhuang4.lte(0))
+            {
+                d().havehuangjintaozhuang4=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.05)
+                d().fangyubeishu=d().fangyubeishu.mul(1.05)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.05)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.05)
+                d().gongji=d().gongji.mul(1.05)
+                d().fangyu=d().fangyu.mul(1.05)
+                d().shengmingmx=d().shengmingmx.mul(1.05)
+                d().shengminghuifu=d().shengminghuifu.mul(1.05)
+            }
+            if(x.gte(100) && d().havehuangjintaozhuang5.lte(0))
+            {
+                d().havehuangjintaozhuang5=n(1)
+                d().gongjibeishu=d().gongjibeishu.mul(1.1)
+                d().fangyubeishu=d().fangyubeishu.mul(1.1)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.1)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.1)
+                d().gongji=d().gongji.mul(1.1)
+                d().fangyu=d().fangyu.mul(1.1)
+                d().shengmingmx=d().shengmingmx.mul(1.1)
+                d().shengminghuifu=d().shengminghuifu.mul(1.1)
+            }
         }
     },
     tooltip(){return ""},
@@ -2360,7 +2455,7 @@ addLayer("b",{
         },
     },
     row: 2,
-    branches:["s","bs",'sq'],
+    branches:["s","bs"],
     layerShown(){return d().dengji.gte(5)},
 })
 addLayer("s",{ 
@@ -2510,6 +2605,7 @@ addLayer("s",{
             ]
         }
     },
+    branches:['sq'],
     layerShown(){return d().dengji.gte(500)},
 })
 addLayer("sq",{ 
@@ -2535,13 +2631,14 @@ addLayer("sq",{
         return exp
     },
     update(diff){
-        if(d().jihuodun1.gte(1) && d().jihuodun2.gte(1) && d().jihuodun3.gte(1) && d().jihuodun4.gte(1) && d().jihuodun.lte(0))
+        if(d().jihuodun.lte(0) && d().jihuodun1.gte(1) && d().jihuodun2.gte(1) && d().jihuodun3.gte(1) && d().jihuodun4.gte(1) )
         {
             d().jihuodun=n(2)
             d().fangyubeishu=d().fangyubeishu.mul(1.5)
             d().fangyu=d().fangyu.mul(1.5)
         }
-        if(
+        if( 
+            d().jihuojian.lte(1) &&
             d().jihuojian1.gte(1) &&
             d().jihuojian2.gte(1) &&
             d().jihuojian3.gte(1) &&
@@ -2550,8 +2647,7 @@ addLayer("sq",{
             d().jihuojian6.gte(1) &&
             d().jihuojian7.gte(1) &&
             d().jihuojian8.gte(1) &&
-            d().jihuojian9.gte(1) &&
-            d().jihuojian.lte(1)
+            d().jihuojian9.gte(1)
         )
         {
             d().jihuojian=n(2)
@@ -2954,8 +3050,6 @@ addLayer("bs",{
     gainExp() { 
         var exp = new ExpantaNum(1)
         return exp
-    },
-    update(diff){
     },
     tooltip(){return ""},
     clickables: {
@@ -3869,6 +3963,7 @@ addLayer("c",{
         unlocked: true, 
 		points: new ExpantaNum(0),
     }},
+    branches:['cb'],
     color: "purple",
     resource: "宠物",
     type: "normal",
@@ -3883,20 +3978,6 @@ addLayer("c",{
     gainExp() { 
         var exp = new ExpantaNum(1)
         return exp
-    },
-    update(diff){
-        if(d().chongwudengji.gte(5))d().chongwudanxuqiu=n(5)
-        if(d().chongwudengji.gte(10))d().chongwudanxuqiu=n(10)
-        if(d().chongwudengji.gte(15))d().chongwudanxuqiu=n(20)
-        if(d().chongwudengji.gte(20))d().chongwudanxuqiu=n(40)
-        if(d().chongwudengji.gte(30))d().chongwudanxuqiu=n(50)
-        if(d().chongwudengji.gte(50))d().chongwudanxuqiu=n(100)
-        if(d().chongwudengji.gte(75))d().chongwudanxuqiu=n(200)
-        if(d().chongwudengji.gte(100))d().chongwudanxuqiu=n(500)
-        if(d().chongwudengji.gte(150))d().chongwudanxuqiu=n(1000)
-        if(d().chongwudengji.gte(200))d().chongwudanxuqiu=n(3000)
-        if(d().chongwudengji.gte(300))d().chongwudanxuqiu=n(5000)
-        if(d().chongwudengji.gte(500))d().chongwudanxuqiu=n(10000)
     },
     tooltip(){return ""},
     clickables: {
@@ -3913,6 +3994,18 @@ addLayer("c",{
                 var x=ten
                 x=x.mul(d().qiegebeishu)
                 d().qiege=d().qiege.add(x)
+                if(d().chongwudengji.gte(5))d().chongwudanxuqiu=n(5)
+                if(d().chongwudengji.gte(10))d().chongwudanxuqiu=n(10)
+                if(d().chongwudengji.gte(15))d().chongwudanxuqiu=n(20)
+                if(d().chongwudengji.gte(20))d().chongwudanxuqiu=n(40)
+                if(d().chongwudengji.gte(30))d().chongwudanxuqiu=n(50)
+                if(d().chongwudengji.gte(50))d().chongwudanxuqiu=n(100)
+                if(d().chongwudengji.gte(75))d().chongwudanxuqiu=n(200)
+                if(d().chongwudengji.gte(100))d().chongwudanxuqiu=n(500)
+                if(d().chongwudengji.gte(150))d().chongwudanxuqiu=n(1000)
+                if(d().chongwudengji.gte(200))d().chongwudanxuqiu=n(3000)
+                if(d().chongwudengji.gte(300))d().chongwudanxuqiu=n(5000)
+                if(d().chongwudengji.gte(500))d().chongwudanxuqiu=n(10000)
             }
         },
     },
@@ -4267,7 +4360,7 @@ addLayer("t",{
         },
         5:{
             requirementDescription: "登峰造极(100W战力)",
-            effectDescription: `魔血结晶需求/2`,
+            effectDescription: `魔血需求开2次根`,
             unlocked(){return hasMilestone("t",4)},
             done() {return d().zhanli.gte(1000000)},
         },
@@ -4342,6 +4435,8 @@ addLayer("vip",{
         if(hasUpgrade("vip",251)){x=x.add(layers.z.need(50000,10000,1500))}
         if(hasUpgrade("vip",252)){x=x.add(layers.z.need(100000,20000,3000))}
         if(hasUpgrade("vip",253)){x=x.add(layers.z.need(150000,50000,5000))}
+        if(hasUpgrade("vip",254)){x=x.add(layers.z.need(300000,50000,20000))}
+        if(hasUpgrade("vip",261)){x=x.add(layers.z.need(800000,100000,40000))}
         if(hasUpgrade("vip",15)){x=x.div(2)}
         d().zongxuqiu=x
         if(d().zongxuqiu.lte(n(0)))
@@ -4479,9 +4574,25 @@ addLayer("vip",{
             if(hasUpgrade("vip",13))d().haskilled43=d().haskilled43.add(n(1).mul(diff).mul(d().guajibeishu))
             if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
         }
+        if(hasUpgrade("vip",254))
+        {
+            d().longwenjia=d().longwenjia.add(n(0.001).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(5000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(10000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().haskilled44=d().haskilled44.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
+        }
+        if(hasUpgrade("vip",261))
+        {
+            d().huangjinzhuangbei=d().huangjinzhuangbei.add(n(0.2).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(10000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(15000).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().haskilled51=d().haskilled51.add(n(1).mul(diff).mul(d().guajibeishu))
+            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
+        }
         if(hasUpgrade("vip",241))
         {
-            d().moxue=d().moxue.add(d().shengminghuifu.add(1).root(2).mul(diff))
+            d().moxue=d().moxue.add(d().shengminghuifu.add(1).div(10).mul(diff))
         }
         if(hasUpgrade("vip",242))
         {
@@ -4759,9 +4870,37 @@ addLayer("vip",{
             style(){return {"height":"125px"}},
             unlocked(){return true},
         },
+        254:{
+            fullDisplay(){
+                return "自动挂机<br>巢穴-黄金巨人<br><br>需要:2000W金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(20000000)
+                d().zidongguajichacao=d().zidongguajichacao.sub(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(20000000) && d().zidongguajichacao.gte(1)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+        },
+        261:{
+            fullDisplay(){
+                return "自动挂机<br>祖玛神殿-祖玛守卫<br><br>需要:5000W金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(50000000)
+                d().zidongguajichacao=d().zidongguajichacao.sub(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(50000000) && d().zidongguajichacao.gte(1)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+        },
         241:{
             fullDisplay(){
-                return "自动炼体<br><br>需要:30000金币"
+                return "自动转化魔血<br><br>需要:30000金币"
             },
             onPurchase(){
                 d().jinbi=d().jinbi.sub(30000)
@@ -4853,7 +4992,8 @@ addLayer("vip",{
                     ["row", [ ["upgrade", 211],["upgrade", 212],["upgrade", 213],["upgrade", 214],]],
                     ["row", [ ["upgrade", 221],["upgrade", 222],["upgrade", 223],]],
                     ["row", [ ["upgrade", 231],["upgrade", 232],["upgrade", 234],]],
-                    ["row", [ ["upgrade", 251],["upgrade", 252],["upgrade", 253],]],
+                    ["row", [ ["upgrade", 251],["upgrade", 252],["upgrade", 253],["upgrade", 254],]],
+                    ["row", [ ["upgrade", 261],["upgrade", 262],["upgrade", 263],["upgrade", 264],]],
                 ],
         },
     },
@@ -5962,95 +6102,96 @@ addLayer("j",{
     },
     tabFormat: {
         '秘境-僵尸洞':{
-            onClick(){console.log(1)},
-            content:[
-                ["row",[["infobox","lore"]]],
-                ["display-text",
-                    function() { return '你当前的坐标X:'+format(d().player_pos_x[0])+',Y:'+format(d().player_pos_y[0]) },
-                    { "color": "white", "font-size": "24px",}
+                unlocked(){return d().caijuecuidudengji.lte(n(99.5)) || d().jiesuotujian7.lte(0.5)},
+                content:[
+                    ["row",[["infobox","lore"]]],
+                    ["display-text",
+                        function() { return '你当前的坐标X:'+format(d().player_pos_x[0])+',Y:'+format(d().player_pos_y[0]) },
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '你当前在秘境'+format(d().nwt) },
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '当前拥有'+format(d().shidufen)+'尸毒粉'},
+                        { "color": "green", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '当前还剩'+format(d().guaiwu_x[0].length)+'只僵尸'},
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '僵尸属性:5W血,2W攻,2000防'},
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '你当前的生命为' + format(d().shengmingnw) + '点(+' + format(d().shengminghuifu) +'点/秒)'},
+                        { "color": "green", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '当前扣血:'+format(layers.z.need(50000,20000,2000))+'点'},
+                        { "color": "green", "font-size": "24px",}
+                    ],
+                    "blank",
+                    "blank",
+                    ["row",[["clickable",11],["clickable",12],["clickable",13],["clickable",14],["clickable",15],]],
+                    ["row",[["clickable",21],["clickable",22],["clickable",23],["clickable",24],["clickable",25],]],
+                    ["row",[["clickable",31],["clickable",32],["clickable",33],["clickable",34],["clickable",35],]],
+                    ["row",[["clickable",41],["clickable",42],["clickable",43],["clickable",44],["clickable",45],]],
+                    ["row",[["clickable",51],["clickable",52],["clickable",53],["clickable",54],["clickable",55],]],
+                    "blank",
+                    ["row",[["clickable",11111],["clickable",11112],]],
                 ],
-                ["display-text",
-                    function() { return '你当前在秘境'+format(d().nwt) },
-                    { "color": "white", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '当前拥有'+format(d().shidufen)+'尸毒粉'},
-                    { "color": "green", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '当前还剩'+format(d().guaiwu_x[0].length)+'只僵尸'},
-                    { "color": "white", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '僵尸属性:5W血,2W攻,2000防'},
-                    { "color": "white", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '你当前的生命为' + format(d().shengmingnw) + '点(+' + format(d().shengminghuifu) +'点/秒)'},
-                    { "color": "green", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '当前扣血:'+format(layers.z.need(50000,20000,2000))+'点'},
-                    { "color": "green", "font-size": "24px",}
-                ],
-                "blank",
-                "blank",
-                ["row",[["clickable",11],["clickable",12],["clickable",13],["clickable",14],["clickable",15],]],
-                ["row",[["clickable",21],["clickable",22],["clickable",23],["clickable",24],["clickable",25],]],
-                ["row",[["clickable",31],["clickable",32],["clickable",33],["clickable",34],["clickable",35],]],
-                ["row",[["clickable",41],["clickable",42],["clickable",43],["clickable",44],["clickable",45],]],
-                ["row",[["clickable",51],["clickable",52],["clickable",53],["clickable",54],["clickable",55],]],
-                "blank",
-                ["row",[["clickable",11111],["clickable",11112],]],
-            ],
         },
         '秘境-地穴':{
-            content:[
-                ["row",[["infobox","lore1"]]],
-                ["display-text",
-                    function() { return '你当前的坐标X:'+format(d().player_pos_x[1])+',Y:'+format(d().player_pos_y[1]) },
-                    { "color": "white", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '你当前在秘境'+format(d().nwt) },
-                    { "color": "white", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '当前拥有'+format(d().fumoshu)+'附魔书'},
-                    { "color": "green", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '当前还剩'+format(d().guaiwu_x[1].length)+'只骷髅'},
-                    { "color": "white", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '骷髅属性:250W血,20W攻,2W防'},
-                    { "color": "white", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '你当前的生命为' + format(d().shengmingnw) + '点(+' + format(d().shengminghuifu) +'点/秒)'},
-                    { "color": "green", "font-size": "24px",}
-                ],
-                ["display-text",
-                    function() { return '当前扣血:'+format(layers.z.need(2500000,200000,20000))+'点'},
-                    { "color": "green", "font-size": "24px",}
-                ],
-                "blank",
-                "blank",
-                ["row",[["clickable",211],["clickable",212],["clickable",213],["clickable",214],["clickable",215],["clickable",216],["clickable",217],]],
-                ["row",[["clickable",221],["clickable",222],["clickable",223],["clickable",224],["clickable",225],["clickable",226],["clickable",227],]],
-                ["row",[["clickable",231],["clickable",232],["clickable",233],["clickable",234],["clickable",235],["clickable",236],["clickable",237],]],
-                ["row",[["clickable",241],["clickable",242],["clickable",243],["clickable",244],["clickable",245],["clickable",246],["clickable",247],]],
-                ["row",[["clickable",251],["clickable",252],["clickable",253],["clickable",254],["clickable",255],["clickable",256],["clickable",257],]],
-                ["row",[["clickable",261],["clickable",262],["clickable",263],["clickable",264],["clickable",265],["clickable",266],["clickable",267],]],
-                ["row",[["clickable",271],["clickable",272],["clickable",273],["clickable",274],["clickable",275],["clickable",276],["clickable",277],]],
-                "blank",
-                ["row",[["clickable",21111],["clickable",21112],]],
+                unlocked() { return d().longwenjiafumodengji.lte(n(99.5)) || d().jiesuotujian11.lte(0.5)},
+                content:[
+                    ["row",[["infobox","lore1"]]],
+                    ["display-text",
+                        function() { return '你当前的坐标X:'+format(d().player_pos_x[1])+',Y:'+format(d().player_pos_y[1]) },
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '你当前在秘境'+format(d().nwt) },
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '当前拥有'+format(d().fumoshu)+'附魔书'},
+                        { "color": "green", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '当前还剩'+format(d().guaiwu_x[1].length)+'只骷髅'},
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '骷髅属性:250W血,20W攻,2W防'},
+                        { "color": "white", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '你当前的生命为' + format(d().shengmingnw) + '点(+' + format(d().shengminghuifu) +'点/秒)'},
+                        { "color": "green", "font-size": "24px",}
+                    ],
+                    ["display-text",
+                        function() { return '当前扣血:'+format(layers.z.need(2500000,200000,20000))+'点'},
+                        { "color": "green", "font-size": "24px",}
+                    ],
+                    "blank",
+                    "blank",
+                    ["row",[["clickable",211],["clickable",212],["clickable",213],["clickable",214],["clickable",215],["clickable",216],["clickable",217],]],
+                    ["row",[["clickable",221],["clickable",222],["clickable",223],["clickable",224],["clickable",225],["clickable",226],["clickable",227],]],
+                    ["row",[["clickable",231],["clickable",232],["clickable",233],["clickable",234],["clickable",235],["clickable",236],["clickable",237],]],
+                    ["row",[["clickable",241],["clickable",242],["clickable",243],["clickable",244],["clickable",245],["clickable",246],["clickable",247],]],
+                    ["row",[["clickable",251],["clickable",252],["clickable",253],["clickable",254],["clickable",255],["clickable",256],["clickable",257],]],
+                    ["row",[["clickable",261],["clickable",262],["clickable",263],["clickable",264],["clickable",265],["clickable",266],["clickable",267],]],
+                    ["row",[["clickable",271],["clickable",272],["clickable",273],["clickable",274],["clickable",275],["clickable",276],["clickable",277],]],
+                    "blank",
+                    ["row",[["clickable",21111],["clickable",21112],]],
             ],
         }
     },
     row: 2,
-    layerShown(){return d().dengji.gte(750)},
+    layerShown(){return d().dengji.gte(750) && (d().caijuecuidudengji.lte(n(99.5)) || d().jiesuotujian7.lte(0.5)) && (d().longwenjiafumodengji.lte(n(99.5)) || d().jiesuotujian11.lte(0.5))},
 })
 addLayer("cb",{ 
     symbol: "翅膀", 
@@ -6074,6 +6215,7 @@ addLayer("cb",{
         var exp = new ExpantaNum(1)
         return exp
     },
+    tooltip(){return ""},
     update(diff){
         if(d().chibangdengji.gte(40))
         {
@@ -6328,35 +6470,6 @@ addLayer("cb",{
 addLayer("ghost1",{ 
     symbol: "翅膀", 
     position: 1,
-    startData() { return {
-        unlocked: true, 
-		points: new ExpantaNum(0),
-    }},
-    color: "grey",
-    resource: "翅膀",
-    type: "normal",
-    requires:new ExpantaNum(1e308),
-    exponent:1,
-    baseAmount(){return player.points},
-    baseResource:"想法",
-    gainMult() { 
-        mult = new ExpantaNum(1)
-        return mult
-    },
-    gainExp() { 
-        var exp = new ExpantaNum(1)
-        return exp
-    },
-    clickables:{
-    },
-    tabFormat: {
-    },
-    row: 4,
-    layerShown(){return "ghost"},
-})
-addLayer("ghost2",{ 
-    symbol: "翅膀", 
-    position: 2,
     startData() { return {
         unlocked: true, 
 		points: new ExpantaNum(0),
