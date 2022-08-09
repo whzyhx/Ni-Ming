@@ -7,6 +7,12 @@ addLayer("data",{
 		    points: new ExpantaNum(0),
             xiuxi: new ExpantaNum(0),
 
+            guajishijian:zero,
+
+            shengqituzhitoukui:zero,shengqituzhiyifu:zero,shengqituzhikuzi:zero,shengqituzhixuezi:zero,
+            jihuoshengqitoukui:zero,jihuoshengqiyifu:zero,jihuoshengqikuzi:zero,jihuoshengqixuezi:zero,
+            shengqihexin:zero,
+
             cigeng:one,
 
             lingqi:zero,lingqihuoqu:zero,jingjiedengji:zero,
@@ -123,7 +129,7 @@ addLayer("data",{
             haskilled21: zero,haskilled22: zero,haskilled23: zero,
             haskilled31: zero,haskilled32: zero,haskilled33: zero,haskilled34: zero,
             haskilled41: zero,haskilled42: zero,haskilled43: zero,haskilled44: zero,
-            haskilled51: zero,haskilled52: zero,haskilled53: zero,haskilled54: zero,
+            haskilled51: zero,haskilled52: zero,haskilled53: zero,haskilled54: zero,haskilled55: zero,haskilled56: zero,haskilled57: zero,
             lastjipin10:zero,
             last2: zero,last4: zero,last6: zero,last8: zero,last10:zero,
             last12: zero,last14: zero,last16: zero,last18: zero,last20:zero,
@@ -656,6 +662,27 @@ addLayer("m",{
                 function() { return '你有 ' + format(d().shengjian9) + ' 圣剑碎片-9' },
                 { "color": "white", "font-size": "28px",}
             ],
+            "blank",
+            ["display-text",
+                function() { return '你有 ' + format(d().shengqituzhitoukui) + ' 圣器图纸-头盔' },
+                { "color": "lime", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().shengqituzhiyifu) + ' 圣器图纸-衣服' },
+                { "color": "lime", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().shengqituzhikuzi) + ' 圣器图纸-裤子' },
+                { "color": "lime", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().shengqituzhixuezi) + ' 圣器图纸-靴子' },
+                { "color": "lime", "font-size": "28px",}
+            ],
+            ["display-text",
+                function() { return '你有 ' + format(d().shengqihexin) + ' 圣器核心' },
+                { "color": "lime", "font-size": "28px",}
+            ],
         ],
         },
         淬体: {
@@ -731,7 +758,7 @@ addLayer("m",{
         },
     },
     row: 1,
-    branches:['j','c'],
+    branches:['j','c','b'],
     layerShown(){return true},
 })
 addLayer("z",{
@@ -765,7 +792,15 @@ addLayer("z",{
         var fang=n(fng)
         var tm=xue.div(d().gongji.div(fang).add(d().qiege)).ceil()
         var kouxue=tm.mul(gong.div(d().fangyu.mul(d().debuff1)))
-        return kouxue
+        return kouxue.max(0.001)
+    },
+    countxiaodui(){
+        var x=zero
+        x=x.add(layers.z.need(3000000,5000000,100000).mul(5))
+        x=x.add(layers.z.need(6000000,10000000,200000).mul(5))
+        x=x.add(layers.z.need(15000000,20000000,200000).mul(5))
+        x=x.add(layers.z.need(30000000,50000000,200000).mul(5))
+        return x
     },
     canget2(){
         var x=zero
@@ -894,7 +929,7 @@ addLayer("z",{
     clickables: {
         11: {
             display() {
-                return '鸡<br>5血 1攻 1防<br>掉落:1经验 1金币<br>当前扣血:'+format(layers.z.need(5,1,1))+'点<br>已击杀:'+format(d().haskilled11)+'次'
+                return '鸡<br>5血 1攻 1防<br>掉落:1经验 1金币<br>当前扣血:'+format(layers.z.need(5,1,1))+'点'//<br>已击杀:'+format(d().haskilled11)+'次'
             },
             unlocked(){return true},
             style(){return {"height":"125px"}},
@@ -913,7 +948,7 @@ addLayer("z",{
         },
         12: {
             display() {
-                return '鹿<br>20血 5攻 2防<br>掉落:3经验 2金币<br><text style="color:white">(20%)1青铜装备</text><br>当前扣血:'+format(layers.z.need(20,5,2))+'点<br>上次是否获得物品:'+layers.z.canget2string()+'<br>已击杀:'+format(d().haskilled12)+'次'
+                return '鹿<br>20血 5攻 2防<br>掉落:3经验 2金币<br><text style="color:white">(20%)1青铜装备</text><br>当前扣血:'+format(layers.z.need(20,5,2))+'点<br>上次是否获得物品:'+layers.z.canget2string()+''//<br>已击杀:'+format(d().haskilled12)+'次'
             },
             style(){return {"width":"150px","height":"125px"}},
             unlocked(){return d().haskilled11.gte(1)},
@@ -939,7 +974,7 @@ addLayer("z",{
         },
         13: {
             display() {
-                return '稻草人<br>100血 30攻 5防<br>掉落:5经验 10金币<br>当前扣血:'+format(layers.z.need(100,30,5))+'点<br>已击杀:'+format(d().haskilled13)+'次'
+                return '稻草人<br>100血 30攻 5防<br>掉落:5经验 10金币<br>当前扣血:'+format(layers.z.need(100,30,5))+'点'//<br>已击杀:'+format(d().haskilled13)+'次'
             },
             unlocked(){return d().haskilled12.gte(1)},
             style(){return {"height":"125px","width":"125px"}},
@@ -959,7 +994,7 @@ addLayer("z",{
         //style() {return {'height':'175px','width':'175px'}},
         14: {
             display() {
-                return '多钩猫<br>500血 100攻 20防<br>掉落:50经验 100金币<br><text style="color:white">(20%)1宠物丹</text><br>当前扣血:'+format(layers.z.need(500,100,20))+'点<br>上次是否获得物品:'+layers.z.canget4string()+'<br>已击杀:'+format(d().haskilled14)+'次'
+                return '多钩猫<br>500血 100攻 20防<br>掉落:50经验 100金币<br><text style="color:white">(20%)1宠物丹</text><br>当前扣血:'+format(layers.z.need(500,100,20))+'点<br>上次是否获得物品:'+layers.z.canget4string()+''//<br>已击杀:'+format(d().haskilled14)+'次'
             },
             style() {return {'height':'200px','width':'200px'}},
             unlocked(){return d().haskilled13.gte(1)},
@@ -985,7 +1020,7 @@ addLayer("z",{
         },
         21: {
             display() {
-                return '经验猪宝宝<br>1W血 100攻 1防<br>掉落:500经验<br>当前扣血:'+format(layers.z.need(10000,100,1))+'点<br>已击杀:'+format(d().haskilled21)+'次'
+                return '经验猪宝宝<br>1W血 100攻 1防<br>掉落:500经验<br>当前扣血:'+format(layers.z.need(10000,100,1))+'点'//<br>已击杀:'+format(d().haskilled21)+'次'
             },
             unlocked(){return true},
             style(){return {"height":"125px"}},
@@ -1003,7 +1038,7 @@ addLayer("z",{
         },
         22: {
             display() {
-                return '经验猪头人<br>10W血 1000攻 1防<br>掉落:3000经验<br>当前扣血:'+format(layers.z.need(100000,1000,1))+'点<br>已击杀:'+format(d().haskilled22)+'次'
+                return '经验猪头人<br>10W血 1000攻 1防<br>掉落:3000经验<br>当前扣血:'+format(layers.z.need(100000,1000,1))+'点'//<br>已击杀:'+format(d().haskilled22)+'次'
             },
             style(){return {"height":"125px"}},
             unlocked(){return d().haskilled21.gte(1)},
@@ -1021,7 +1056,7 @@ addLayer("z",{
         },
         23: {
             display() {
-                return '经验猪魔<br>100W血 10000攻 1防<br>掉落:50000经验<br>当前扣血:'+format(layers.z.need(1000000,10000,1))+'点<br>已击杀:'+format(d().haskilled23)+'次'
+                return '经验猪魔<br>100W血 10000攻 1防<br>掉落:50000经验<br>当前扣血:'+format(layers.z.need(1000000,10000,1))+'点'//<br>已击杀:'+format(d().haskilled23)+'次'
             },
             style(){return {"height":"125px","width":"150px"}},
             unlocked(){return d().haskilled22.gte(1)},
@@ -1039,7 +1074,7 @@ addLayer("z",{
         },
         31: {
             display() {
-                return '蝙蝠<br>1000血 300攻 50防<br>掉落:75经验 150金币<br>当前扣血:'+format(layers.z.need(1000,300,50))+'点<br>已击杀:'+format(d().haskilled31)+'次'
+                return '蝙蝠<br>1000血 300攻 50防<br>掉落:75经验 150金币<br>当前扣血:'+format(layers.z.need(1000,300,50))+'点'//<br>已击杀:'+format(d().haskilled31)+'次'
             },
             unlocked(){return true},
             style(){return {"height":"125px","width":"145px"}},
@@ -1058,7 +1093,7 @@ addLayer("z",{
         },
         32: {
             display() {
-                return '黑色恶蛆<br>1500血 500攻 70防<br>掉落:100经验 200金币<br><text style="color:white">(20%)1白银装备</text><br>当前扣血:'+format(layers.z.need(1500,500,70))+'点<br>上次是否获得物品:'+layers.z.canget6string()+'<br>已击杀:'+format(d().haskilled32)+'次'
+                return '黑色恶蛆<br>1500血 500攻 70防<br>掉落:100经验 200金币<br><text style="color:white">(20%)1白银装备</text><br>当前扣血:'+format(layers.z.need(1500,500,70))+'点<br>上次是否获得物品:'+layers.z.canget6string()+''//<br>已击杀:'+format(d().haskilled32)+'次'
             },
             style(){return {"width":"150px","height":"125px"}},
             unlocked(){return d().haskilled31.gte(1)},
@@ -1084,7 +1119,7 @@ addLayer("z",{
         },
         33: {
             display() {
-                return '低级杂魔兵<br>3000血 1000攻 150防<br>掉落:200经验 400金币<br><text style="color:orange">(10%)1魔血结晶</text><br>当前扣血:'+format(layers.z.need(3000,1000,150))+'点<br>上次是否获得物品:'+layers.z.canget8string()+'<br>已击杀:'+format(d().haskilled33)+'次<br>DEBUFF:1层魔气入体'
+                return '低级杂魔兵<br>3000血 1000攻 150防<br>掉落:200经验 400金币<br><text style="color:orange">(10%)1魔血结晶</text><br>当前扣血:'+format(layers.z.need(3000,1000,150))+'点<br>上次是否获得物品:'+layers.z.canget8string()+''//<br>已击杀:'+format(d().haskilled33)+'次<br><text style="color:purple">DEBUFF:1层魔气入体</text>'
             },
             style(){return {"width":"150px","height":"125px"}},
             unlocked(){return d().haskilled32.gte(1)},
@@ -1113,9 +1148,9 @@ addLayer("z",{
             display() {
                 if(d().lastjipin10.gte(1))
                 {
-                    return '<text style="color:purple">极品·红野猪</text><br>10000血 3000攻 300防<br>掉落:500经验 1000金币<br>当前扣血:'+format(layers.z.need(10000,3000,300))+'点<br><text style="color:orange">(10%)裁决</text><br>上次是否获得物品:'+layers.z.canget10string()+'<br>已击杀:'+format(d().haskilled34)+'次'
+                    return '<text style="color:purple">极品·红野猪</text><br>10000血 3000攻 300防<br>掉落:500经验 1000金币<br><text style="color:orange">(10%)裁决</text><br>当前扣血:'+format(layers.z.need(10000,3000,300))+'点<br>上次是否获得物品:'+layers.z.canget10string()+''//<br>已击杀:'+format(d().haskilled34)+'次'
                 }
-                return '红野猪<br>10000血 3000攻 300防<br>掉落:500经验 1000金币<br>当前扣血:'+format(layers.z.need(10000,3000,300))+'点<br><text style="color:orange">(0.1%)裁决</text><br>上次是否获得物品:'+layers.z.canget10string()+'<br>已击杀:'+format(d().haskilled34)+'次'
+                return '红野猪<br>10000血 3000攻 300防<br>掉落:500经验 1000金币<br><text style="color:orange">(0.1%)裁决</text><br>当前扣血:'+format(layers.z.need(10000,3000,300))+'点<br>上次是否获得物品:'+layers.z.canget10string()+''//<br>已击杀:'+format(d().haskilled34)+'次'
             },
             style() {return {'height':'200px','width':'200px'}},
             unlocked(){return d().haskilled33.gte(1)},
@@ -1164,7 +1199,7 @@ addLayer("z",{
         },
         41: {
             display() {
-                return '岩石巨人<br>5W血 1W攻 1500防<br>掉落:1000经验 1500金币<br>当前扣血:'+format(layers.z.need(50000,10000,1500))+'点<br>已击杀:'+format(d().haskilled41)+'次'
+                return '岩石巨人<br>5W血 1W攻 1500防<br>掉落:1000经验 1500金币<br>当前扣血:'+format(layers.z.need(50000,10000,1500))+'点'//<br>已击杀:'+format(d().haskilled41)+'次'
             },
             unlocked(){return d().haskilled34.gte(1)},
             style(){return {"height":"125px","width":"160px"}},
@@ -1183,7 +1218,7 @@ addLayer("z",{
         },
         42: {
             display() {
-                return '宝石巨人<br>10W血 2W攻 3000防<br>掉落:2000经验 3000金币<br><text style="color:pink">1宝石残片</text><br>当前扣血:'+format(layers.z.need(100000,20000,3000))+'点<br>已击杀:'+format(d().haskilled42)+'次'
+                return '宝石巨人<br>10W血 2W攻 3000防<br>掉落:2000经验 3000金币<br><text style="color:pink">1宝石残片</text><br>当前扣血:'+format(layers.z.need(100000,20000,3000))+'点'//<br>已击杀:'+format(d().haskilled42)+'次'
             },
             unlocked(){return d().haskilled41.gte(1)},
             style(){return {"height":"125px","width":"160px"}},
@@ -1203,7 +1238,7 @@ addLayer("z",{
         },
         43: {
             display() {
-                return '秃鹫<br>15W血 5W攻 5000防<br>掉落:3000经验 5000金币<br><text style="color:grey">半根鸟毛</text><br>当前扣血:'+format(layers.z.need(150000,50000,5000))+'点<br>已击杀:'+format(d().haskilled43)+'次'
+                return '秃鹫<br>15W血 5W攻 5000防<br>掉落:3000经验 5000金币<br><text style="color:grey">半根鸟毛</text><br>当前扣血:'+format(layers.z.need(150000,50000,5000))+'点'//<br>已击杀:'+format(d().haskilled43)+'次'
             },
             unlocked(){return d().haskilled42.gte(1)},
             style(){return {"height":"125px","width":"160px"}},
@@ -1224,7 +1259,7 @@ addLayer("z",{
         },
         44: {
             display() {
-                return '<text style="color":"gold">黄金巨人</text><br>30W血 5W攻 2W防<br>掉落:5000经验 10000金币<br>当前扣血:'+format(layers.z.need(300000,50000,20000))+'点<br><text style="color:gold">(0.1%)龙纹甲</text><br>上次是否获得物品:'+layers.z.canget12string()+'<br>已击杀:'+format(d().haskilled44)+'次'
+                return '<text style="color":"gold">黄金巨人</text><br>30W血 5W攻 2W防<br>掉落:5000经验 10000金币<br>当前扣血:'+format(layers.z.need(300000,50000,20000))+'点<br><text style="color:gold">(0.1%)龙纹甲</text><br>上次是否获得物品:'+layers.z.canget12string()+''//<br>已击杀:'+format(d().haskilled44)+'次'
             },
             style() {return {'height':'200px','width':'200px'}},
             unlocked(){return d().haskilled43.gte(1)},
@@ -1250,7 +1285,7 @@ addLayer("z",{
         },
         51: {
             display() {
-                return '祖玛守卫<br>80W血 10W攻 4W防<br>掉落:1000经验 15000金币<br>当前扣血:'+format(layers.z.need(800000,100000,40000))+'点<br><text style="color:gold">(20%)黄金装备</text><br>上次是否获得物品:'+layers.z.canget14string()+'<br>已击杀:'+format(d().haskilled51)+'次'
+                return '祖玛守卫<br>80W血 10W攻 4W防<br>掉落:1W经验 1.5W金币<br><text style="color:gold">(20%)黄金装备</text><br>当前扣血:'+format(layers.z.need(800000,100000,40000))+'点<br>上次是否获得物品:'+layers.z.canget14string()+''//<br>已击杀:'+format(d().haskilled51)+'次'
             },
             style() {return {'height':'125px','width':'160px'}},
             unlocked(){return d().haskilled44.gte(1)},
@@ -1272,6 +1307,127 @@ addLayer("z",{
                     d().last14=n(0)
                 }
                 d().killall=d().killall.add(1)
+            }
+        },
+        52: {
+            display() {
+                return '中级杂魔兵<br>150W血 20W攻 5W防<br>掉落:2W经验 3W金币<br><text style="color:orange">5魔血结晶</text><br>当前扣血:'+format(layers.z.need(1500000,200000,50000))+'点'//<br>已击杀:'+format(d().haskilled52)+'次<br><text style="color:purple">DEBUFF:10层魔气入体</text>'
+            },
+            style() {return {'height':'125px','width':'160px'}},
+            unlocked(){return d().haskilled51.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.need(1500000,200000,50000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(1500000,200000,50000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(1500000,200000,50000))
+                d().jingyan=d().jingyan.add(20000)
+                d().jinbi=d().jinbi.add(30000)
+                d().haskilled52=d().haskilled52.add(1)
+                d().moqiruti=d().moqiruti.add(10)
+                d().moxuejiejing=d().moxuejiejing.add(5)
+                d().killall=d().killall.add(1)
+            }
+        },
+        53: {
+            display() {
+                return '祖玛刀兵<br>300W血 500W攻 10W防<br>掉落:2.5W经验 4W金币<br><text style="color:lime">1圣器图纸-头盔</text><br>当前扣血:'+format(layers.z.need(3000000,5000000,100000))+'点'//<br>已击杀:'+format(d().haskilled53)+'次'
+            },
+            style() {return {'height':'125px','width':'160px'}},
+            unlocked(){return d().haskilled52.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.need(3000000,5000000,100000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(3000000,5000000,100000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(3000000,5000000,100000))
+                d().jingyan=d().jingyan.add(25000)
+                d().jinbi=d().jinbi.add(40000)
+                d().haskilled53=d().haskilled53.add(1)
+                d().killall=d().killall.add(1)
+                d().shengqituzhitoukui=d().shengqituzhitoukui.add(1)
+            }
+        },
+        54: {
+            display() {
+                return '祖玛弓兵<br>600W血 1000W攻 20W防<br>掉落:3W经验 5W金币<br><text style="color:lime">1圣器图纸-衣服</text><br>当前扣血:'+format(layers.z.need(6000000,10000000,200000))+'点'//<br>已击杀:'+format(d().haskilled54)+'次'
+            },
+            style() {return {'height':'125px','width':'160px'}},
+            unlocked(){return d().haskilled53.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.need(6000000,10000000,200000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(6000000,10000000,200000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(6000000,10000000,200000))
+                d().jingyan=d().jingyan.add(30000)
+                d().jinbi=d().jinbi.add(50000)
+                d().haskilled54=d().haskilled54.add(1)
+                d().killall=d().killall.add(1)
+                d().shengqituzhiyifu=d().shengqituzhiyifu.add(1)
+            }
+        },
+        55: {
+            display() {
+                return '祖玛斧兵<br>1500W血 2000W攻 20W防<br>掉落:5W经验 7W金币<br><text style="color:lime">1圣器图纸-裤子</text><br>当前扣血:'+format(layers.z.need(15000000,20000000,200000))+'点'//<br>已击杀:'+format(d().haskilled55)+'次'
+            },
+            style() {return {'height':'125px','width':'160px'}},
+            unlocked(){return d().haskilled54.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.need(15000000,20000000,200000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(15000000,20000000,200000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(15000000,20000000,200000))
+                d().jingyan=d().jingyan.add(50000)
+                d().jinbi=d().jinbi.add(70000)
+                d().haskilled55=d().haskilled55.add(1)
+                d().killall=d().killall.add(1)
+                d().shengqituzhikuzi=d().shengqituzhikuzi.add(1)
+            }
+        },
+        56: {
+            display() {
+                return '祖玛枪兵<br>3000W血 5000W攻 20W防<br>掉落:10W经验 10W金币<br><text style="color:lime">1圣器图纸-靴子</text><br>当前扣血:'+format(layers.z.need(30000000,50000000,200000))+'点'//<br>已击杀:'+format(d().haskilled56)+'次'
+            },
+            style() {return {'height':'125px','width':'160px'}},
+            unlocked(){return d().haskilled54.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.need(30000000,50000000,200000))},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.need(30000000,50000000,200000)))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.need(30000000,50000000,200000))
+                d().jingyan=d().jingyan.add(100000)
+                d().jinbi=d().jinbi.add(100000)
+                d().haskilled56=d().haskilled56.add(1)
+                d().killall=d().killall.add(1)
+                d().shengqituzhixuezi=d().shengqituzhixuezi.add(1)
+            }
+        },
+        57: {
+            display() {
+                return '祖玛小队<br>包含:<br>5只祖玛刀兵,5只祖玛弓兵<br>5只祖玛斧兵,5只祖玛枪兵<br>掉落:50W经验 50W金币<br><text style="color:lime">1圣器核心</text><br>当前扣血:'+format(layers.z.countxiaodui())+'点'//<br>已击杀:'+format(d().haskilled57)+'次'
+            },
+            style() {return {'height':'200px','width':'200px'}},
+            unlocked(){return d().haskilled55.gte(1)},
+            canClick(){return d().shengmingnw.gte(layers.z.countxiaodui())},
+            onClick(){
+                if(d().shengmingnw.lte(layers.z.countxiaodui()))
+                {
+                    return ""
+                }
+                d().shengmingnw=d().shengmingnw.sub(layers.z.countxiaodui())
+                d().jingyan=d().jingyan.add(500000)
+                d().jinbi=d().jinbi.add(500000)
+                d().haskilled57=d().haskilled57.add(1)
+                d().killall=d().killall.add(1)
+                d().shengqihexin=d().shengqihexin.add(1)
             }
         },
     },
@@ -1301,7 +1457,8 @@ addLayer("z",{
                 unlocked(){return d().haskilled44.gte(1)},
 				content:[
                     ["row", [ ["clickable", 51],["clickable", 52],["clickable", 53],]],
-                    ["row", [ ["clickable", 54],]]
+                    ["row", [ ["clickable", 54],["clickable", 55],["clickable", 56],]],
+                    ["row", [ ["clickable", 57],]]
 				]
 			},
 		},
@@ -1375,7 +1532,7 @@ addLayer("f",{
     clickables: {
         11: {
             display() {
-                return '1层通天<br><text style="color:darkblue">1 圣盾碎片-1</text><br>200W血 10W攻 8000防<br>当前扣血:'+format(layers.z.need(2000000,100000,8000))+'点<br>已击杀:'+format(d().tongtiantajisha1)+'次'
+                return '1层通天<br><text style="color:darkblue">1 圣盾碎片-1</text><br>200W血 10W攻 8000防<br>当前扣血:'+format(layers.z.need(2000000,100000,8000))+'点'//<br>已击杀:'+format(d().tongtiantajisha1)+'次'
             },
             unlocked(){return true},
             style(){return {"height":"125px","width":"800px"}},
@@ -1393,7 +1550,7 @@ addLayer("f",{
         },
         12: {
             display() {
-                return '2层通天<br><text style="color:darkblue">1 圣盾碎片-2</text><br>250W血 12.5W攻 15000防<br>当前扣血:'+format(layers.z.need(2500000,125000,15000))+'点<br>已击杀:'+format(d().tongtiantajisha2)+'次'
+                return '2层通天<br><text style="color:darkblue">1 圣盾碎片-2</text><br>250W血 12.5W攻 15000防<br>当前扣血:'+format(layers.z.need(2500000,125000,15000))+'点'//<br>已击杀:'+format(d().tongtiantajisha2)+'次'
             },
             unlocked(){return d().tongtiantajisha1.gte(1)},
             style(){return {"height":"125px","width":"750px"}},
@@ -1411,7 +1568,7 @@ addLayer("f",{
         },
         13: {
             display() {
-                return '3层通天<br><text style="color:darkblue">1 圣盾碎片-3</text><br>350W血 17.5W攻 25000防<br>当前扣血:'+format(layers.z.need(3500000,175000,25000))+'点<br>已击杀:'+format(d().tongtiantajisha3)+'次'
+                return '3层通天<br><text style="color:darkblue">1 圣盾碎片-3</text><br>350W血 17.5W攻 25000防<br>当前扣血:'+format(layers.z.need(3500000,175000,25000))+'点'//<br>已击杀:'+format(d().tongtiantajisha3)+'次'
             },
             unlocked(){return d().tongtiantajisha2.gte(1)},
             style(){return {"height":"125px","width":"700px"}},
@@ -1429,7 +1586,7 @@ addLayer("f",{
         },
         14: {
             display() {
-                return '4层通天<br><text style="color:darkblue">1 圣盾碎片-4</text><br>500W血 25W攻 50000防<br>当前扣血:'+format(layers.z.need(5000000,250000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha4)+'次'
+                return '4层通天<br><text style="color:darkblue">1 圣盾碎片-4</text><br>500W血 25W攻 50000防<br>当前扣血:'+format(layers.z.need(5000000,250000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha4)+'次'
             },
             unlocked(){return d().tongtiantajisha3.gte(1)},
             style(){return {"height":"125px","width":"650px"}},
@@ -1447,7 +1604,7 @@ addLayer("f",{
         },
         21: {
             display() {
-                return '5层通天<br><text style="color:maroon">1 圣剑碎片-1</text><br>600W血 30W攻 50000防<br>当前扣血:'+format(layers.z.need(6000000,300000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha5)+'次'
+                return '5层通天<br><text style="color:maroon">1 圣剑碎片-1</text><br>600W血 30W攻 50000防<br>当前扣血:'+format(layers.z.need(6000000,300000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha5)+'次'
             },
             unlocked(){return d().tongtiantajisha4.gte(1)},
             style(){return {"height":"125px","width":"600px"}},
@@ -1465,7 +1622,7 @@ addLayer("f",{
         },
         22: {
             display() {
-                return '6层通天<br><text style="color:maroon">1 圣剑碎片-2</text><br>700W血 35W攻 50000防<br>当前扣血:'+format(layers.z.need(7000000,350000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha6)+'次'
+                return '6层通天<br><text style="color:maroon">1 圣剑碎片-2</text><br>700W血 35W攻 50000防<br>当前扣血:'+format(layers.z.need(7000000,350000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha6)+'次'
             },
             unlocked(){return d().tongtiantajisha5.gte(1)},
             style(){return {"height":"125px","width":"550px"}},
@@ -1483,7 +1640,7 @@ addLayer("f",{
         },
         23: {
             display() {
-                return '7层通天<br><text style="color:maroon">1 圣剑碎片-3</text><br>800W血 40W攻 50000防<br>当前扣血:'+format(layers.z.need(8000000,400000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha7)+'次'
+                return '7层通天<br><text style="color:maroon">1 圣剑碎片-3</text><br>800W血 40W攻 50000防<br>当前扣血:'+format(layers.z.need(8000000,400000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha7)+'次'
             },
             unlocked(){return d().tongtiantajisha6.gte(1)},
             style(){return {"height":"125px","width":"500px"}},
@@ -1501,7 +1658,7 @@ addLayer("f",{
         },
         24: {
             display() {
-                return '8层通天<br><text style="color:maroon">1 圣剑碎片-4</text><br>900W血 45W攻 50000防<br>当前扣血:'+format(layers.z.need(9000000,450000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha8)+'次'
+                return '8层通天<br><text style="color:maroon">1 圣剑碎片-4</text><br>900W血 45W攻 50000防<br>当前扣血:'+format(layers.z.need(9000000,450000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha8)+'次'
             },
             unlocked(){return d().tongtiantajisha7.gte(1)},
             style(){return {"height":"125px","width":"450px"}},
@@ -1519,7 +1676,7 @@ addLayer("f",{
         },
         25: {
             display() {
-                return '9层通天<br><text style="color:maroon">1 圣剑碎片-5</text><br>1000W血 50W攻 50000防<br>当前扣血:'+format(layers.z.need(10000000,500000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha9)+'次'
+                return '9层通天<br><text style="color:maroon">1 圣剑碎片-5</text><br>1000W血 50W攻 50000防<br>当前扣血:'+format(layers.z.need(10000000,500000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha9)+'次'
             },
             unlocked(){return d().tongtiantajisha8.gte(1)},
             style(){return {"height":"125px","width":"400px"}},
@@ -1537,7 +1694,7 @@ addLayer("f",{
         },
         26: {
             display() {
-                return '10层通天<br><text style="color:maroon">1 圣剑碎片-6</text><br>1200W血 60W攻 50000防<br>当前扣血:'+format(layers.z.need(12000000,600000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha10)+'次'
+                return '10层通天<br><text style="color:maroon">1 圣剑碎片-6</text><br>1200W血 60W攻 50000防<br>当前扣血:'+format(layers.z.need(12000000,600000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha10)+'次'
             },
             unlocked(){return d().tongtiantajisha9.gte(1)},
             style(){return {"height":"125px","width":"350px"}},
@@ -1555,7 +1712,7 @@ addLayer("f",{
         },
         27: {
             display() {
-                return '11层通天<br><text style="color:maroon">1 圣剑碎片-7</text><br>1400W血 70W攻 50000防<br>当前扣血:'+format(layers.z.need(14000000,700000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha11)+'次'
+                return '11层通天<br><text style="color:maroon">1 圣剑碎片-7</text><br>1400W血 70W攻 50000防<br>当前扣血:'+format(layers.z.need(14000000,700000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha11)+'次'
             },
             unlocked(){return d().tongtiantajisha10.gte(1)},
             style(){return {"height":"125px","width":"300px"}},
@@ -1573,7 +1730,7 @@ addLayer("f",{
         },
         28: {
             display() {
-                return '12层通天<br><text style="color:maroon">1 圣剑碎片-8</text><br>1700W血 85W攻 50000防<br>当前扣血:'+format(layers.z.need(17000000,850000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha12)+'次'
+                return '12层通天<br><text style="color:maroon">1 圣剑碎片-8</text><br>1700W血 85W攻 50000防<br>当前扣血:'+format(layers.z.need(17000000,850000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha12)+'次'
             },
             unlocked(){return d().tongtiantajisha11.gte(1)},
             style(){return {"height":"125px","width":"250px"}},
@@ -1591,7 +1748,7 @@ addLayer("f",{
         },
         29: {
             display() {
-                return '13层通天<br><text style="color:maroon">1 圣剑碎片-9</text><br>2000W血 100W攻 50000防<br>当前扣血:'+format(layers.z.need(20000000,1000000,50000))+'点<br>已击杀:'+format(d().tongtiantajisha13)+'次'
+                return '13层通天<br><text style="color:maroon">1 圣剑碎片-9</text><br>2000W血 100W攻 50000防<br>当前扣血:'+format(layers.z.need(20000000,1000000,50000))+'点'//<br>已击杀:'+format(d().tongtiantajisha13)+'次'
             },
             unlocked(){return d().tongtiantajisha12.gte(1)},
             style(){return {"height":"125px","width":"200px"}},
@@ -1874,6 +2031,26 @@ addLayer("b",{
         }
     },
     tooltip(){return ""},
+    bars: {
+        1: {
+            direction: RIGHT,
+            width: 300,
+            height: 20,
+            fillStyle(){return {"background-color":"green"}},
+            unlocked(){return d().jihuocaijue.gte(1) && d().dengji.gte(750)},
+            display(){return `淬毒等级 `+format(d().caijuecuidudengji)+' / 100'},
+            progress() { return d().caijuecuidudengji.div(100) },
+        },
+        2: {
+            direction: RIGHT,
+            width: 300,
+            height: 20,
+            fillStyle(){return {"background-color":"purple"}},
+            unlocked(){return d().jihuolongwenjia.gte(1) && d().dengji.gte(750)},
+            display(){return `附魔等级 `+format(d().longwenjiafumodengji)+' / 100'},
+            progress() { return d().longwenjiafumodengji.div(100) },
+        },
+    },
     clickables: {
         11: {
             display() {
@@ -2097,413 +2274,13 @@ addLayer("b",{
                 d().huangjin4nw=x
                 d().huangjin4mx=d().huangjin4mx.max(x)
                 d().shengminghuifu=d().shengminghuifu.sub(d().huangjin4shuzhi)
-                d().huangjin4shuzhi=n(800).div(100).mul(d().huangjin1mx).mul(d().shengminghuifubeishu)
+                d().huangjin4shuzhi=n(800).div(100).mul(d().huangjin4mx).mul(d().shengminghuifubeishu)
                 d().shengminghuifu=d().shengminghuifu.add(d().huangjin4shuzhi)
                 d().huangjinzhuangbei=d().huangjinzhuangbei.sub(1)
                 d().jinbi=d().jinbi.sub(100000)
             }
         },
-    },
-    tabFormat: {
-        青铜: {
-            content:["blank",
-            ["display-text",
-                function() { return '每次洗炼消耗1青铜装备和20金币,数值按最大的计算'},
-                { "color": "white", "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '青铜套装1:所有青铜装备系数>=60%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().haveqingtongtaozhuang1.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '青铜套装2:所有青铜装备系数>=80%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().haveqingtongtaozhuang2.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '青铜套装3:所有青铜装备系数>=90%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().haveqingtongtaozhuang3.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '青铜套装4:所有青铜装备系数>=95%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().haveqingtongtaozhuang4.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '青铜套装5:所有青铜装备系数>=100%,所有属性倍数x1.1(独立计算)'},
-                { "color": function() {
-                    if(d().haveqingtongtaozhuang5.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '你有' + format(d().qingtongzhuangbei)+'件青铜装备'},
-                { "color": "#467500", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '你有' + format(d().jinbi)+'金币'},
-                { "color": "gold", "font-size": "24px",}
-            ],
-            "blank",
-            ["display-text",
-                function() { return '青铜剑系数:' + format(d().qingtong1mx)+'%'},
-                { "color": "red", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '攻击+' + format(d().qingtong1shuzhi)},
-                { "color": "red", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '青铜护手系数:' + format(d().qingtong2mx)+'%'},
-                { "color": "blue", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '防御+' + format(d().qingtong2shuzhi)},
-                { "color": "blue", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '青铜甲系数:' + format(d().qingtong3mx)+'%'},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '生命+' + format(d().qingtong3shuzhi)},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '青铜靴系数:' + format(d().qingtong4mx)+'%'},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '生命恢复+' + format(d().qingtong4shuzhi)},
-                { "color": "green", "font-size": "24px",}
-            ],
-            "blank",
-            ["row", [ ["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],]],
-            ],
-        },
-        白银: {
-            content:["blank",
-            ["display-text",
-                function() { return '每次洗炼消耗1白银装备和1000金币,数值按最大的计算<br>注意:白银级装备的洗炼比青铜级更加困难'},
-                { "color": "white", "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '白银套装1:所有白银装备系数>=60%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havebaiyingtaozhuang1.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '白银套装2:所有白银装备系数>=80%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havebaiyingtaozhuang2.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '白银套装3:所有白银装备系数>=90%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havebaiyingtaozhuang3.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '白银套装4:所有白银装备系数>=95%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havebaiyingtaozhuang4.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '白银套装5:所有白银装备系数>=100%,所有属性倍数x1.1(独立计算)'},
-                { "color": function() {
-                    if(d().havebaiyingtaozhuang5.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '你有' + format(d().baiyingzhuangbei)+'件白银装备'},
-                { "color": "#BCC6CC", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '你有' + format(d().jinbi)+'金币'},
-                { "color": "gold", "font-size": "24px",}
-            ],
-            "blank",
-            ["display-text",
-                function() { return '白银剑系数:' + format(d().baiying1mx)+'%'},
-                { "color": "red", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '攻击+' + format(d().baiying1shuzhi)},
-                { "color": "red", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '白银护手系数:' + format(d().baiying2mx)+'%'},
-                { "color": "blue", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '防御+' + format(d().baiying2shuzhi)},
-                { "color": "blue", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '白银甲系数:' + format(d().baiying3mx)+'%'},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '生命+' + format(d().baiying3shuzhi)},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '白银靴系数:' + format(d().baiying4mx)+'%'},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '生命恢复+' + format(d().baiying4shuzhi)},
-                { "color": "green", "font-size": "24px",}
-            ],
-            "blank",
-            ["row", [ ["clickable", 21],["clickable", 22],["clickable", 23],["clickable", 24],]],
-            ],
-        },
-        黄金: {
-            content:["blank",
-            ["display-text",
-                function() { return '每次洗炼消耗1黄金装备和100000金币,数值按最大的计算<br>注意:黄金级装备的洗炼比白银级更加困难'},
-                { "color": "white", "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '黄金套装1:所有黄金装备系数>=60%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havehuangjintaozhuang1.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '黄金套装2:所有黄金装备系数>=80%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havehuangjintaozhuang2.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '黄金套装3:所有黄金装备系数>=90%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havehuangjintaozhuang3.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '黄金套装4:所有黄金装备系数>=95%,所有属性倍数x1.05(独立计算)'},
-                { "color": function() {
-                    if(d().havehuangjintaozhuang4.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '黄金套装5:所有黄金装备系数>=100%,所有属性倍数x1.1(独立计算)'},
-                { "color": function() {
-                    if(d().havehuangjintaozhuang5.gte(1))
-                    {
-                        return "#FDD017"
-                    }
-                    else
-                    {
-                        return "black"
-                    }
-                }, "font-size": "20px",}
-            ],
-            ["display-text",
-                function() { return '你有' + format(d().huangjinzhuangbei)+'件黄金装备'},
-                { "color": "gold", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '你有' + format(d().jinbi)+'金币'},
-                { "color": "gold", "font-size": "24px",}
-            ],
-            "blank",
-            ["display-text",
-                function() { return '黄金剑系数:' + format(d().huangjin1mx)+'%'},
-                { "color": "red", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '攻击+' + format(d().huangjin1shuzhi)},
-                { "color": "red", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '黄金护手系数:' + format(d().huangjin2mx)+'%'},
-                { "color": "blue", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '防御+' + format(d().huangjin2shuzhi)},
-                { "color": "blue", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '黄金甲系数:' + format(d().huangjin3mx)+'%'},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '生命+' + format(d().huangjin3shuzhi)},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '黄金靴系数:' + format(d().huangjin4mx)+'%'},
-                { "color": "green", "font-size": "24px",}
-            ],
-            ["display-text",
-                function() { return '生命恢复+' + format(d().huangjin4shuzhi)},
-                { "color": "green", "font-size": "24px",}
-            ],
-            "blank",
-            ["row", [ ["clickable", 31],["clickable", 32],["clickable", 33],["clickable", 34],]],
-            ],
-        },
-    },
-    row: 2,
-    branches:["s","bs"],
-    layerShown(){return d().dengji.gte(5)},
-})
-addLayer("s",{ 
-    symbol: "神兵", 
-    position: 1,
-    startData() { return {
-        unlocked: true, 
-		points: new ExpantaNum(0),
-    }},
-    color: "blue",
-    resource: "神兵",
-    type: "normal",
-    requires:new ExpantaNum(1e308),
-    exponent:1,
-    baseAmount(){return player.points},
-    baseResource:"想法",
-    gainMult() { 
-        mult = new ExpantaNum(1)
-        return mult
-    },
-    gainExp() { 
-        var exp = new ExpantaNum(1)
-        return exp
-    },
-    bars: {
-        1: {
-            direction: RIGHT,
-            width: 300,
-            height: 20,
-            fillStyle(){return {"background-color":"green"}},
-            unlocked(){return d().jihuocaijue.gte(1) && d().dengji.gte(750)},
-            display(){return `淬毒等级 `+format(d().caijuecuidudengji)+' / 100'},
-            progress() { return d().caijuecuidudengji.div(100) },
-        },
-        2: {
-            direction: RIGHT,
-            width: 300,
-            height: 20,
-            fillStyle(){return {"background-color":"purple"}},
-            unlocked(){return d().jihuolongwenjia.gte(1) && d().dengji.gte(750)},
-            display(){return `附魔等级 `+format(d().longwenjiafumodengji)+' / 100'},
-            progress() { return d().longwenjiafumodengji.div(100) },
-        },
-    },
-    tooltip(){return ""},
-    row: 3,
-    clickables: {
-        11: {
+        's11': {
             display() {
                 return `激活-<text style="color:gold">神兵·裁决</text><br>需要:10W金币<br><text style="color:red">攻击倍数x2</text><br>`+(d().jihuocaijue.gte(1)?"(已激活)":"未激活")
             },
@@ -2524,7 +2301,7 @@ addLayer("s",{
                 d().gongji=d().gongji.mul(2)
             }
         },
-        12: {
+        's12': {
             display() {
                 return '淬毒<br>消耗:1尸毒粉<br>每次淬毒,独立提升1%的攻击'
             },
@@ -2540,7 +2317,7 @@ addLayer("s",{
                 d().gongji=d().gongji.mul(1.01)
             }
         },
-        21: {
+        's21': {
             display() {
                 return `激活-<text style="color:orange">龙纹甲</text><br>需要:1000W金币<br><text style="color:green">生命倍数x2</text><br>`+(d().jihuolongwenjia.gte(1)?"(已激活)":"未激活")
             },
@@ -2561,7 +2338,7 @@ addLayer("s",{
                 d().shengmingmx=d().shengmingmx.mul(2)
             }
         },
-        22: {
+        's22': {
             display() {
                 return '附魔<br>消耗:1附魔书<br>每次附魔,独立提升1%的生命恢复'
             },
@@ -2577,98 +2354,7 @@ addLayer("s",{
                 d().shengminghuifu=d().shengminghuifu.mul(1.01)
             }
         },
-    },
-    tabFormat:{
-        主界面:{
-            content:[
-                ["display-text",
-                function() { return '你有'+format(d().caijue)+'把裁决'},
-                { "color": "gold", "font-size": "24px",}
-                ],
-                ["display-text",
-                function() { return '你有'+format(d().longwenjia)+'件龙纹甲'},
-                { "color": "gold", "font-size": "24px",}
-                ],
-                ["display-text",
-                function() { return '你有'+format(d().shidufen)+'尸毒粉'},
-                { "color": "green", "font-size": "24px",}
-                ],
-                ["display-text",
-                function() { return '你有'+format(d().fumoshu)+'附魔书'},
-                { "color": "purple", "font-size": "24px",}
-                ],
-                "blank",
-                "blank",
-                "blank",
-                ["row",[["clickable",11],["bar",1],["clickable",12],]],
-                ["row",[["clickable",21],["bar",2],["clickable",22],]],
-            ]
-        }
-    },
-    branches:['sq'],
-    layerShown(){return d().dengji.gte(500)},
-})
-addLayer("sq",{ 
-    symbol: "圣器", 
-    position: 0,
-    startData() { return {
-        unlocked: true, 
-		points: new ExpantaNum(0),
-    }},
-    color: "lime",
-    resource: "圣器",
-    type: "normal",
-    requires:new ExpantaNum(1e308),
-    exponent:1,
-    baseAmount(){return player.points},
-    baseResource:"想法",
-    gainMult() { 
-        mult = new ExpantaNum(1)
-        return mult
-    },
-    gainExp() { 
-        var exp = new ExpantaNum(1)
-        return exp
-    },
-    update(diff){
-        if(d().jihuodun.lte(0) && d().jihuodun1.gte(1) && d().jihuodun2.gte(1) && d().jihuodun3.gte(1) && d().jihuodun4.gte(1) )
-        {
-            d().jihuodun=n(2)
-            d().fangyubeishu=d().fangyubeishu.mul(1.5)
-            d().fangyu=d().fangyu.mul(1.5)
-        }
-        if( 
-            d().jihuojian.lte(1) &&
-            d().jihuojian1.gte(1) &&
-            d().jihuojian2.gte(1) &&
-            d().jihuojian3.gte(1) &&
-            d().jihuojian4.gte(1) &&
-            d().jihuojian5.gte(1) &&
-            d().jihuojian6.gte(1) &&
-            d().jihuojian7.gte(1) &&
-            d().jihuojian8.gte(1) &&
-            d().jihuojian9.gte(1)
-        )
-        {
-            d().jihuojian=n(2)
-            d().gongjibeishu=d().gongjibeishu.mul(1.5)
-            d().gongji=d().gongji.mul(1.5)
-        }
-    },
-    tooltip(){return ""},
-
-    //┌┐
-    //└┘
-
-
-    //  ^
-    // | |
-    // | |
-    // ---
-    //  |
-
-    clickables: {
-        11: {
+        'sq11': {
             display() {
                 if(d().jihuodun1.gte(1))
                 {
@@ -2692,7 +2378,7 @@ addLayer("sq",{
                 d().fangyu=d().fangyu.mul(1.1)
             }
         },
-        12: {
+        'sq12': {
             display() {
                 if(d().jihuodun2.gte(1))
                 {
@@ -2716,7 +2402,7 @@ addLayer("sq",{
                 d().fangyu=d().fangyu.mul(1.1)
             }
         },
-        13: {
+        'sq13': {
             display() {
                 if(d().jihuodun3.gte(1))
                 {
@@ -2740,7 +2426,7 @@ addLayer("sq",{
                 d().fangyu=d().fangyu.mul(1.1)
             }
         },
-        14: {
+        'sq14': {
             display() {
                 if(d().jihuodun4.gte(1))
                 {
@@ -2764,7 +2450,7 @@ addLayer("sq",{
                 d().fangyu=d().fangyu.mul(1.1)
             }
         },
-        21: {
+        'sq21': {
             display() {
                 if(d().jihuojian1.gte(1))
                 {
@@ -2788,7 +2474,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        22: {
+        'sq22': {
             display() {
                 if(d().jihuojian2.gte(1))
                 {
@@ -2812,7 +2498,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        23: {
+        'sq23': {
             display() {
                 if(d().jihuojian3.gte(1))
                 {
@@ -2836,7 +2522,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        24: {
+        'sq24': {
             display() {
                 if(d().jihuojian4.gte(1))
                 {
@@ -2860,7 +2546,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        25: {
+        'sq25': {
             display() {
                 if(d().jihuojian5.gte(1))
                 {
@@ -2884,7 +2570,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        26: {
+        'sq26': {
             display() {
                 if(d().jihuojian6.gte(1))
                 {
@@ -2908,7 +2594,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        27: {
+        'sq27': {
             display() {
                 if(d().jihuojian7.gte(1))
                 {
@@ -2932,7 +2618,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        28: {
+        'sq28': {
             display() {
                 if(d().jihuojian8.gte(1))
                 {
@@ -2956,7 +2642,7 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-        29: {
+        'sq29': {
             display() {
                 if(d().jihuojian9.gte(1))
                 {
@@ -2980,80 +2666,107 @@ addLayer("sq",{
                 d().gongji=d().gongji.mul(1.1)
             }
         },
-    },
-    tabFormat: {
-        圣盾:{
-            content:[
-                ["row",[["clickable",11],["clickable",12],]],
-                ["row",[["clickable",13],["clickable",14],]],
-                "blank",
-                "blank",
-                "blank",
-                "blank",
-                ["display-text",
-                    function() { 
-                        if(d().jihuodun.gte(1))
-                        {
-                            return '<text style="color:blue">圣盾 效果:防御倍数x1.5(已激活)'
-                        }
-                        return '<text style="color:white">圣盾 效果:防御倍数x1.5(未激活)'
-                    },
-                    {"font-size": "28px",}
-                ],
-            ],
+        'sq31': {
+            display() {
+                if(d().jihuoshengqitoukui.gte(1))
+                {
+                    return `<h1>头盔`
+                }
+                return `激活 圣器-头盔<br>需要:<br>500 圣器图纸-头盔<br>100 圣器核心<br>效果:<text style="color:green">生命倍数x1.5`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuoshengqitoukui.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengqituzhitoukui.gte(500) && d().jihuoshengqitoukui.lte(1) && d().shengqihexin.gte(100)},
+            onClick(){
+                d().shengqituzhitoukui=d().shengqituzhitoukui.sub(500)
+                d().shengqihexin=d().shengqihexin.sub(100)
+                d().jihuoshengqitoukui=n(2)
+                d().shengmingbeishu=d().shengmingbeishu.mul(1.5)
+                d().shengmingmx=d().shengmingmx.mul(1.5)
+            }
         },
-        圣剑:{
-            content:[
-                ["row",[["clickable",21]]],
-                ["row",[["clickable",22],["clickable",23],]],
-                ["row",[["clickable",24],["clickable",25],]],
-                ["row",[["clickable",26],["clickable",27],["clickable",28],]],
-                ["row",[["clickable",29]]],
-                "blank",
-                "blank",
-                "blank",
-                "blank",
-                ["display-text",
-                    function() { 
-                        if(d().jihuojian.gte(1))
-                        {
-                            return '<text style="color:red">圣剑 效果:攻击倍数x1.5(已激活)'
-                        }
-                        return '<text style="color:white">圣剑 效果:攻击倍数x1.5(未激活)'
-                    },
-                    {"font-size": "28px",}
-                ],
-            ],
+        'sq32': {
+            display() {
+                if(d().jihuoshengqiyifu.gte(1))
+                {
+                    return `<h1>衣服`
+                }
+                return `激活 圣器-衣服<br>需要:<br>500 圣器图纸-衣服<br>100 圣器核心<br>效果:<text style="color:blue">防御倍数x1.5`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuoshengqiyifu.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengqituzhiyifu.gte(500) && d().jihuoshengqiyifu.lte(1) && d().shengqihexin.gte(100)},
+            onClick(){
+                d().shengqituzhiyifu=d().shengqituzhiyifu.sub(500)
+                d().shengqihexin=d().shengqihexin.sub(100)
+                d().jihuoshengqiyifu=n(2)
+                d().fangyubeishu=d().fangyubeishu.mul(1.5)
+                d().fangyu=d().fangyu.mul(1.5)
+            }
         },
-    },
-    row: 4,
-    layerShown(){return d().dengji.gte(1500)},
-})
-addLayer("bs",{ 
-    symbol: "宝石", 
-    position: 0,
-    startData() { return {
-        unlocked: true, 
-		points: new ExpantaNum(0),
-    }},
-    color: "pink",
-    resource: "装备",
-    type: "normal",
-    requires:new ExpantaNum(1e308),
-    exponent:1,
-    baseAmount(){return player.points},
-    baseResource:"想法",
-    gainMult() { 
-        mult = new ExpantaNum(1)
-        return mult
-    },
-    gainExp() { 
-        var exp = new ExpantaNum(1)
-        return exp
-    },
-    tooltip(){return ""},
-    clickables: {
-        11: {
+        'sq33': {
+            display() {
+                if(d().jihuoshengqikuzi.gte(1))
+                {
+                    return `<h1>裤子`
+                }
+                return `激活 圣器-裤子<br>需要:<br>500 圣器图纸-裤子<br>100 圣器核心<br>效果:<text style="color:blue">防御倍数x1.5`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuoshengqikuzi.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengqituzhikuzi.gte(500) && d().jihuoshengqikuzi.lte(1) && d().shengqihexin.gte(100)},
+            onClick(){
+                d().shengqituzhikuzi=d().shengqituzhikuzi.sub(500)
+                d().shengqihexin=d().shengqihexin.sub(100)
+                d().jihuoshengqikuzi=n(2)
+                d().fangyubeishu=d().fangyubeishu.mul(1.5)
+                d().fangyu=d().fangyu.mul(1.5)
+            }
+        },
+        'sq34': {
+            display() {
+                if(d().jihuoshengqixuezi.gte(1))
+                {
+                    return `<h1>靴子`
+                }
+                return `激活 圣器-靴子<br>需要:<br>500 圣器图纸-靴子<br>100 圣器核心<br>效果:<text style="color:green">生命倍数x1.5`
+            },
+            unlocked(){return true},
+            style(){
+                if(d().jihuoshengqixuezi.gte(1))
+                {
+                    return {"height":"125px","width":"125px","background-color":"lime"}
+                }
+                return {"height":"125px","width":"125px"}
+            },
+            canClick(){return d().shengqituzhixuezi.gte(500) && d().jihuoshengqixuezi.lte(1) && d().shengqihexin.gte(100)},
+            onClick(){
+                d().shengqituzhixuezi=d().shengqituzhixuezi.sub(500)
+                d().shengqihexin=d().shengqihexin.sub(100)
+                d().jihuoshengqixuezi=n(2)
+                d().shengminghuifubeishu=d().shengminghuifubeishu.mul(1.5)
+                d().shengminghuifu=d().shengminghuifu.mul(1.5)
+            }
+        },
+        'bs11': {
             display() {
                 return `合成1级红晶石<br>消耗5宝石残片`
             },
@@ -3071,7 +2784,7 @@ addLayer("bs",{
                 }
             }
         },
-        12: {
+        'bs12': {
             display() {
                 return `合成2级红晶石<br>消耗10一级红晶石`
             },
@@ -3091,7 +2804,7 @@ addLayer("bs",{
                 }
             }
         },
-        13: {
+        'bs13': {
             display() {
                 return `合成3级红晶石<br>消耗10二级红晶石`
             },
@@ -3111,7 +2824,7 @@ addLayer("bs",{
                 }
             }
         },
-        21: {
+        'bs21': {
             display() {
                 return `合成1级蓝晶石<br>消耗5宝石残片`
             },
@@ -3129,7 +2842,7 @@ addLayer("bs",{
                 }
             }
         },
-        22: {
+        'bs22': {
             display() {
                 return `合成2级蓝晶石<br>消耗10一级蓝晶石`
             },
@@ -3149,7 +2862,7 @@ addLayer("bs",{
                 }
             }
         },
-        23: {
+        'bs23': {
             display() {
                 return `合成3级蓝晶石<br>消耗10二级蓝晶石`
             },
@@ -3169,7 +2882,7 @@ addLayer("bs",{
                 }
             }
         },
-        31: {
+        'bs31': {
             display() {
                 return `合成1级绿晶石<br>消耗5宝石残片`
             },
@@ -3187,7 +2900,7 @@ addLayer("bs",{
                 }
             }
         },
-        32: {
+        'bs32': {
             display() {
                 return `合成2级绿晶石<br>消耗10一级绿晶石`
             },
@@ -3207,7 +2920,7 @@ addLayer("bs",{
                 }
             }
         },
-        33: {
+        'bs33': {
             display() {
                 return `合成3级绿晶石<br>消耗10二级绿晶石`
             },
@@ -3227,7 +2940,7 @@ addLayer("bs",{
                 }
             }
         },
-        41: {
+        'bs41': {
             display() {
                 return `合成1级血晶石<br>消耗5宝石残片`
             },
@@ -3245,7 +2958,7 @@ addLayer("bs",{
                 }
             }
         },
-        42: {
+        'bs42': {
             display() {
                 return `合成2级血晶石<br>消耗10一级血晶石`
             },
@@ -3265,7 +2978,7 @@ addLayer("bs",{
                 }
             }
         },
-        43: {
+        'bs43': {
             display() {
                 return `合成3级血晶石<br>消耗10二级血晶石`
             },
@@ -3285,7 +2998,7 @@ addLayer("bs",{
                 }
             }
         },
-        211: {
+        'bs211': {
             display() {
                 return `合成1级红晶石<br>消耗5宝石残片`
             },
@@ -3303,7 +3016,7 @@ addLayer("bs",{
                 }
             }
         },
-        212: {
+        'bs212': {
             display() {
                 return `合成2级红晶石<br>消耗10一级红晶石`
             },
@@ -3323,7 +3036,7 @@ addLayer("bs",{
                 }
             }
         },
-        213: {
+        'bs213': {
             display() {
                 return `合成3级红晶石<br>消耗10二级红晶石`
             },
@@ -3343,7 +3056,7 @@ addLayer("bs",{
                 }
             }
         },
-        221: {
+        'bs221': {
             display() {
                 return `合成1级蓝晶石<br>消耗5宝石残片`
             },
@@ -3361,7 +3074,7 @@ addLayer("bs",{
                 }
             }
         },
-        222: {
+        'bs222': {
             display() {
                 return `合成2级蓝晶石<br>消耗10一级蓝晶石`
             },
@@ -3381,7 +3094,7 @@ addLayer("bs",{
                 }
             }
         },
-        223: {
+        'bs223': {
             display() {
                 return `合成3级蓝晶石<br>消耗10二级蓝晶石`
             },
@@ -3401,7 +3114,7 @@ addLayer("bs",{
                 }
             }
         },
-        231: {
+        'bs231': {
             display() {
                 return `合成1级绿晶石<br>消耗5宝石残片`
             },
@@ -3419,7 +3132,7 @@ addLayer("bs",{
                 }
             }
         },
-        232: {
+        'bs232': {
             display() {
                 return `合成2级绿晶石<br>消耗10一级绿晶石`
             },
@@ -3439,7 +3152,7 @@ addLayer("bs",{
                 }
             }
         },
-        233: {
+        'bs233': {
             display() {
                 return `合成3级绿晶石<br>消耗10二级绿晶石`
             },
@@ -3459,7 +3172,7 @@ addLayer("bs",{
                 }
             }
         },
-        241: {
+        'bs241': {
             display() {
                 return `合成1级血晶石<br>消耗5宝石残片`
             },
@@ -3477,7 +3190,7 @@ addLayer("bs",{
                 }
             }
         },
-        242: {
+        'bs242': {
             display() {
                 return `合成2级血晶石<br>消耗10一级血晶石`
             },
@@ -3497,7 +3210,7 @@ addLayer("bs",{
                 }
             }
         },
-        243: {
+        'bs243': {
             display() {
                 return `合成3级血晶石<br>消耗10二级血晶石`
             },
@@ -3517,7 +3230,7 @@ addLayer("bs",{
                 }
             }
         },
-        311: {
+        'bs311': {
             display() {
                 return `合成1级红晶石<br>消耗5宝石残片`
             },
@@ -3535,7 +3248,7 @@ addLayer("bs",{
                 }
             }
         },
-        312: {
+        'bs312': {
             display() {
                 return `合成2级红晶石<br>消耗10一级红晶石`
             },
@@ -3555,7 +3268,7 @@ addLayer("bs",{
                 }
             }
         },
-        313: {
+        'bs313': {
             display() {
                 return `合成3级红晶石<br>消耗10二级红晶石`
             },
@@ -3575,7 +3288,7 @@ addLayer("bs",{
                 }
             }
         },
-        321: {
+        'bs321': {
             display() {
                 return `合成1级蓝晶石<br>消耗5宝石残片`
             },
@@ -3593,7 +3306,7 @@ addLayer("bs",{
                 }
             }
         },
-        322: {
+        'bs322': {
             display() {
                 return `合成2级蓝晶石<br>消耗10一级蓝晶石`
             },
@@ -3613,7 +3326,7 @@ addLayer("bs",{
                 }
             }
         },
-        323: {
+        'bs323': {
             display() {
                 return `合成3级蓝晶石<br>消耗10二级蓝晶石`
             },
@@ -3633,7 +3346,7 @@ addLayer("bs",{
                 }
             }
         },
-        331: {
+        'bs331': {
             display() {
                 return `合成1级绿晶石<br>消耗5宝石残片`
             },
@@ -3651,7 +3364,7 @@ addLayer("bs",{
                 }
             }
         },
-        332: {
+        'bs332': {
             display() {
                 return `合成2级绿晶石<br>消耗10一级绿晶石`
             },
@@ -3671,7 +3384,7 @@ addLayer("bs",{
                 }
             }
         },
-        333: {
+        'bs333': {
             display() {
                 return `合成3级绿晶石<br>消耗10二级绿晶石`
             },
@@ -3691,7 +3404,7 @@ addLayer("bs",{
                 }
             }
         },
-        341: {
+        'bs341': {
             display() {
                 return `合成1级血晶石<br>消耗5宝石残片`
             },
@@ -3709,7 +3422,7 @@ addLayer("bs",{
                 }
             }
         },
-        342: {
+        'bs342': {
             display() {
                 return `合成2级血晶石<br>消耗10一级血晶石`
             },
@@ -3729,7 +3442,7 @@ addLayer("bs",{
                 }
             }
         },
-        343: {
+        'bs343': {
             display() {
                 return `合成3级血晶石<br>消耗10二级血晶石`
             },
@@ -3750,211 +3463,673 @@ addLayer("bs",{
             }
         },
     },
+    microtabs:{
+        装备:{
+            青铜: {
+                content:["blank",
+                ["display-text",
+                    function() { return '每次洗炼消耗1青铜装备和20金币,数值按最大的计算'},
+                    { "color": "white", "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '青铜套装1:所有青铜装备系数>=60%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().haveqingtongtaozhuang1.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '青铜套装2:所有青铜装备系数>=80%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().haveqingtongtaozhuang2.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '青铜套装3:所有青铜装备系数>=90%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().haveqingtongtaozhuang3.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '青铜套装4:所有青铜装备系数>=95%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().haveqingtongtaozhuang4.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '青铜套装5:所有青铜装备系数>=100%,所有属性倍数x1.1(独立计算)'},
+                    { "color": function() {
+                        if(d().haveqingtongtaozhuang5.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '你有' + format(d().qingtongzhuangbei)+'件青铜装备'},
+                    { "color": "#467500", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '你有' + format(d().jinbi)+'金币'},
+                    { "color": "gold", "font-size": "24px",}
+                ],
+                "blank",
+                ["display-text",
+                    function() { return '青铜剑系数:' + format(d().qingtong1mx)+'%'},
+                    { "color": "red", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '攻击+' + format(d().qingtong1shuzhi)},
+                    { "color": "red", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '青铜护手系数:' + format(d().qingtong2mx)+'%'},
+                    { "color": "blue", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '防御+' + format(d().qingtong2shuzhi)},
+                    { "color": "blue", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '青铜甲系数:' + format(d().qingtong3mx)+'%'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '生命+' + format(d().qingtong3shuzhi)},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '青铜靴系数:' + format(d().qingtong4mx)+'%'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '生命恢复+' + format(d().qingtong4shuzhi)},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                "blank",
+                ["row", [ ["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],]],
+                ],
+            },
+            白银: {
+                content:["blank",
+                ["display-text",
+                    function() { return '每次洗炼消耗1白银装备和1000金币,数值按最大的计算<br>注意:白银级装备的洗炼比青铜级更加困难'},
+                    { "color": "white", "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '白银套装1:所有白银装备系数>=60%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havebaiyingtaozhuang1.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '白银套装2:所有白银装备系数>=80%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havebaiyingtaozhuang2.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '白银套装3:所有白银装备系数>=90%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havebaiyingtaozhuang3.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '白银套装4:所有白银装备系数>=95%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havebaiyingtaozhuang4.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '白银套装5:所有白银装备系数>=100%,所有属性倍数x1.1(独立计算)'},
+                    { "color": function() {
+                        if(d().havebaiyingtaozhuang5.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '你有' + format(d().baiyingzhuangbei)+'件白银装备'},
+                    { "color": "#BCC6CC", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '你有' + format(d().jinbi)+'金币'},
+                    { "color": "gold", "font-size": "24px",}
+                ],
+                "blank",
+                ["display-text",
+                    function() { return '白银剑系数:' + format(d().baiying1mx)+'%'},
+                    { "color": "red", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '攻击+' + format(d().baiying1shuzhi)},
+                    { "color": "red", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '白银护手系数:' + format(d().baiying2mx)+'%'},
+                    { "color": "blue", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '防御+' + format(d().baiying2shuzhi)},
+                    { "color": "blue", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '白银甲系数:' + format(d().baiying3mx)+'%'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '生命+' + format(d().baiying3shuzhi)},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '白银靴系数:' + format(d().baiying4mx)+'%'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '生命恢复+' + format(d().baiying4shuzhi)},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                "blank",
+                ["row", [ ["clickable", 21],["clickable", 22],["clickable", 23],["clickable", 24],]],
+                ],
+            },
+            黄金: {
+                content:["blank",
+                ["display-text",
+                    function() { return '每次洗炼消耗1黄金装备和100000金币,数值按最大的计算<br>注意:黄金级装备的洗炼比白银级更加困难'},
+                    { "color": "white", "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '黄金套装1:所有黄金装备系数>=60%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havehuangjintaozhuang1.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '黄金套装2:所有黄金装备系数>=80%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havehuangjintaozhuang2.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '黄金套装3:所有黄金装备系数>=90%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havehuangjintaozhuang3.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '黄金套装4:所有黄金装备系数>=95%,所有属性倍数x1.05(独立计算)'},
+                    { "color": function() {
+                        if(d().havehuangjintaozhuang4.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '黄金套装5:所有黄金装备系数>=100%,所有属性倍数x1.1(独立计算)'},
+                    { "color": function() {
+                        if(d().havehuangjintaozhuang5.gte(1))
+                        {
+                            return "#FDD017"
+                        }
+                        else
+                        {
+                            return "black"
+                        }
+                    }, "font-size": "20px",}
+                ],
+                ["display-text",
+                    function() { return '你有' + format(d().huangjinzhuangbei)+'件黄金装备'},
+                    { "color": "gold", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '你有' + format(d().jinbi)+'金币'},
+                    { "color": "gold", "font-size": "24px",}
+                ],
+                "blank",
+                ["display-text",
+                    function() { return '黄金剑系数:' + format(d().huangjin1mx)+'%'},
+                    { "color": "red", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '攻击+' + format(d().huangjin1shuzhi)},
+                    { "color": "red", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '黄金护手系数:' + format(d().huangjin2mx)+'%'},
+                    { "color": "blue", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '防御+' + format(d().huangjin2shuzhi)},
+                    { "color": "blue", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '黄金甲系数:' + format(d().huangjin3mx)+'%'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '生命+' + format(d().huangjin3shuzhi)},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '黄金靴系数:' + format(d().huangjin4mx)+'%'},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                    function() { return '生命恢复+' + format(d().huangjin4shuzhi)},
+                    { "color": "green", "font-size": "24px",}
+                ],
+                "blank",
+                ["row", [ ["clickable", 31],["clickable", 32],["clickable", 33],["clickable", 34],]],
+                ],
+            },
+        },
+        圣器:{
+            圣盾:{
+                buttonStyle(){return {"border-color":"lime"}},
+                content:[
+                    "blank",
+                    ["row",[["clickable",'sq11'],["clickable",'sq12'],]],
+                    ["row",[["clickable",'sq13'],["clickable",'sq14'],]],
+                    "blank",
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["display-text",
+                        function() { 
+                            if(d().jihuodun.gte(1))
+                            {
+                                return '<text style="color:blue">圣盾 效果:防御倍数x1.5(已激活)'
+                            }
+                            return '<text style="color:white">圣盾 效果:防御倍数x1.5(未激活)'
+                        },
+                        {"font-size": "28px",}
+                    ],
+                ],
+            },
+            圣剑:{
+                buttonStyle(){return {"border-color":"lime"}},
+                content:[
+                    "blank",
+                    ["row",[["clickable",'sq21']]],
+                    ["row",[["clickable",'sq22'],["clickable",'sq23'],]],
+                    ["row",[["clickable",'sq24'],["clickable",'sq25'],]],
+                    ["row",[["clickable",'sq26'],["clickable",'sq27'],["clickable",'sq28'],]],
+                    ["row",[["clickable",'sq29']]],
+                    "blank",
+                    "blank",
+                    "blank",
+                    "blank",
+                    ["display-text",
+                        function() { 
+                            if(d().jihuojian.gte(1))
+                            {
+                                return '<text style="color:red">圣剑 效果:攻击倍数x1.5(已激活)'
+                            }
+                            return '<text style="color:white">圣剑 效果:攻击倍数x1.5(未激活)'
+                        },
+                        {"font-size": "28px",}
+                    ],
+                ],
+            },
+            套装:{
+                buttonStyle(){return {"border-color":"lime"}},
+                content:[
+                    "blank",
+                    ["row",[["clickable",'sq31'],"blank","blank","blank","blank",["clickable",'sq32']]],
+                    "blank",
+                    "blank",
+                    ["row",[["clickable",'sq33'],"blank","blank","blank","blank",["clickable",'sq34']]],
+                ],
+            },
+        },
+        宝石:{
+            青铜: {
+                buttonStyle(){return {"border-color":"pink"}},
+                content:["blank",
+                        ["display-text",
+                            function() { return '装备评分达到100,可以解锁对应宝石槽位'},
+                            { "color": "white", "font-size": "28px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
+                            { "color": "pink", "font-size": "28px",}
+                        ],
+                        "blank",
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
+                            { "color": "red", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
+                            { "color": "blue", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
+                            { "color": "green", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
+                            { "color": "green", "font-size": "20px",}
+                        ],
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        ["row",
+                        [
+                            ["display-text",function() { return '青铜剑 : '+(d().qingtong1baoshi.gte(3)?'攻击+20%':d().qingtong1baoshi.gte(2)?'攻击+10%':d().qingtong1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            ["clickable",'bs11'],["clickable",'bs12'],["clickable",'bs13'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '青铜护手 : '+(d().qingtong2baoshi.gte(3)?'防御+20%':d().qingtong2baoshi.gte(2)?'防御+10%':d().qingtong2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
+                            "blank",
+                            ["clickable",'bs21'],["clickable",'bs22'],["clickable",'bs23'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '青铜甲 : '+(d().qingtong3baoshi.gte(3)?'生命+20%':d().qingtong3baoshi.gte(2)?'生命+10%':d().qingtong3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            ["clickable",'bs31'],["clickable",'bs32'],["clickable",'bs33'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '青铜靴 : '+(d().qingtong4baoshi.gte(3)?'生命恢复+20%':d().qingtong4baoshi.gte(2)?'生命恢复+10%':d().qingtong4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
+                            "blank",
+                            ["clickable",'bs41'],["clickable",'bs42'],["clickable",'bs43'],
+                        ]],
+                        ]
+            },
+            白银: {
+                buttonStyle(){return {"border-color":"pink"}},
+                content:["blank",
+                        ["display-text",
+                            function() { return '装备评分达到100,可以解锁对应宝石槽位'},
+                            { "color": "white", "font-size": "28px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
+                            { "color": "pink", "font-size": "28px",}
+                        ],
+                        "blank",
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
+                            { "color": "red", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
+                            { "color": "blue", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
+                            { "color": "green", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
+                            { "color": "green", "font-size": "20px",}
+                        ],
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        ["row",
+                        [
+                            ["display-text",function() { return '白银剑 : '+(d().baiying1baoshi.gte(3)?'攻击+20%':d().baiying1baoshi.gte(2)?'攻击+10%':d().baiying1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            ["clickable",'bs211'],["clickable",'bs212'],["clickable",'bs213'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '白银护手 : '+(d().baiying2baoshi.gte(3)?'防御+20%':d().baiying2baoshi.gte(2)?'防御+10%':d().baiying2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
+                            "blank",
+                            ["clickable",'bs221'],["clickable",'bs222'],["clickable",'bs223'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '白银甲 : '+(d().baiying3baoshi.gte(3)?'生命+20%':d().baiying3baoshi.gte(2)?'生命+10%':d().baiying3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            ["clickable",'bs231'],["clickable",'bs232'],["clickable",'bs233'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '白银靴 : '+(d().baiying4baoshi.gte(3)?'生命恢复+20%':d().baiying4baoshi.gte(2)?'生命恢复+10%':d().baiying4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
+                            "blank",
+                            ["clickable",'bs241'],["clickable",'bs242'],["clickable",'bs243'],
+                        ]],
+                        ]
+            },
+            黄金: {
+                buttonStyle(){return {"border-color":"pink"}},
+                content:["blank",
+                        ["display-text",
+                            function() { return '装备评分达到100,可以解锁对应宝石槽位'},
+                            { "color": "white", "font-size": "28px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
+                            { "color": "pink", "font-size": "28px",}
+                        ],
+                        "blank",
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
+                            { "color": "red", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
+                            { "color": "blue", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
+                            { "color": "green", "font-size": "20px",}
+                        ],
+                        ["display-text",
+                            function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
+                            { "color": "green", "font-size": "20px",}
+                        ],
+                        "blank",
+                        "blank",
+                        "blank",
+                        "blank",
+                        ["row",
+                        [
+                            ["display-text",function() { return '黄金剑 : '+(d().huangjin1baoshi.gte(3)?'攻击+20%':d().huangjin1baoshi.gte(2)?'攻击+10%':d().huangjin1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            ["clickable",'bs311'],["clickable",'bs312'],["clickable",'bs313'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '黄金护手 : '+(d().huangjin2baoshi.gte(3)?'防御+20%':d().huangjin2baoshi.gte(2)?'防御+10%':d().huangjin2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
+                            "blank",
+                            ["clickable",'bs321'],["clickable",'bs322'],["clickable",'bs323'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '黄金甲 : '+(d().huangjin3baoshi.gte(3)?'生命+20%':d().huangjin3baoshi.gte(2)?'生命+10%':d().huangjin3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            "blank",
+                            ["clickable",'bs331'],["clickable",'bs332'],["clickable",'bs333'],
+                        ]],
+                        ["row",
+                        [
+                            ["display-text",function() { return '黄金靴 : '+(d().huangjin4baoshi.gte(3)?'生命恢复+20%':d().huangjin4baoshi.gte(2)?'生命恢复+10%':d().huangjin4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
+                            "blank",
+                            ["clickable",'bs341'],["clickable",'bs342'],["clickable",'bs343'],
+                        ]],
+                        ]
+            },
+        }
+    },
     tabFormat: {
-        青铜: {
-            content:["blank",
-                    ["display-text",
-                        function() { return '装备评分达到100,可以解锁对应宝石槽位'},
-                        { "color": "white", "font-size": "28px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
-                        { "color": "pink", "font-size": "28px",}
-                    ],
-                    "blank",
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
-                        { "color": "red", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
-                        { "color": "blue", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
-                        { "color": "green", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
-                        { "color": "green", "font-size": "20px",}
-                    ],
-                    "blank",
-                    "blank",
-                    "blank",
-                    "blank",
-                    ["row",
-                    [
-                        ["display-text",function() { return '青铜剑 : '+(d().qingtong1baoshi.gte(3)?'攻击+20%':d().qingtong1baoshi.gte(2)?'攻击+10%':d().qingtong1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        ["clickable",11],["clickable",12],["clickable",13],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '青铜护手 : '+(d().qingtong2baoshi.gte(3)?'防御+20%':d().qingtong2baoshi.gte(2)?'防御+10%':d().qingtong2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
-                        "blank",
-                        ["clickable",21],["clickable",22],["clickable",23],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '青铜甲 : '+(d().qingtong3baoshi.gte(3)?'生命+20%':d().qingtong3baoshi.gte(2)?'生命+10%':d().qingtong3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        ["clickable",31],["clickable",32],["clickable",33],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '青铜靴 : '+(d().qingtong4baoshi.gte(3)?'生命恢复+20%':d().qingtong4baoshi.gte(2)?'生命恢复+10%':d().qingtong4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
-                        "blank",
-                        ["clickable",41],["clickable",42],["clickable",43],
-                    ]],
-                    ]
+        装备:{
+            content:[
+                ["microtabs","装备",{'border-width':'0px'}],
+            ]
         },
-        白银: {
-            content:["blank",
-                    ["display-text",
-                        function() { return '装备评分达到100,可以解锁对应宝石槽位'},
-                        { "color": "white", "font-size": "28px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
-                        { "color": "pink", "font-size": "28px",}
-                    ],
-                    "blank",
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
-                        { "color": "red", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
-                        { "color": "blue", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
-                        { "color": "green", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
-                        { "color": "green", "font-size": "20px",}
-                    ],
-                    "blank",
-                    "blank",
-                    "blank",
-                    "blank",
-                    ["row",
-                    [
-                        ["display-text",function() { return '白银剑 : '+(d().baiying1baoshi.gte(3)?'攻击+20%':d().baiying1baoshi.gte(2)?'攻击+10%':d().baiying1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        ["clickable",211],["clickable",212],["clickable",213],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '白银护手 : '+(d().baiying2baoshi.gte(3)?'防御+20%':d().baiying2baoshi.gte(2)?'防御+10%':d().baiying2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
-                        "blank",
-                        ["clickable",221],["clickable",222],["clickable",223],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '白银甲 : '+(d().baiying3baoshi.gte(3)?'生命+20%':d().baiying3baoshi.gte(2)?'生命+10%':d().baiying3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        ["clickable",231],["clickable",232],["clickable",233],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '白银靴 : '+(d().baiying4baoshi.gte(3)?'生命恢复+20%':d().baiying4baoshi.gte(2)?'生命恢复+10%':d().baiying4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
-                        "blank",
-                        ["clickable",241],["clickable",242],["clickable",243],
-                    ]],
-                    ]
+        宝石:{
+            unlocked(){return d().dengji.gte(900)},
+            buttonStyle(){return {"border-color":"pink"}},
+            content:[
+                ["microtabs","宝石",{'border-width':'0px'}],
+            ]
         },
-        黄金: {
-            content:["blank",
-                    ["display-text",
-                        function() { return '装备评分达到100,可以解锁对应宝石槽位'},
-                        { "color": "white", "font-size": "28px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有'+format(d().baoshicanpian)+'宝石残片'},
-                        { "color": "pink", "font-size": "28px",}
-                    ],
-                    "blank",
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejihongjingshi)+' 一级红晶石, '+format(d().twojihongjingshi)+' 二级红晶石, '+format(d().threejihongjingshi)+' 三级红晶石'},
-                        { "color": "red", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejilanjingshi)+' 一级蓝晶石, '+format(d().twojilanjingshi)+' 二级蓝晶石, '+format(d().threejilanjingshi)+' 三级蓝晶石'},
-                        { "color": "blue", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejilvjingshi)+' 一级绿晶石, '+format(d().twojilvjingshi)+' 二级绿晶石, '+format(d().threejilvjingshi)+' 三级绿晶石'},
-                        { "color": "green", "font-size": "20px",}
-                    ],
-                    ["display-text",
-                        function() { return '你拥有 '+format(d().onejixuejingshi)+' 一级血晶石, '+format(d().twojixuejingshi)+' 二级血晶石, '+format(d().threejixuejingshi)+' 三级血晶石'},
-                        { "color": "green", "font-size": "20px",}
-                    ],
-                    "blank",
-                    "blank",
-                    "blank",
-                    "blank",
-                    ["row",
-                    [
-                        ["display-text",function() { return '黄金剑 : '+(d().huangjin1baoshi.gte(3)?'攻击+20%':d().huangjin1baoshi.gte(2)?'攻击+10%':d().huangjin1baoshi.gte(1)?'攻击+5%':"攻击+0%")},{ "color": "red", "font-size": "28px",}],
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        ["clickable",311],["clickable",312],["clickable",313],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '黄金护手 : '+(d().huangjin2baoshi.gte(3)?'防御+20%':d().huangjin2baoshi.gte(2)?'防御+10%':d().huangjin2baoshi.gte(1)?'防御+5%':"防御+0%")},{ "color": "blue", "font-size": "28px",}],
-                        "blank",
-                        ["clickable",321],["clickable",322],["clickable",323],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '黄金甲 : '+(d().huangjin3baoshi.gte(3)?'生命+20%':d().huangjin3baoshi.gte(2)?'生命+10%':d().huangjin3baoshi.gte(1)?'生命+5%':"生命+0%")},{ "color": "green", "font-size": "28px",}],
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        "blank",
-                        ["clickable",331],["clickable",332],["clickable",333],
-                    ]],
-                    ["row",
-                    [
-                        ["display-text",function() { return '黄金靴 : '+(d().huangjin4baoshi.gte(3)?'生命恢复+20%':d().huangjin4baoshi.gte(2)?'生命恢复+10%':d().huangjin4baoshi.gte(1)?'生命恢复+5%':"生命恢复+0%")},{ "color": "green", "font-size": "28px",}],
-                        "blank",
-                        ["clickable",341],["clickable",342],["clickable",343],
-                    ]],
-                    ]
+        神兵:{
+            unlocked(){return d().dengji.gte(500)},
+            buttonStyle(){return {"border-color":"blue"}},
+            content:[
+                ["display-text",
+                function() { return '你有'+format(d().caijue)+'把裁决'},
+                { "color": "gold", "font-size": "24px",}
+                ],
+                ["display-text",
+                function() { return '你有'+format(d().longwenjia)+'件龙纹甲'},
+                { "color": "gold", "font-size": "24px",}
+                ],
+                ["display-text",
+                function() { return '你有'+format(d().shidufen)+'尸毒粉'},
+                { "color": "green", "font-size": "24px",}
+                ],
+                ["display-text",
+                function() { return '你有'+format(d().fumoshu)+'附魔书'},
+                { "color": "purple", "font-size": "24px",}
+                ],
+                "blank",
+                "blank",
+                "blank",
+                ["row",[["clickable",'s11'],["bar",1],["clickable",'s12'],]],
+                ["row",[["clickable",'s21'],["bar",2],["clickable",'s22'],]],
+            ]
+        },
+        圣器:{
+            unlocked(){return d().dengji.gte(1500)},
+            buttonStyle(){return {"border-color":"lime"}},
+            content:[
+                ["microtabs","圣器",{'border-width':'0px'}],
+            ]
         },
     },
-    row: 3,
-    layerShown(){return d().dengji.gte(900)},
+    row: 2,
+    layerShown(){return d().dengji.gte(5)},
 })
 addLayer("c",{ 
     symbol: "宠物", 
@@ -4477,119 +4652,7 @@ addLayer("vip",{
             d().dulibeishu=d().dulibeishu.mul(1.4)
         }
         d().guajibeishu=d().guajibeishu.mul(d().dulibeishu)
-        if(hasUpgrade("vip",211))
-        {
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled11=d().haskilled11.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",212))
-        {
-            d().qingtongzhuangbei=d().qingtongzhuangbei.add(n(0.2).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(3).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(2).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled12=d().haskilled12.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",213))
-        {
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(5).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(10).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled13=d().haskilled13.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",214))
-        {
-            d().chongwudan=d().chongwudan.add(n(0.2).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(50).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(100).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled14=d().haskilled14.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",221))
-        {
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(500).mul(diff).mul(d().guajibeishu))
-            // if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled21=d().haskilled21.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",222))
-        {
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(3000).mul(diff).mul(d().guajibeishu))
-            // if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled22=d().haskilled22.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",223))
-        {
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(50000).mul(diff).mul(d().guajibeishu))
-            // if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled23=d().haskilled23.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",231))
-        {
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(75).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(150).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled31=d().haskilled31.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",232))
-        {
-            d().baiyingzhuangbei=d().baiyingzhuangbei.add(n(0.2).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(100).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(200).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled32=d().haskilled32.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",234))
-        {
-            d().caijue=d().caijue.add(n(0.001).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(500).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled34=d().haskilled34.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",251))
-        {
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(1000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1500).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled41=d().haskilled41.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",252))
-        {
-            d().baoshicanpian=d().baoshicanpian.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(2000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(3000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled42=d().haskilled42.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",253))
-        {
-            d().yumao=d().yumao.add(n(0.5).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(3000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(5000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled43=d().haskilled43.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",254))
-        {
-            d().longwenjia=d().longwenjia.add(n(0.001).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(5000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(10000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled44=d().haskilled44.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
-        if(hasUpgrade("vip",261))
-        {
-            d().huangjinzhuangbei=d().huangjinzhuangbei.add(n(0.2).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(10000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(15000).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().haskilled51=d().haskilled51.add(n(1).mul(diff).mul(d().guajibeishu))
-            if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(diff).mul(d().guajibeishu))
-        }
+        d().guajishijian=d().guajishijian.add(diff)
         if(hasUpgrade("vip",241))
         {
             d().moxue=d().moxue.add(d().shengminghuifu.add(1).div(10).mul(diff))
@@ -4603,7 +4666,12 @@ addLayer("vip",{
         }
         if(hasUpgrade("vip",243))
         {
-            if(layers.m.clickables[11].canClick())
+            if(d().killall.gte(d().hunqidengji.add(1).mul(500)))
+            {
+                d().hunqidengji=d().hunqidengji.add(1)
+                d().killall=d().killall.sub(d().hunqidengji.add(1).mul(500))
+            }
+            else if(layers.m.clickables[11].canClick())
             {
                 layers.m.clickables[11].onClick()
             }
@@ -4687,6 +4755,21 @@ addLayer("vip",{
             },
             style(){return {"height":"140px","width":"140px"}},
             unlocked(){return hasUpgrade("vip",14)},
+        },
+        16:{
+            fullDisplay(){
+                return "VIP6<br>效果1:额外增加一枚挂机插槽<br>效果2:额外增加一枚挂机插槽<br>需要:8888W金币"
+            },
+            onPurchase(){
+                d().jinbi=d().jinbi.sub(88880000)
+                d().zidongguajichacao=d().zidongguajichacao.add(1)
+                d().zidongguajichacao=d().zidongguajichacao.add(1)
+            },
+            canAfford(){
+                return d().jinbi.gte(88880000)
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return hasUpgrade("vip",15)},
         },
         211:{
             fullDisplay(){
@@ -4956,6 +5039,132 @@ addLayer("vip",{
         }
         return ""
     },
+    clickables:{
+        11: {
+            display() {
+                return '领取收益'
+            },
+            style(){return {"height":"125px"}},
+            unlocked(){return true},
+            canClick(){return true},
+            onClick(){
+                if(hasUpgrade("vip",211))
+                {
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled11=d().haskilled11.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",212))
+                {
+                    d().qingtongzhuangbei=d().qingtongzhuangbei.add(n(0.2).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(3).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(2).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled12=d().haskilled12.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",213))
+                {
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(5).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(10).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled13=d().haskilled13.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",214))
+                {
+                    d().chongwudan=d().chongwudan.add(n(0.2).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(50).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(100).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled14=d().haskilled14.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",221))
+                {
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(500).mul(d().guajishijian).mul(d().guajibeishu))
+                    // if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled21=d().haskilled21.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",222))
+                {
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(3000).mul(d().guajishijian).mul(d().guajibeishu))
+                    // if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled22=d().haskilled22.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",223))
+                {
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(50000).mul(d().guajishijian).mul(d().guajibeishu))
+                    // if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled23=d().haskilled23.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",231))
+                {
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(75).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(150).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled31=d().haskilled31.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",232))
+                {
+                    d().baiyingzhuangbei=d().baiyingzhuangbei.add(n(0.2).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(100).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(200).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled32=d().haskilled32.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",234))
+                {
+                    d().caijue=d().caijue.add(n(0.001).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(500).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled34=d().haskilled34.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",251))
+                {
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(1000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(1500).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled41=d().haskilled41.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",252))
+                {
+                    d().baoshicanpian=d().baoshicanpian.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(2000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(3000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled42=d().haskilled42.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",253))
+                {
+                    d().yumao=d().yumao.add(n(0.5).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(3000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(5000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled43=d().haskilled43.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",254))
+                {
+                    d().longwenjia=d().longwenjia.add(n(0.001).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(5000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(10000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled44=d().haskilled44.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                if(hasUpgrade("vip",261))
+                {
+                    d().huangjinzhuangbei=d().huangjinzhuangbei.add(n(0.2).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",11))d().jingyan=d().jingyan.add(n(10000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",12))d().jinbi=d().jinbi.add(n(15000).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().haskilled51=d().haskilled51.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                    if(hasUpgrade("vip",13))d().killall=d().killall.add(n(1).mul(d().guajishijian).mul(d().guajibeishu))
+                }
+                d().guajishijian=n(0)
+            }
+        },
+    },
     tabFormat: {
         VIP: {
             content:["blank",
@@ -4967,6 +5176,7 @@ addLayer("vip",{
                     "blank",
                     "blank",
                     ["row", [ ["upgrade", 11],["upgrade", 12],["upgrade", 13],["upgrade", 14],["upgrade", 15],]],
+                    ["row", [ ["upgrade", 16],["upgrade", 17],["upgrade", 18],["upgrade", 19],]],
                 ],
         },
         自动化: {
@@ -4985,6 +5195,14 @@ addLayer("vip",{
                         function() { return '而你当前的生命恢复为'+format(d().shengminghuifu)+'点<br>因此给你的挂机提供一个x'+format(d().guajibeishu)+'的倍数'+layers.vip.stringstring() },
                         { "color": "green", "font-size": "24px",}
                     ],
+                    "blank",
+                    ["display-text",
+                        function() { return '你当前挂机了'+format(d().guajishijian)+'秒' },
+                        { "color": "white", "font-size": "20px",}
+                    ],
+                    "blank",
+                    "blank",
+                    ["row", [ ["clickable", 11],]],
                     "blank",
                     "blank",
                     "blank",
@@ -5086,6 +5304,18 @@ addLayer("svip",{
         },
         13: {
             display() {
+                return `一键回收白银装备<br>单价:0.05元宝`
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return true},
+            onClick(){
+                d().yuanbao=d().yuanbao.add(d().huangjinzhuangbei.div(20))
+                d().huangjinzhuangbei=n(0)
+            }
+        },
+        14: {
+            display() {
                 return `一键回收裁决<br>单价:5元宝`
             },
             unlocked(){return true},
@@ -5094,6 +5324,18 @@ addLayer("svip",{
             onClick(){
                 d().yuanbao=d().yuanbao.add(d().caijue.mul(5))
                 d().caijue=n(0)
+            }
+        },
+        15: {
+            display() {
+                return `一键回收龙纹甲<br>单价:10元宝`
+            },
+            unlocked(){return true},
+            style(){return {"height":"125px"}},
+            canClick(){return true},
+            onClick(){
+                d().yuanbao=d().yuanbao.add(d().longwenjia.mul(10))
+                d().longwenjia=n(0)
             }
         },
         66666: {
@@ -5138,7 +5380,7 @@ addLayer("svip",{
                     "blank",
                     "blank",
                     "blank",
-                    ["row", [ ["clickable", 11],["clickable", 12],["clickable", 13],]],
+                    ["row", [ ["clickable", 11],["clickable", 12],["clickable", 13],["clickable", 14],["clickable", 15],]],
                 ],
         },
     },
@@ -6102,7 +6344,7 @@ addLayer("j",{
     },
     tabFormat: {
         '秘境-僵尸洞':{
-                unlocked(){return d().caijuecuidudengji.lte(n(99.5)) || d().jiesuotujian7.lte(0.5)},
+                unlocked(){return (d().caijuecuidudengji.lte(n(99.5)) || d().jiesuotujian7.lte(0.5) || d().longwenjiafumodengji.lte(n(99.5)) || d().jiesuotujian11.lte(0.5))},
                 content:[
                     ["row",[["infobox","lore"]]],
                     ["display-text",
@@ -6467,32 +6709,32 @@ addLayer("cb",{
     row: 3,
     layerShown(){return d().dengji.gte(1200)},
 })
-addLayer("ghost1",{ 
-    symbol: "翅膀", 
-    position: 1,
-    startData() { return {
-        unlocked: true, 
-		points: new ExpantaNum(0),
-    }},
-    color: "grey",
-    resource: "翅膀",
-    type: "normal",
-    requires:new ExpantaNum(1e308),
-    exponent:1,
-    baseAmount(){return player.points},
-    baseResource:"想法",
-    gainMult() { 
-        mult = new ExpantaNum(1)
-        return mult
-    },
-    gainExp() { 
-        var exp = new ExpantaNum(1)
-        return exp
-    },
-    clickables:{
-    },
-    tabFormat: {
-    },
-    row: 4,
-    layerShown(){return "ghost"},
-})
+// addLayer("ghost1",{ 
+//     symbol: "翅膀", 
+//     position: 1,
+//     startData() { return {
+//         unlocked: true, 
+// 		points: new ExpantaNum(0),
+//     }},
+//     color: "grey",
+//     resource: "翅膀",
+//     type: "normal",
+//     requires:new ExpantaNum(1e308),
+//     exponent:1,
+//     baseAmount(){return player.points},
+//     baseResource:"想法",
+//     gainMult() { 
+//         mult = new ExpantaNum(1)
+//         return mult
+//     },
+//     gainExp() { 
+//         var exp = new ExpantaNum(1)
+//         return exp
+//     },
+//     clickables:{
+//     },
+//     tabFormat: {
+//     },
+//     row: 4,
+//     layerShown(){return "ghost"},
+// })

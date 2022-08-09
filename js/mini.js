@@ -690,6 +690,6 @@ addLayer("xw",{
             ]
         }
     },
-    row: 5,
+    row: 4,
     layerShown(){return d().dengji.gte(2000)},
 })
