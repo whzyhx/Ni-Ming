@@ -398,7 +398,7 @@ addLayer("xw",{
     clickables:{
         11: {
             display() {
-                if(d().jingjiedengji.gte(n(48.5)))
+                if(d().jingjiedengji.gte(n(58.5)))
                 {
                     return `已达该版本上限`
                 }
@@ -406,7 +406,7 @@ addLayer("xw",{
             },
             unlocked(){return true},
             style(){return {"height":"125px"}},
-            canClick(){return d().jingjiedengji.lte(n(48.5)) && d().lingqi.gte(d().jingjiexuyao[d().jingjiedengji])},
+            canClick(){return d().jingjiedengji.lte(n(58.5)) && d().lingqi.gte(d().jingjiexuyao[d().jingjiedengji])},
             onClick(){
                 d().lingqi=d().lingqi.sub(d().jingjiexuyao[d().jingjiedengji])
                 d().jingjiedengji=d().jingjiedengji.add(1)
@@ -627,6 +627,10 @@ addLayer("xw",{
                     if(d().jingjiedengji.lte(49))
                     {
                         return 'js/images/fenshen.png'
+                    }
+                    if(d().jingjiedengji.lte(59))
+                    {
+                        return 'js/images/heti.png'
                     }
                 }, {maxWidth:'100%',maxHeight:'100%',position: 'relative'}],
                 "blank",
